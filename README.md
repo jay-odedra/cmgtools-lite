@@ -1,55 +1,67 @@
-# Short recipe for CMGTools 
+# Short description 
 
+CMG is a general analysis tool developed and maintained by CMS. Is being used by many analysis. CMG provides several common tools and functionallities and each analysis developing their code using those tools. The present code is dedicated to B physics in general and in particular Rk analysis.
 For the general recipe, [follow these instructions](https://twiki.cern.ch/twiki/bin/view/CMS/CMGToolsReleasesExperimental).
 
 --------------
 
-#### Set up CMSSW and the base git
+## Installation 
 
+#### CMSSW version
 ```
-cmsrel CMSSW_8_0_25
-cd CMSSW_8_0_25/src
+SCRAM_ARCH=slc7_amd64_gcc700
+cmsrel CMSSW_10_4_0
+cd CMSSW_10_4_0/src
 cmsenv
 git cms-init
 ```
-
-#### Add the central cmg-cmssw repository to get the Heppy 80X branch
-
+#### Add centrall CMG
 ```
-git remote add cmg-central https://github.com/CERN-PH-CMG/cmg-cmssw.git -f  -t heppy_80X
+git remote add cmg-central https://github.com/CERN-PH-CMG/cmg-cmssw.git -f  -t heppy_104X_dev
+git checkout -b heppy_104X_dev cmg-central/heppy_104X_dev
+git cms-addpkg PhysicsTools/Heppy
+git cms-addpkg PhysicsTools/HeppyCore
+cd $CMSSW_BASE/src/PhysicsTools
 ```
-
-#### Configure the sparse checkout, and get the base heppy packages
-
+#### Add B Parking code
 ```
-cp /afs/cern.ch/user/c/cmgtools/public/sparse-checkout_80X_heppy .git/info/sparse-checkout
-git checkout -b heppy_80X cmg-central/heppy_80X
-```
-
-#### Add your mirror, and push the 80X branch to it
-
-```
-git remote add origin git@github.com:YOUR_GITHUB_REPOSITORY/cmg-cmssw.git
-git push -u origin heppy_80X
-```
-
-#### Now get the CMGTools subsystem from the cmgtools-lite repository
-
-```
-git clone -o cmg-central https://github.com/CERN-PH-CMG/cmgtools-lite.git -b 80X CMGTools
-cd CMGTools
-```
-
-#### Add your fork, and push the 80X branch to it
-
-```
-git remote add origin  git@github.com:YOUR_GITHUB_REPOSITORY/cmgtools-lite.git
-git push -u origin 80X
-```
-
-#### Compile
-
-```
+git clone -b NanoToolsBPark https://github.com/gkaratha/nanoAOD-tools NanoAODTools
 cd $CMSSW_BASE/src
+git clone -b bpark_cmg https://github.com/gkaratha/cmgtools-lite CMGTools
+cd $CMSSW_BASE/src
+```
+#### Compile
+```
 scram b -j 8
 ```
+## Basic code
+```
+NanoAOD ntuples definition: CMGTools/RootTools/python/samples/samples_13TeV_BParkingData_NanoAOD.py
+Module sequence and structure: CMGTools/RKAnalysis/python/tools/nanoAOD/BParking_modules.py
+Configuration: CMGTools/RKAnalysis/cfg/run_RK_fromNanoAOD_cfg.py
+Plotting: CMGTools/RKAnalysis/python/plotter/experimental/plotter2.py
+```
+## Usage
+```
+```
+#### Skimming NanoAOD
+```
+Main code (ie modules to run and running order) defined in BParking_modules.py
+Local run: nanopy.py <folder>  run_RK_fromNanoAOD_cfg.py -N <evts per dataset> -o xxx=yyy
+Batch run: nanopy_batch.py -o <localOutput> -r /eos/space/<remoteOutput> -b 'run_condor_simple.sh -t 1200' run_RK_fromNanoAOD_cfg.py --option xxx=yyy
+Options:
+- mc to run on MC
+- data to run on data
+- njobs number of chuncks to create
+- kmumu to run on B -> Kmumu
+- kee to run on B -> Kee
+- kstarmumu to run on B ->K*mumu
+- onlyPFe runs kee channel only with 2PF
+- onlyLowPtAndPFe runs kee channel only with 1PF & 1 Low pT
+- jpsi when run on mc (only in mc used) requires e to come from Jpsi mother
+- psi2s same for excited jpsi
+- test to take one file per dataset
+- single for single threaded run. this needs "--single"
+
+
+
