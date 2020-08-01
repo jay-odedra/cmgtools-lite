@@ -18,6 +18,7 @@ def _filterSamples(samples,args):
     return selsamples
 
 def runMain(samples,args=None,localobjs=None):
+   print samples
    if args == None: args = sys.argv
    selsamples = _filterSamples(samples,args)
    if "help" in args or "--help" in args or "-h" in args:

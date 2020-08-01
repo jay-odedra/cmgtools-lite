@@ -85,5 +85,13 @@ void addregion(TChain * cc,TString var,TString cuts, TString name){
  cc->Draw(var+">>+"+name,cuts);
 }
 
+void AddOverFlow(TH1F * h1){
+  int nx= h1->GetNbinsX();
+  float value=h1->GetBinContent(nx)+ h1->GetBinContent(nx+1);
+  h1->SetBinContent(nx,value);
+}
 
-
+void AddUnderFlow(TH1F * h1){
+  float value=h1->GetBinContent(0)+ h1->GetBinContent(1);
+  h1->SetBinContent(1,value);
+}
