@@ -233,8 +233,8 @@ if __name__ == "__main__":
         canvasName=wline[1]
         plot_options=(wline[2]).split(";")
         h1= froot.Get(histName)
-#        if "Over" in plot_options:
-#           h1=AddOverflow(h1)
+        if "Over" in plot_options:
+           h1=AddOverflow(h1)
         yld.write(histName+"  "+str(h1.Integral())+"\n")
         h1=default_plot(h1)
         h1.SetLineWidth(3)
@@ -263,8 +263,8 @@ if __name__ == "__main__":
           histName2=wline2[0]
           plot_options2=wline2[2].split(";")
           h2=froot.Get(histName2)
-#          if "Over" in plot_options2:
-#             h2= AddOverflow(h2)
+          if "Over" in plot_options2:
+             h2= AddOverflow(h2)
           yld.write(histName2+"  "+str(h2.Integral())+"\n")
           h2=default_plot(h2)
           h2.SetLineWidth(3)

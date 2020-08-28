@@ -1,8 +1,11 @@
+#ifndef CANVASSES_H
+#define CANVASSES_H
+
 #include "TCanvas.h"
 #include "TLegend.h"
 #include "TH1.h"
 #include "TString.h"
-
+#include "CMS_lumi.C"
 
 TLatex cms(){
 
@@ -28,6 +31,13 @@ TLatex head(){
  }
 
 
+void AddOverflow(TH1F * h1){
+  float nx=h1->GetNbinsX();
+  float value=h1->GetBinContent(nx)+ h1->GetBinContent(nx+1);
+  h1->SetBinContent(nx,value);
+}
+
+
 TH1F * gethisto(TChain * cc,TString var,TString cuts, TString name, int bins, float start, float end){
  TH1F * htemp=new TH1F(name," ",bins,start,end);
  cc->Draw(var+">>"+name,cuts);
@@ -46,10 +56,9 @@ TH2F * get2Dhisto(TChain * cc,TString varX,TString varY ,TString cuts, TString n
 
 TCanvas *canvas_5plot(TH1F * h1, TH1F * h2, TH1F * h3, TH1F * h4, TH1F * h5,TString canvas, bool Logy, bool norm,double miny, double maxy, TString Labelx,TString Labely, TString leg1,TString leg2,TString leg3, TString leg4,TString leg5){
 
-  TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
+  TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,50,50,700,700);
   gStyle->SetPadBorderMode(0);
   gStyle->SetOptStat(0);
-  gStyle->SetOptTitle(1);
 
   h1->SetLineColor(kRed);
   h2->SetLineColor(kBlue);
@@ -89,32 +98,34 @@ TCanvas *canvas_5plot(TH1F * h1, TH1F * h2, TH1F * h3, TH1F * h4, TH1F * h5,TStr
    leg->SetBorderSize(0);
    leg->Draw();
    if (Logy) data_mc_canvas->SetLogy();
-   cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
+   CMS_lumi( data_mc_canvas, 4,0 );
    return data_mc_canvas;
    
    }
 
 
 
-TCanvas *canvas_4plot(TH1F * h1, TH1F * h2, TH1F * h3, TH1F * h4, TString canvas, bool Logy, bool norm,double miny, double maxy, TString Labelx,TString Labely, TString leg1,TString leg2,TString leg3, TString leg4, bool dashed=false){
+TCanvas *canvas_4plot(TH1F * h1, TH1F * h2, TH1F * h3, TH1F * h4, TString canvas, bool Logy, bool norm,double miny, double maxy, TString Labelx,TString Labely, TString leg1,TString leg2,TString leg3, TString leg4, bool Markers2and4=false){
 
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
-    gStyle->SetPadBorderMode(0);
+  gStyle->SetPadBorderMode(0);
   gStyle->SetOptStat(0);
-    gStyle->SetOptTitle(1);
 
   h1->SetLineColor(kRed);
   h2->SetLineColor(kBlue);
   h3->SetLineColor(kBlack);
   h4->SetLineColor(kMagenta);
-if(dashed){
-  h1->SetLineColor(kRed);
-  h2->SetLineColor(kBlue);
-  h3->SetLineColor(kRed);
-  h4->SetLineColor(kBlue);
-}
+  if(Markers2and4){
+    h2->SetLineColor(kRed);
+    h2->SetMarkerColor(kRed);
+    h2->SetMarkerStyle(kFullCircle);
+    h2->SetMarkerSize(2);
+    h3->SetLineColor(kBlue);
+    h4->SetLineColor(kBlue);
+    h4->SetMarkerColor(kBlue);
+    h4->SetMarkerStyle(kFullCircle);
+    h4->SetMarkerSize(2);
+  }
  
   h1->GetYaxis()->SetTitle(Labely);
   h1->GetXaxis()->SetTitle(Labelx);
@@ -127,16 +138,22 @@ if(dashed){
    }
 
   h1->Draw("HIST ");
-  h2->Draw("HIST sames");
+  if (!Markers2and4)
+    h2->Draw("HIST sames");
+  else
+    h2->Draw("P sames");
   h3->Draw("HIST sames");
-  h4->Draw("HIST sames");
+  if (!Markers2and4)
+    h4->Draw("HIST sames");
+  else
+    h4->Draw("P sames");
  if (miny>-1 && maxy >-1)
   h1->GetYaxis()->SetRangeUser(miny,maxy);
   else if (miny!=-1 && maxy==-1)
     h1->SetMinimum(miny);
   else if (miny==-1 && maxy!=-1)
      h1->SetMaximum(maxy);
-   TLegend * leg = new TLegend(0.70,0.70,1,1);
+   TLegend * leg = new TLegend(0.70,0.75,0.97,0.95);
    leg->AddEntry(h1,leg1);
    leg->AddEntry(h2,leg2);
    leg->AddEntry(h3,leg3);
@@ -145,31 +162,38 @@ if(dashed){
    leg->SetLineColor(kWhite);
    leg->SetBorderSize(0);
    leg->Draw();
-   cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
+   CMS_lumi( data_mc_canvas, 4,0 );
    if (Logy) data_mc_canvas->SetLogy();
 
    return data_mc_canvas;
 
    }
 
-TCanvas *canvas_1plot(TH1F * h1, TString canvas, bool Logy, TString Labelx,TString Labely, bool marker=false){
+TCanvas *canvas_1plot(TH1F * h1, TString canvas, bool Logy, TString Labelx,TString Labely,double miny=-1, double maxy=-1, bool marker=true){
 
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
   gStyle->SetPadBorderMode(0);
   gStyle->SetOptStat(0);
-  gStyle->SetOptTitle(1);
   h1->SetLineColor(1);
   h1->SetLineWidth(2);
   h1->GetYaxis()->SetTitle(Labely);
   h1->GetXaxis()->SetTitle(Labelx);
-  h1->Draw("P E1");
-//  else h1->Draw("HIST");
+  if (marker)
+    h1->Draw("P E1");
+  else
+    h1->Draw("HIST");
   if (Logy) data_mc_canvas->SetLogy();
-  cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
+  if (miny>-1 && maxy >-1)
+    h1->GetYaxis()->SetRangeUser(miny,maxy);
+  else if (miny!=-1 && maxy==-1)
+    h1->SetMinimum(miny);
+  else if (miny==-1 && maxy!=-1)
+    h1->SetMaximum(maxy);
+
+  //  cms().Draw("sames");
+  // head().Draw("sames");
+  // extra().Draw("sames");
+  CMS_lumi( data_mc_canvas, 4,0 );
   return data_mc_canvas;
    }
 
@@ -178,41 +202,40 @@ TCanvas *canvas_1graph(TGraph * gr, TString canvas, TString Labelx,TString Label
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
   gStyle->SetPadBorderMode(0);
   gStyle->SetOptStat(0);
-  gStyle->SetOptTitle(1);
   gr->SetMarkerSize(2);
   gr->SetLineColor(1);
-  gr->SetMarkerStyle(kFullDotLarge);
   gr->SetTitle(" ;"+ Labelx+" ;"+ Labely);
-  gr->Draw("A*");
-  cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
+  gr->SetMarkerStyle(20);
+  gr->SetMarkerSize(0.001);
+  gr->Draw("A P");
+  CMS_lumi( data_mc_canvas, 4,0 );
   return data_mc_canvas;
              }
 TCanvas *canvas_3graph(TGraph * gr1, TGraph *gr2 ,TGraph *gr3, TString canvas, TString Labelx,TString Labely,TString leg1,TString leg2,TString leg3){
 
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
-  gStyle->SetPadBorderMode(0); gStyle->SetOptStat(0); gStyle->SetOptTitle(1);
+  gStyle->SetPadBorderMode(0); gStyle->SetOptStat(0);
   gr1->SetMarkerColor(1); gr1->SetLineColor(1);
   gr2->SetMarkerColor(2); gr2->SetLineColor(2);
   gr3->SetMarkerColor(3); gr3->SetLineColor(3);
+  gr1->SetMarkerStyle(20); gr1->SetMarkerSize(2);
+  gr2->SetMarkerStyle(20); gr2->SetMarkerSize(2);
+  gr3->SetMarkerStyle(20); gr3->SetMarkerSize(2);
   TLegend * leg = new TLegend(0.70,0.70,1,1);
   leg->AddEntry(gr1,leg1); leg->AddEntry(gr2,leg2); leg->AddEntry(gr3,leg3);
   auto mgr=new TMultiGraph();
   mgr->Add(gr1); mgr->Add(gr2); mgr->Add(gr3);
   mgr->SetTitle(" ;"+ Labelx+" ;"+ Labely);
-   mgr->Draw("AL*"); leg->SetTextFont(42); leg->SetFillColor(kWhite);
+   mgr->Draw("A P"); leg->SetTextFont(42); leg->SetFillColor(kWhite);
   leg->SetLineColor(kWhite); leg->SetBorderSize(0); leg->Draw();
-  cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
+  CMS_lumi( data_mc_canvas, 4,0 );
   return data_mc_canvas;
              }
 
 TCanvas *canvas_5graph(TGraph * gr1, TGraph *gr2 , TGraph * gr3,TGraph * gr4,TGraph * gr5, TString canvas, TString Labelx,TString Labely,TString leg1,TString leg2,TString leg3,TString leg4,TString leg5){
 
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
-  gStyle->SetPadBorderMode(0); gStyle->SetOptStat(0); gStyle->SetOptTitle(1);
+  gStyle->SetPadBorderMode(0); gStyle->SetOptStat(0);
   gr1->SetMarkerColor(1); gr1->SetLineColor(1);
   gr2->SetMarkerColor(2); gr2->SetLineColor(2);
   gr3->SetMarkerColor(3); gr3->SetLineColor(3);
@@ -234,7 +257,7 @@ TCanvas *canvas_5graph(TGraph * gr1, TGraph *gr2 , TGraph * gr3,TGraph * gr4,TGr
   TCanvas *canvas_2graph(TGraph * gr1, TGraph *gr2 , TString canvas, TString Labelx,TString Labely,TString leg1,TString leg2){
 
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
-  gStyle->SetPadBorderMode(0); gStyle->SetOptStat(0); gStyle->SetOptTitle(1);
+  gStyle->SetPadBorderMode(0); gStyle->SetOptStat(0);
   gr1->SetMarkerColor(4); gr1->SetLineColor(4);
   gr2->SetMarkerColor(2); gr2->SetLineColor(2);
   gr1->SetMarkerStyle(20);
@@ -258,7 +281,6 @@ TCanvas *canvas_2plot(TH1F * h1, TH1F * h2, TString canvas, bool Logy, bool norm
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
   gStyle->SetPadBorderMode(0);
   gStyle->SetOptStat(0);
-  gStyle->SetOptTitle(1);
 
   h1->SetLineColor(kRed);
   h1->SetMarkerColor(kRed);
@@ -289,7 +311,7 @@ TCanvas *canvas_2plot(TH1F * h1, TH1F * h2, TString canvas, bool Logy, bool norm
   else if (miny==-1 && maxy!=-1)
      h1->SetMaximum(maxy);
   
-   TLegend * leg = new TLegend(0.70,0.75,0.95,0.95);
+   TLegend * leg = new TLegend(0.65,0.70,0.95,0.90);
    leg->AddEntry(h1,leg1);
    leg->AddEntry(h2,leg2);
    leg->SetFillColor(kWhite);
@@ -298,9 +320,7 @@ TCanvas *canvas_2plot(TH1F * h1, TH1F * h2, TString canvas, bool Logy, bool norm
    leg->Draw();
 
    if (Logy) data_mc_canvas->SetLogy();
-   cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
+   CMS_lumi( data_mc_canvas, 4,0 );
    return data_mc_canvas;
 
    }
@@ -312,22 +332,26 @@ TCanvas *canvas_2plot_ratio(TH1F * h1, TH1F * h2, TString canvas, bool Logy, boo
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
     gStyle->SetPadBorderMode(0);
     gStyle->SetOptStat(0);
-    gStyle->SetOptTitle(1);
-  TPad *pad1 = new TPad("pad1","This is pad1",0.,0.30,1.,1.);
-  TPad *pad2 = new TPad("pad2","This is pad2",0.,0.,1.,0.30);
+  TPad *pad1 = new TPad("pad1","This is pad1",0.,0.35,1.,0.97);
+  TPad *pad2 = new TPad("pad2","This is pad2",0.,0.0,1.,0.35);
   pad1->SetFillColor(kWhite);
   pad2->SetFillColor(kWhite);
   pad1->Draw();
   pad2->Draw();
 
+  
+  pad1->SetBottomMargin(0);
+  pad2->SetBottomMargin(0.30);
+  pad2->SetTopMargin(0);
   pad1->cd();
-   gPad->SetBottomMargin(0);
-  gPad->SetLeftMargin(0.10); gPad->SetRightMargin(0.03);
+ // gPad->SetLeftMargin(0.10); gPad->SetRightMargin(0.03);
 
   h1->SetLineColor(kRed);
   h2->SetLineColor(kBlue);
   h1->SetMarkerStyle(2);
   h2->SetMarkerStyle(2);
+  h1->SetLineWidth(2);
+  h2->SetLineWidth(2);
 
    if (dashed){
    h1->SetLineColor(kBlack);
@@ -341,7 +365,8 @@ TCanvas *canvas_2plot_ratio(TH1F * h1, TH1F * h2, TString canvas, bool Logy, boo
       h1->Scale(1/h1->Integral());
       h2->Scale(1/h2->Integral());
    }
- // h1->SetMarkerSize(2);
+  if (Logy) pad1->SetLogy();
+
   h1->Draw("HIST ");
   h2->Draw("HIST sames");
  
@@ -353,36 +378,32 @@ TCanvas *canvas_2plot_ratio(TH1F * h1, TH1F * h2, TString canvas, bool Logy, boo
   else if (miny==-1 && maxy!=-1)
      h1->SetMaximum(maxy);
   
-   TLegend * leg = new TLegend(0.70,0.70,1,1);
+   TLegend * leg = new TLegend(0.70,0.70,0.9,0.9);
    leg->AddEntry(h1,leg1);
    leg->AddEntry(h2,leg2);
    leg->SetFillColor(kWhite);
    leg->SetLineColor(kWhite);
    leg->SetBorderSize(0);
    leg->Draw();
-   cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
-   if (Logy) data_mc_canvas->SetLogy();
-   pad2->cd();                                                                     gPad->SetTopMargin(0);
-   gPad->SetBottomMargin(0.2);
-   gPad->SetLeftMargin(0.10); gPad->SetRightMargin(0.03);
+   CMS_lumi( data_mc_canvas, 4,0 );
+   pad2->cd();                                
    
    TH1F* hdif1=(TH1F*)h1->Clone();
-    TH1F* hdif2=(TH1F*)h2->Clone();
-     hdif1->SetTitle(" ");
+  TH1F* hdif2=(TH1F*)h2->Clone();
+  
     hdif1->GetYaxis()->SetTitle(""+leg1+"/"+leg2+"");
-    hdif1->GetYaxis()->SetLabelSize(0.07);
+    hdif1->GetYaxis()->SetLabelSize(0.1);
     hdif1->GetYaxis()->SetTitleSize(0.1);
-    hdif1->GetYaxis()->SetTitleOffset(0.4);
-   hdif1->GetXaxis()->SetLabelSize(0.1);
-    hdif1->GetXaxis()->SetTitleSize(0.1);
-    hdif1->GetXaxis()->SetTitleOffset(0.7);
+    hdif1->GetYaxis()->SetTitleOffset(0.6);
+    hdif1->GetXaxis()->SetLabelSize(0.1);
+    hdif1->GetXaxis()->SetTitleSize(0.12);
+    hdif1->GetXaxis()->SetTitleOffset(1.0);
 
     hdif1->Divide(hdif2);
     hdif1->Draw("P");
     hdif1->SetMarkerStyle(kFullCircle);
-   hdif1->SetMarkerSize(1);
+    hdif1->SetMarkerSize(1);
+    pad2->SetGridy(1);
 
    return data_mc_canvas;
 
@@ -393,7 +414,6 @@ TCanvas *canvas_2plot_dif(TH1F * h1, TH1F * h2, TString canvas, bool Logy, bool 
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
     gStyle->SetPadBorderMode(0);
     gStyle->SetOptStat(0);
-    gStyle->SetOptTitle(1);
   TPad *pad1 = new TPad("pad1","This is pad1",0.,0.30,1.,1.);
   TPad *pad2 = new TPad("pad2","This is pad2",0.,0.,1.,0.30);
   pad1->SetFillColor(kWhite);
@@ -472,7 +492,6 @@ TCanvas *canvas_3plot(TH1F * h1, TH1F * h2, TH1F * h3, TString canvas, bool Logy
   TCanvas *data_mc_canvas = new TCanvas(canvas,canvas,700,700);
     gStyle->SetPadBorderMode(0);
   gStyle->SetOptStat(0);
-    gStyle->SetOptTitle(1);
 
   h1->SetLineColor(kRed);
   h2->SetLineColor(kBlue);
@@ -504,7 +523,7 @@ TCanvas *canvas_3plot(TH1F * h1, TH1F * h2, TH1F * h3, TString canvas, bool Logy
     h1->SetMinimum(miny);
   else if (miny==-1 && maxy!=-1)
      h1->SetMaximum(maxy);
-   TLegend * leg = new TLegend(0.70,0.70,1,1);
+   TLegend * leg = new TLegend(0.70,0.70,0.9,0.9);
    leg->AddEntry(h1,leg1);
    leg->AddEntry(h2,leg2);
    leg->AddEntry(h3,leg3);
@@ -513,9 +532,7 @@ TCanvas *canvas_3plot(TH1F * h1, TH1F * h2, TH1F * h3, TString canvas, bool Logy
    leg->SetLineColor(kWhite);
    leg->SetBorderSize(0);
    leg->Draw();
-   cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
+   CMS_lumi( data_mc_canvas, 4,0 );
    if (Logy) data_mc_canvas->SetLogy();
 
    return data_mc_canvas;
@@ -526,16 +543,15 @@ TCanvas *canvas_3plot(TH1F * h1, TH1F * h2, TH1F * h3, TString canvas, bool Logy
 
 
 
-TCanvas *canvas_2d(TH2F * h2,TString name, TString xaxis, TString yaxis){
-TCanvas * ctemp=new TCanvas(name,name,700,700);
-gStyle->SetOptStat(0);
-h2->Draw("COLZ");
-h2->GetXaxis()->SetTitle(xaxis);
-h2->GetYaxis()->SetTitle(yaxis);
-cms().Draw("sames");
-   head().Draw("sames");
-   extra().Draw("sames");
-return ctemp;
+TCanvas *canvas_2d(TH2F * h2,TString name, TString xaxis, TString yaxis,TString option="COLZ"){
+  TCanvas * ctemp=new TCanvas(name,name,700,700);
+  gStyle->SetOptStat(0);
+  h2->Draw(option);
+  gPad->SetRightMargin(0.1);
+  h2->GetXaxis()->SetTitle(xaxis);
+  h2->GetYaxis()->SetTitle(yaxis);
+  CMS_lumi( ctemp, 4,0 );
+  return ctemp;
 }
 
 TCanvas * canvas_prof(TH1F * h1, TH1F * h2, TH1F * h3,double xax[],double xerr[], TString name, TString title){
@@ -587,18 +603,32 @@ hp1->SetTitle(title);
 return ct;
 }
 
-TCanvas * canvas_2prof(TH2F * h1,TH2F * h2,TString name, TString titleX, TString titleY){
+TCanvas * canvas_2prof(TH2F * h1,TH2F * h2,TString name, TString titleX, TString titleY,TString profXOrY="X"){
 TCanvas * ct=new TCanvas("c"+name,"c"+name,700,700);
- TH1D *hp1=h1->ProfileX("h1"+name,1,-1,"s");
- TH1D *hp2=h2->ProfileX("h2"+name,1,-1,"s");
+ TH1D *hp1,*hp2;
+ if ( profXOrY=="X"){
+   hp1=h1->ProfileX("h1"+name,1,-1,"s");
+   hp2=h2->ProfileX("h2"+name,1,-1,"s");
+ } 
+ else if ( profXOrY=="Y"){
+   hp1=h1->ProfileY("h1"+name,1,-1,"s");
+   hp2=h2->ProfileY("h2"+name,1,-1,"s");
+ }
+ else cout<<"invalid profile axis designated. Options: X or Y"<<endl;
  hp1->Draw();
  hp2->Draw("sames");
 
-hp1->SetLineColor(1);
-hp2->SetLineColor(2);
+ hp1->SetMarkerColor(1);
+ hp2->SetMarkerColor(2);
+ hp2->SetMarkerSize(3);
+ hp1->SetMarkerSize(3);
+ hp1->SetLineWidth(3);
+ hp2->SetLineWidth(3);
 
-hp1->SetTitle("#font[22]{CMS} #font[12]{Preliminary};"+titleX+";"+titleY);
-
+ hp1->SetTitle(";"+titleX+";"+titleY);
+ cms().Draw("sames");
+ head().Draw("sames");
+ extra().Draw("sames");
 return ct;
 }
-
+#endif

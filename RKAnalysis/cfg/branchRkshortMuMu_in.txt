@@ -1,0 +1,6 @@
+drop *
+keep Muon_soft*
+keep Muon_triggerIdLoose
+keep Kshort_trk*_pt
+keep Kshort_*prob
+keep BToKshortMuMu*

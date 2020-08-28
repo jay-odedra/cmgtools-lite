@@ -1,6 +1,8 @@
 #!/bin/bash
 
-for VAR in hmBlowq_ncut hmBjpsi_nocut hBpt hBslxy hBprob hBcos hmBlowq hmBjpsi
+
+
+for VAR in hminBtrk1 hminBtrk2 hminBtrk3 hl1Bmass hl2Bmass
 do
-   python combinePlots.py --two-plot-ratio -i plots_Sep12 nofix_slxy -p ${VAR} -o ${VAR} -l Sep12 Nov29 -c LogY -o bugged
+   python combinePlots.py -i NewVarsData NewVarsMC -p ${VAR} -o NewVarsMCData -l Bkg Sgn -c Norm LogY Over
 done

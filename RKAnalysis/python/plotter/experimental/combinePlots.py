@@ -115,7 +115,11 @@ def legPos( options):
   else:
      return newpos
 
-
+def AddOverflow(h1):
+  nx=h1.GetNbinsX()
+  value=h1.GetBinContent(nx)+ h1.GetBinContent(nx+1);
+  h1.SetBinContent(nx,value);
+  return h1
 
 
 
@@ -161,7 +165,7 @@ if __name__ == "__main__":
     
    
     args = parser.parse_args()
-    
+    print args.legends, args.plotNames
      #  create output folder to save plots
     os.system("mkdir -p "+args.outputName)
       
@@ -170,7 +174,7 @@ if __name__ == "__main__":
        print " histo name is not provided"
        exit()
 
-    if len(args.legends) != len(args.plotNames):
+    if len(args.legends) != len(args.plotNames) and len(args.plotNames)!=1:
        print "legends for all plots not defined"
        exit()    
 
@@ -216,6 +220,8 @@ if __name__ == "__main__":
 #        histo.GetYaxis().SetTitleFont(42)
         histo.GetYaxis().SetLabelFont(42)
         histo.GetYaxis().SetLabelSize(0.2)
+        if "Over" in args.cfg:
+           histo=AddOverflow(histo)
         histo=transform(histo, args.cfg)
         leg.AddEntry(histo,args.legends[idx])
         gROOT.cd()
@@ -237,7 +243,7 @@ if __name__ == "__main__":
       ks_test = histos[0].KolmogorovTest(histos[1])
       print "   KolmogorovTest =",ks_test
       # draw everything
-      if "LogY" in args.cfg:  pad1.SetLogy()  
+      if "LogY" in args.cfg:  c.SetLogy()  
       if args.ratio and len(args.inputPaths)==2:     
         ks_test = histos[0].KolmogorovTest(histos[1])
         print "   KolmogorovTest =",ks_test
