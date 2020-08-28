@@ -1,11 +1,11 @@
 #!/bin/bash
 
 
-DIR="/eos/cms/store/cmst3/user/gkaratha/cmgTuple_PFeKEE_11B_v4.2_noBDTPresel/"
+DIR="/eos/cms/store/cmst3/user/gkaratha/cmgTuple_PFeKEE_11B_v5.4"
 
-Nexp=11; #need expected+1 
+Nexp=31; #need expected+1 
 
-DeleteTempFiles=true  #those having BParkNANO_data_*.root
+DeleteTempFiles=false  #those having BParkNANO_data_*.root
 
 for i in "$DIR"/*
 do

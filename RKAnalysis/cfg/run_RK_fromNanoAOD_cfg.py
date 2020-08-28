@@ -3,7 +3,8 @@
 # BParking space: /store/group/cmst3/group/bpark/gkaratha/
 # local run: nanopy.py <folder>  run_RK_fromNanoAOD_cfg.py -N <evts per dataset> -o xxx=yyy
 # --single for debugging 
-
+#real example:
+# nanopy.py test3  run_RK_fromNanoAOD_cfg.py -N 1000 -o kee -o data -o filterSample=2018 -o onlyPFe -o test
 
 import re, os, sys
 from CMGTools.RootTools.samples.configTools import printSummary, mergeExtensions, doTestN, configureSplittingFromTime, cropToLumi
@@ -41,14 +42,11 @@ if (not data) and (not mc):
    data=True
 
 
-#get triggers
-from CMGTools.RootTools.samples.triggers_13TeV_BParking import all_triggers as triggers
-
-
 # get datasets  
 Ncomps=[]
 if data:
   from CMGTools.RootTools.samples.samples_13TeV_BParkingData_NanoAOD import samples as allData
+#  from CMGTools.RootTools.samples.samples_13TeV_data_test import samples as allData
   Ncomps = allData 
 if mc:
   from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD import samples as allMC
@@ -96,11 +94,11 @@ br_in = ""
 if kmumu and data:
   br_in = "branchRkmumu_in.txt"
   #no cuts
-  #Bcuts=dict ( Pt= 0, MinMass=4.7, MaxMass=5.7, LxySign=0, Cos2D=0, Prob=0, L1Pt= 1.0, L2Pt= 1.0, KPt= 1.0, Mllmin=2.7, Mllmax=3.3 )
+  Bcuts=dict ( Pt= 0, MinMass=-4.7, MaxMass=50.7, LxySign=0, Cos2D=0, Prob=0, L1Pt= -1.0, L2Pt= -1.0, KPt= -1.0, Mllmin=-2.7, Mllmax=30.3 )
   # tag cuts
 #  Bcuts=dict ( Pt= 10.5, MinMass=4.7, MaxMass=6.0, LxySign=1.0, Cos2D=0.99, Prob=0.001, L1Pt= 7.2, L2Pt= 1.0, KPt= 1.0, Mllmin=0, Mllmax=5 )
   # probe cuts 
-  Bcuts=dict ( Pt= 3.0, MinMass=4.7, MaxMass=6.0, LxySign=1.0, Cos2D=0.9, Prob=0.01, L1Pt= 1.0, L2Pt= 1.0, KPt= 1.0, Mllmin=0, Mllmax=5 )
+  #Bcuts=dict ( Pt= 3.0, MinMass=4.7, MaxMass=6.0, LxySign=1.0, Cos2D=0.9, Prob=0.01, L1Pt= 1.0, L2Pt= 1.0, KPt= 1.0, Mllmin=0, Mllmax=5 )
   BparkSkim=SkimCuts("BToKMuMu",Bcuts)
   modules = KMuMuData(modules,Bcuts)
 
@@ -110,7 +108,8 @@ if kee and data:
   Bcuts=dict ( Pt=0, MinMass=0, MaxMass=6, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0, L2Pt= 0, KPt= 0, Mllmin=0, Mllmax=5 ) # no -preselection cuts 
   if onlyPFe:
      #v2 preselection 2 PFe
-     Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.5, Cos2D=0.8, Prob=0, L1Pt= 0.5, L2Pt= 0.5, KPt= 0.75, Mllmin=0.55, Mllmax=5 ) 
+#     Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.5, Cos2D=0.8, Prob=0, L1Pt= 0.5, L2Pt= 0.5, KPt= 0.75, Mllmin=0.55, Mllmax=5 ) 
+     Bcuts=dict ( Pt= 0, MinMass=4.7, MaxMass=6.0, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0.5, L2Pt= 0.5, KPt= 0, Mllmin=0, Mllmax=5 )
   if onlyLowPtAndPFe:
      #v2 preselection Low Pt + PFe
      Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.8, Cos2D=0.9, Prob=0.05, L1Pt= 2.0, L2Pt= 0.8, KPt= 0.9, Mllmin=0.5, Mllmax=3.5 ) 

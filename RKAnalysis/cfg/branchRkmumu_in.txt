@@ -1,7 +1,7 @@
 drop SV_*
 drop PV_*
 drop L1_*
-drop HLT_*
+
 drop TrigObj_*
 drop fixedGrid*
 drop BToKEE_*
