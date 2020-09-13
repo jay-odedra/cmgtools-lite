@@ -48,7 +48,7 @@ Plotting: CMGTools/RKAnalysis/python/plotter/experimental/plotter2.py
 ```
 Main code (ie modules to run and running order) defined in BParking_modules.py
 Local run: nanopy.py <folder>  run_RK_fromNanoAOD_cfg.py -N <evts per dataset> -o xxx=yyy
-Batch run: nanopy_batch.py -o <localOutput> -r /eos/space/<remoteOutput> -b 'run_condor_simple.sh -t 1200' run_RK_fromNanoAOD_cfg.py --option xxx=yyy
+Batch run: nanopy_batch.py -o <localOutput> -r /eos/space/<remoteOutput> -b 'run_condor_simple.sh -t 1200' run_RK_fromNanoAOD_cfg.py --option <xxx>=<yyy>
 Options:
 - mc to run on MC
 - data to run on data
@@ -64,4 +64,12 @@ Options:
 - single for single threaded run. this needs "--single"
 
 
+```
+#### Proxy error
+```
+In the following error, during submission in condor, is encountered:
 
+Submitting job(s)ERROR: use_x509userproxy=/afs/cern.ch/work/r/ratramon/CMSSW_10_4_0/src/CMGTools/RKAnalysis/cfg/X509_USER_PROXY is invalid, must eval to a boolean
+
+go to PhysicsTools/HeppyCore/scripts and comment out the line use_x509userproxy = \$ENV(X509_USER_PROXY) from both run_condor.sh and run_condor_simple.sh
+then re-compile
