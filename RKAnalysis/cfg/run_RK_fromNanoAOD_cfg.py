@@ -5,6 +5,7 @@
 # --single for debugging 
 #real example:
 # nanopy.py test3  run_RK_fromNanoAOD_cfg.py -N 1000 -o kee -o data -o filterSample=2018 -o onlyPFe -o test
+#nanopy_batch.py -o cmgTuple_PFeKEE_12B_v7.0/ -r /store/cmst3/user/gkaratha/cmgTuple_PFeKEE_12B_v7.0 -b 'run_condor_simple.sh -t 1200' run_RK_fromNanoAOD_cfg.py --option filterSample=crab_data_Run2018 --option data --option njobs=50 --option kee --option onlyPFe
 
 import re, os, sys
 from CMGTools.RootTools.samples.configTools import printSummary, mergeExtensions, doTestN, configureSplittingFromTime, cropToLumi
@@ -27,9 +28,13 @@ data = getHeppyOption("data",False)
 njobs = getHeppyOption("njobs",10)
 nfiles = getHeppyOption("nfiles",1)
 kmumu = getHeppyOption("kmumu",False)
-kstarmumu = getHeppyOption("kstarmumu",False)
-kshortmumu = getHeppyOption("kshortmumu",False)
+kstarmumu_pimumu= getHeppyOption("kstarmumu_pimumu",False)
+kstarmumu_kmumu= getHeppyOption("kstarmumu_kmumu",False)
 kee = getHeppyOption("kee",False)
+kstaree_piee= getHeppyOption("kstaree_piee",False)
+kstaree_kee= getHeppyOption("kstaree_kee",False)
+tagmu = getHeppyOption("tagmu",False)
+trgUnbiased = getHeppyOption("trgUnbiased",False)
 onlyPFe = getHeppyOption("onlyPFe",False)
 onlyLowPtAndPFe = getHeppyOption("onlyLowPtAndPFe",False) # b cands with 1 low and 1 pf e only created
 jpsi = getHeppyOption("jpsi",False)
@@ -45,11 +50,11 @@ if (not data) and (not mc):
 # get datasets  
 Ncomps=[]
 if data:
-  from CMGTools.RootTools.samples.samples_13TeV_BParkingData_NanoAOD import samples as allData
-#  from CMGTools.RootTools.samples.samples_13TeV_data_test import samples as allData
+  from CMGTools.RootTools.samples.samples_13TeV_BParkingData_NanoAOD import samples as allData 
   Ncomps = allData 
 if mc:
   from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD import samples as allMC
+#  from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD_noregr import samples as allMC
   Ncomps = allMC
 
 
@@ -93,14 +98,14 @@ br_in = ""
 # code loaded here just like in cmssw cfg
 if kmumu and data:
   br_in = "branchRkmumu_in.txt"
-  #no cuts
-  Bcuts=dict ( Pt= 0, MinMass=-4.7, MaxMass=50.7, LxySign=0, Cos2D=0, Prob=0, L1Pt= -1.0, L2Pt= -1.0, KPt= -1.0, Mllmin=-2.7, Mllmax=30.3 )
+  #loose cuts
+  Bcuts=dict ( Pt= 3.0, MinMass=4.7, MaxMass=5.7, LxySign=0, Cos2D=0, Prob=0.001, L1Pt= 2.0, L2Pt= 2.0, KPt= 1.0, Mllmin=0, Mllmax=5.0 )
   # tag cuts
 #  Bcuts=dict ( Pt= 10.5, MinMass=4.7, MaxMass=6.0, LxySign=1.0, Cos2D=0.99, Prob=0.001, L1Pt= 7.2, L2Pt= 1.0, KPt= 1.0, Mllmin=0, Mllmax=5 )
   # probe cuts 
   #Bcuts=dict ( Pt= 3.0, MinMass=4.7, MaxMass=6.0, LxySign=1.0, Cos2D=0.9, Prob=0.01, L1Pt= 1.0, L2Pt= 1.0, KPt= 1.0, Mllmin=0, Mllmax=5 )
   BparkSkim=SkimCuts("BToKMuMu",Bcuts)
-  modules = KMuMuData(modules,Bcuts)
+  modules = KMuMuData(modules,Bcuts,tagmu)
 
 
 if kee and data:
@@ -109,10 +114,11 @@ if kee and data:
   if onlyPFe:
      #v2 preselection 2 PFe
 #     Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.5, Cos2D=0.8, Prob=0, L1Pt= 0.5, L2Pt= 0.5, KPt= 0.75, Mllmin=0.55, Mllmax=5 ) 
-     Bcuts=dict ( Pt= 0, MinMass=4.7, MaxMass=6.0, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0.5, L2Pt= 0.5, KPt= 0, Mllmin=0, Mllmax=5 )
+     Bcuts=dict ( Pt= 3.0, MinMass=4.7, MaxMass=6.0, LxySign=0, Cos2D=0, Prob=0.001, L1Pt= 2.0, L2Pt= 2.0, KPt=0.7, Mllmin=1.05, Mllmax=5.0 )
   if onlyLowPtAndPFe:
      #v2 preselection Low Pt + PFe
-     Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.8, Cos2D=0.9, Prob=0.05, L1Pt= 2.0, L2Pt= 0.8, KPt= 0.9, Mllmin=0.5, Mllmax=3.5 ) 
+     #Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.8, Cos2D=0.9, Prob=0.05, L1Pt= 2.0, L2Pt= 0.8, KPt= 0.9, Mllmin=0.5, Mllmax=3.5 ) 
+     Bcuts=dict ( Pt= 3.0, MinMass=4.7, MaxMass=6.0, LxySign=0, Cos2D=0, Prob=0.01, L1Pt= 2.0, L2Pt= 1.0, KPt=1.0, Mllmin=1.05, Mllmax=5.0 )
   if onlyPFe and onlyLowPtAndPFe: 
      print "Only PF e flag AND only lowpT andPF e flag enabled. Results may be invalid. Terminate"
      exit()
@@ -125,12 +131,33 @@ if kee and data:
 if kmumu and mc:
   br_in = "branchRkmumu_in.txt"
   if not jpsi and not psi2s:
-     modules = KMuMuMC(modules)
+     modules = KMuMuMC(modules,[],tagmu,trgUnbiased)
   elif jpsi and not psi2s:
-     modules = KMuMuMC(modules,["443->13,-13"])
+     modules = KMuMuMC(modules,["443->13,-13"],tagmu,trgUnbiased)
   elif not jpsi and psi2s:
-     modules = KMuMuMC(modules,["100443->13,-13"])
+     modules = KMuMuMC(modules,["100443->13,-13"],tagmu,trgUnbiased)
   BparkSkim=""
+
+if kstarmumu_pimumu and mc:
+  br_in = "branchRkmumu_in.txt"
+  if not jpsi and not psi2s:
+     modules = KstarPiMuMuMC(modules,[],tagmu,trgUnbiased)
+  elif jpsi and not psi2s:
+     modules = KstarPiMuMuMC(modules,["443->13,-13","313->321,-211"],tagmu,trgUnbiased)
+  elif not jpsi and psi2s:
+     modules = KstarPiMuMuMC(modules,["100443->13,-13","313->321,-211"],tagmu,trgUnbiased)
+  BparkSkim=""
+
+if kstarmumu_kmumu and mc:
+  br_in = "branchRkmumu_in.txt"
+  if not jpsi and not psi2s:
+     modules = KstarKMuMuMC(modules,[],tagmu,trgUnbiased)
+  elif jpsi and not psi2s:
+     modules = KstarKMuMuMC(modules,["443->13,-13","313->321,-211"],tagmu,trgUnbiased)
+  elif not jpsi and psi2s:
+     modules = KstarKMuMuMC(modules,["100443->13,-13","313->321,-211"],tagmu,trgUnbiased)
+  BparkSkim=""
+
 
 if kee and mc: 
   br_in = "branchRkee_in.txt"
@@ -142,6 +169,25 @@ if kee and mc:
      modules = KEEMC(modules,["100443->11,-11"],onlyPFe,onlyLowPtAndPFe)
   BparkSkim=""
 
+if kstaree_piee and mc:
+  br_in = "branchRkee_in.txt"
+  if not jpsi and not psi2s:
+     modules = KstarPiEEMC(modules,["313->321,-211"],onlyPFe,onlyLowPtAndPFe)
+  elif jpsi and not psi2s:
+     modules = KstarPiEEMC(modules,["443->11,-11","313->321,-211"],onlyPFe,onlyLowPtAndPFe)
+  elif not jpsi and psi2s:
+     modules = KstarPiEEMC(modules,["100443->11,-11","313->321,-211"],onlyPFe,onlyLowPtAndPFe)
+  BparkSkim=""
+
+if kstaree_kee and mc:
+  br_in = "branchRkee_in.txt"
+  if not jpsi and not psi2s:
+     modules = KstarKEEMC(modules,["313->321,-211"],onlyPFe,onlyLowPtAndPFe)
+  elif jpsi and not psi2s:
+     modules = KstarKEEMC(modules,["443->11,-11","313->321,-211"],onlyPFe,onlyLowPtAndPFe)
+  elif not jpsi and psi2s:
+     modules = KstarKEEMC(modules,["100443->11,-11","313->321,-211"],onlyPFe,onlyLowPtAndPFe)
+  BparkSkim=""
 
 
 # only read the branches in this file - for speed deactivate unescairy stuff

@@ -137,8 +137,10 @@ if __name__ == "__main__":
     parser.add_option("-n","--ncore",dest="ncore",type="int",  default=-1, help="number of cores to use. -1 uses all")
 
     parser.add_option("--tree",dest="tree",  default="Events", type="string", help="tree name. Default Events")
-
+   
     (options, args) = parser.parse_args()
+
+    weight=None
 
     if  os.path.exists(options.outputDir) and options.rewriteOutDir:
         os.system("rm -r "+options.outputDir)
@@ -235,7 +237,7 @@ if __name__ == "__main__":
         h1= froot.Get(histName)
         if "Over" in plot_options:
            h1=AddOverflow(h1)
-        yld.write(histName+"  "+str(h1.Integral())+"\n")
+        yld.write(histName+"  "+str(h1.Integral(0,h1.GetNbinsX()+1))+"\n")
         h1=default_plot(h1)
         h1.SetLineWidth(3)
         c1 = TCanvas( canvasName,canvasName, 700,700)

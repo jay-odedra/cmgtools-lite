@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIRS="/eos/cms/store/cmst3/group/bpark/gkaratha/cmgTuple_PFeKEE_11B_noBDTpresel_v4.2/"
+DIRS="/eos/cms/store/cmst3/user/gkaratha/cmgTuple_PFeKEE_COMB_BKG_v5.4/"
 
 mkdir $DIRS/addedChunks
 for DIR in "$DIRS"/* 

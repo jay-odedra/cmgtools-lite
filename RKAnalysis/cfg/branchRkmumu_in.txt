@@ -7,3 +7,5 @@ drop fixedGrid*
 drop BToKEE_*
 drop Electron_*
 drop OtherPV_*
+keep nSV
+keep PV_npvs

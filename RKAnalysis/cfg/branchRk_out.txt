@@ -1,3 +1,5 @@
 drop *_*
 drop fixed*
 keep HLT_*
+keep nSV
+keep PV_npvs

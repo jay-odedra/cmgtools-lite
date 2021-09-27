@@ -4,6 +4,7 @@ drop L1_*
 drop TrigObj_*
 drop fixedGrid*
 drop BToKMuMu_*
-drop Muon_*
 drop OtherPV_*
-keep TriggerMuon_*
+keep Muon_*
+keep nSV
+keep PV_npvs

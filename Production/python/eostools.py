@@ -460,7 +460,6 @@ def move(src, dest):
                 
 def matchingFiles( path, regexp):
     """Return a list of files matching a regexp"""
-
     # print path, regexp
     pattern = re.compile( regexp )
     #files = ls_EOS(path)
@@ -479,7 +478,6 @@ def datasetNotEmpty( path, regexp ):
     
 def cmsStage( absDestDir, files, force):
     """Runs cmsStage with LFNs if possible"""
-
     destIsEOSDir = isEOSDir(absDestDir)
     if destIsEOSDir: 
         createEOSDir( absDestDir )

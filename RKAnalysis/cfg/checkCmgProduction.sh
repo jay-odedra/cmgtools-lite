@@ -25,7 +25,7 @@ do
      
      if [ ${file: -4} == ".log" ]
      then
-         echo "check",$file
+#         echo "check",$file
          let "total++"
          RESULT=$(condor_history -userlog $file )
          if [[ $RESULT == *" C "* ]]
@@ -46,7 +46,11 @@ done
 
 echo "success  "$success," running "$running," killed "$killed," total ",$total
 echo "logical urls in",$validurl," chunks"
-echo "bad url list",${brokenurl[@]}
+echo "bad url list"
+for i in "${brokenurl[@]}"; 
+do
+   echo $i
+done
 
 if $RESUBMIT
 then

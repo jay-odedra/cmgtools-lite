@@ -1,15 +1,25 @@
-from ROOT import TLorentzVector
+from ROOT import TLorentzVector,TVector3
 from math import sqrt
 from PhysicsTools.HeppyCore.utils.deltar import deltaR
 
 def TagVars(collections):
-  results=[]; Et_ratio=[]; Dphi=[]; projB=[]
+  results=[]; Et_ratio=[]; Dphi=[]; projB=[]; DzTagMuK=[]; DzTagMuL1=[]; 
+  DzTagMuL2=[]; 
   tracks=collections[0]
   Bcands=collections[2]
-  trgmuon=(collections[1])[0]
-  
+  trgmuons=(collections[1])
   trgmuon_vec=TLorentzVector()
-  trgmuon_vec.SetPtEtaPhiM(getattr(trgmuon,"pt"),getattr(trgmuon,"eta"),getattr(trgmuon,"phi"),0.105)
+  trgmuon_vec.SetPtEtaPhiM(0,0,0,0)
+  trgmuon_vz=-99
+  for trgmuon in trgmuons:
+    if not getattr(trgmuon,"isTriggering"): 
+       continue;
+    trgmuon_vec.SetPtEtaPhiM(getattr(trgmuon,"pt"),getattr(trgmuon,"eta"),getattr(trgmuon,"phi"),0.105)
+    trgmuon_vz=getattr(trgmuon,"vz")
+    break
+  if trgmuon_vec.M()==0:
+    result=[[0], [0], [0], [0], [0], [0]]
+    return result
   sum_track_vec=trgmuon_vec;
   sum_track=trgmuon_vec.Pt();
   for track  in tracks:
@@ -29,7 +39,12 @@ def TagVars(collections):
       Et_ratio.append(0)
     Dphi.append(Bcand_vec.DeltaPhi(sum_track_vec))
     projB.append(Bcand_vec*sum_track_vec)   
-  result=[Et_ratio,Dphi,projB]
+    DzTagMuK.append( abs(trgmuon_vz-getattr(Bcand,"kVz")) )
+    DzTagMuL1.append( abs(trgmuon_vz-getattr(Bcand,"l1Vz")) ) 
+    DzTagMuL2.append( abs(trgmuon_vz-getattr(Bcand,"l2Vz")) )
+    
+ 
+  result=[Et_ratio, Dphi, projB, DzTagMuL1, DzTagMuL2, DzTagMuK]
   return result
 
 def ClosestTrkVars(collections):
@@ -91,12 +106,19 @@ def ClosestTrkVars(collections):
          mean_b_trk+= sqrt( (vx_b-vx_trk)**(2) + (vy_b-vy_trk)**(2) )
          imean_b_trk+=1.0
     distances_b_trk=sorted(distances_b_trk)     
-    
-    trk1_vec.SetPtEtaPhiM(getattr(tracks[imin_distance_trk_e1],"pt"),getattr(tracks[imin_distance_trk_e1],"eta"),getattr(tracks[imin_distance_trk_e1],"phi"),0.139)
-    trk2_vec.SetPtEtaPhiM(getattr(tracks[imin_distance_trk_e2],"pt"),getattr(tracks[imin_distance_trk_e2],"eta"),getattr(tracks[imin_distance_trk_e2],"phi"),0.139)
 
-    mll_e1_trk.append( (trk1_vec+e1_vec).M() )               
-    mll_e2_trk.append( (trk2_vec+e2_vec).M() )
+    if imin_distance_trk_e1>-1:
+      trk1_vec.SetPtEtaPhiM(getattr(tracks[imin_distance_trk_e1],"pt"),getattr(tracks[imin_distance_trk_e1],"eta"),getattr(tracks[imin_distance_trk_e1],"phi"),0.139)
+      mll_e1_trk.append( (trk1_vec+e1_vec).M() )
+    else:
+      mll_e1_trk.append(-1. )
+
+    if imin_distance_trk_e2>-1:
+      trk2_vec.SetPtEtaPhiM(getattr(tracks[imin_distance_trk_e2],"pt"),getattr(tracks[imin_distance_trk_e2],"eta"),getattr(tracks[imin_distance_trk_e2],"phi"),0.139)
+      mll_e2_trk.append( (trk2_vec+e2_vec).M() )
+    else:
+      mll_e2_trk.append( -1. )
+
 
     if len(distances_b_trk)>0: minxy1_b_trk.append(distances_b_trk[0])
     else: minxy1_b_trk.append(10)
@@ -112,22 +134,107 @@ def ClosestTrkVars(collections):
   return results
 
 
+def D0Vars(collections):
+    muons=collections[0]
+    Bcands=collections[1]
+    k_opp_l_mass=[]
+    k_mu_hadron_mass=[]
+    k_mu_muon_mass=[]
+    vMu=TLorentzVector()
+    mucharge=0
+    for mu in muons:
+      if getattr(mu,"isTriggering")==0:
+           continue
+      mucharge = getattr(mu,"charge")
+      vMu.SetPtEtaPhiM(getattr(mu,"pt"),getattr(mu,"eta"),getattr(mu,"phi"),0.493);
+      break;
+       
+    for Bcand in Bcands:
+      vK=TLorentzVector()
+      vL=TLorentzVector()
+      kcharge=getattr(Bcand,"kCharge")
+      if getattr(Bcand,"l1Charge") != kcharge:
+         vL.SetPtEtaPhiM( getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"),0.493)
+      else:
+         vL.SetPtEtaPhiM( getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"),0.493)
+      vK.SetPtEtaPhiM( getattr(Bcand,"fit_k_pt"), getattr(Bcand,"fit_k_eta"), getattr(Bcand,"fit_k_phi"),0.139)
+      k_opp_l_mass.append((vL+vK).M())
+      m_muk_hadron_mass=0
+      m_muk_muon_mass=0
+     
+      if mucharge!=0 and mucharge!=kcharge:
+        m_muk_hadron_mass=(vMu+vK).M()
+        vK.SetPtEtaPhiM(vK.Pt(),vK.Eta(),vK.Phi(),0.105)
+        vMu.SetPtEtaPhiM(vMu.Pt(),vMu.Eta(),vMu.Phi(),0.105)
+        m_muk_muon_mass=(vMu+vK).M()
+     
+      if mucharge==0:
+        m_muk_muon_mass=-99
+        m_muk_hadron_mass=-99
+      k_mu_hadron_mass.append(m_muk_hadron_mass)  
+      k_mu_muon_mass.append(m_muk_muon_mass)
+     
+    return [k_opp_l_mass, k_mu_hadron_mass, k_mu_muon_mass]
+
+def PAssymVar(collections):
+    muons=collections[0]
+    Bcands=collections[1]
+
+    mu_found=False
+    assym=[]
+    mu_vtx=TVector3()
+    for mu in muons:
+      if getattr(mu,"isTriggering")==0:
+           continue
+      mu_vtx.SetXYZ(getattr(mu,"vx"),getattr(mu,"vy"),getattr(mu,"vz"))
+      mu_found=True
+      break;
+       
+    for Bcand in Bcands:
+      if not mu_found:
+         assym.append(-99)
+         continue   
+      b_vtx=TVector3()
+      b_vtx.SetXYZ(getattr(Bcand,"vtx_x"), getattr(Bcand,"vtx_y"), getattr(Bcand,"vtx_z"))
+      k_p=TVector3()
+      k_p.SetPtEtaPhi(getattr(Bcand,"fit_k_pt"), getattr(Bcand,"fit_k_eta"), getattr(Bcand,"fit_k_phi"))
+      e1_p=TVector3(getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"))
+      e2_p=TVector3(getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"))
+      assym.append( (((e1_p+e2_p).Cross(b_vtx-mu_vtx)).Mag()-(k_p.Cross(b_vtx-mu_vtx)).Mag())/(((e1_p+e2_p).Cross(b_vtx-mu_vtx)).Mag()+(k_p.Cross(b_vtx-mu_vtx)).Mag()) )
+     
+    return [assym]
+
+
 def TagVarsMC(collections):
-  results=[]; Et_ratio=[]; Dphi=[]; projB=[]
+  results=[]; Et_ratio=-99.; Dphi=-99.; projB=-99.
   tracks=collections[0]
   trgmuons=collections[1]
   recoB_pt=collections[2]
   recoB_eta=collections[3]
   recoB_phi=collections[4]
   recoB_mass=collections[5]
-  if len(trgmuons)==0:
-     default=[-99.,-99.,-99.]
+  recoE1_vz=collections[6]
+  recoE2_vz=collections[7]
+  recoK_vz=collections[8]
+  '''if len(trgmuons)==0:
+     default=[-99.,-99.,-99.,-99.,-99.,-99.]
      return default
   trgmuon=trgmuons[0]  
   trgmuon_vec=TLorentzVector()
-  trgmuon_vec.SetPtEtaPhiM(getattr(trgmuon,"pt"),getattr(trgmuon,"eta"),getattr(trgmuon,"phi"),0.105)
+  trgmuon_vec.SetPtEtaPhiM(getattr(trgmuon,"pt"),getattr(trgmuon,"eta"),getattr(trgmuon,"phi"),0.105)'''
+  trgmuon_vec=TLorentzVector()
+  trgmuon_vec.SetPtEtaPhiM(0,0,0,0)
+  for trgmuon in trgmuons:
+    if getattr(trgmuon,"isTriggering")==0:
+       continue
+    trgmuon_vec.SetPtEtaPhiM(getattr(trgmuon,"pt"),getattr(trgmuon,"eta"),getattr(trgmuon,"phi"),0.105)
+    break
+  if trgmuon_vec.M()==0:
+    result=[-99.,-99.,-99.,-99.,-99.,-99.]
+    return result 
   sum_track_vec=trgmuon_vec;
   sum_track=trgmuon_vec.Pt();
+  trgmuon_vz=getattr(trgmuon,"vz")
   for track  in tracks:
     track_vec=TLorentzVector();
     track_vec.SetPtEtaPhiM(getattr(track,"pt"),getattr(track,"eta"),getattr(track,"phi"),0.139)
@@ -144,7 +251,7 @@ def TagVarsMC(collections):
     Et_ratio=0
   Dphi=recoB_vec.DeltaPhi(sum_track_vec)
   projB=recoB_vec*sum_track_vec
-  result=[Et_ratio,Dphi,projB]
+  result=[Et_ratio,Dphi,projB,abs(trgmuon_vz-recoE1_vz),abs(trgmuon_vz-recoE2_vz),abs(trgmuon_vz-recoK_vz)]
   return result
 
 
@@ -216,10 +323,17 @@ def ClosestTrkVarsMC(collections):
   minxy_e2_trk=min_dist_e2; 
   trk1_vec=TLorentzVector();
   trk2_vec=TLorentzVector();
-  trk1_vec.SetPtEtaPhiM(getattr(tracks[itrk_e1],"pt"),getattr(tracks[itrk_e1],"eta"),getattr(tracks[itrk_e1],"phi"),0.139)
-  trk2_vec.SetPtEtaPhiM(getattr(tracks[itrk_e2],"pt"),getattr(tracks[itrk_e2],"eta"),getattr(tracks[itrk_e2],"phi"),0.139)
-  mll_e1_trk= (trk1_vec+e1_vec).M()
-  mll_e2_trk= (trk2_vec+e2_vec).M()
+  if itrk_e1>-1:
+    trk1_vec.SetPtEtaPhiM(getattr(tracks[itrk_e1],"pt"),getattr(tracks[itrk_e1],"eta"),getattr(tracks[itrk_e1],"phi"),0.139)
+    mll_e1_trk= (trk1_vec+e1_vec).M()
+  else:
+    mll_e1_trk=-1.
+
+  if itrk_e2>-1:
+    trk2_vec.SetPtEtaPhiM(getattr(tracks[itrk_e2],"pt"),getattr(tracks[itrk_e2],"eta"),getattr(tracks[itrk_e2],"phi"),0.139)
+    mll_e2_trk= (trk2_vec+e2_vec).M()
+  else:
+    mll_e2_trk=-1.
 
   if len(distance_b_trk)>0: minxy1_b_trk=distance_b_trk[0]
   else: minxy1_b_trk=10
@@ -235,4 +349,79 @@ def ClosestTrkVarsMC(collections):
   results=[ mll_e1_trk, mll_e2_trk, minxy1_b_trk, minxy2_b_trk, minxy3_b_trk,\
             meanxy_b_trk]
   return results
+
+
+def D0VarsMC(collections):
+    muons=collections[0]
+    Bcands=collections[1]
+    Bidx=collections[2]
+    e1charge=collections[3]
+    e2charge=collections[4]
+    kcharge=collections[5]
+
+    k_opp_l_mass=-99
+    k_mu_hadron_mass=-99
+    k_mu_muon_mass=-99
+    
+    if Bidx<0:
+       return [k_opp_l_mass,k_mu_hadron_mass,k_mu_muon_mass]
+    
+    vMu=TLorentzVector()
+    mucharge=0
+    for mu in muons:
+      if getattr(mu,"isTriggering")==0:
+           continue
+      mucharge = getattr(mu,"charge")
+      vMu.SetPtEtaPhiM(getattr(mu,"pt"),getattr(mu,"eta"),getattr(mu,"phi"),0.493);
+      break;
+
+    if mucharge==0:   
+       return [k_opp_l_mass,k_mu_hadron_mass,k_mu_muon_mass]
+
+    Bcand= Bcands[Bidx]
+    vK=TLorentzVector()
+    vL=TLorentzVector()
+    if e1charge != kcharge:
+       vL.SetPtEtaPhiM( getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"),0.493)
+    else:
+       vL.SetPtEtaPhiM( getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"),0.493)
+    vK.SetPtEtaPhiM( getattr(Bcand,"fit_k_pt"), getattr(Bcand,"fit_k_eta"), getattr(Bcand,"fit_k_phi"),0.139)
+    k_opp_l_mass=(vL+vK).M()
+     
+    if mucharge!=0 and mucharge!=kcharge:
+      k_mu_hadron_mass=(vMu+vK).M()
+      vK.SetPtEtaPhiM(vK.Pt(),vK.Eta(),vK.Phi(),0.105)
+      vMu.SetPtEtaPhiM(vMu.Pt(),vMu.Eta(),vMu.Phi(),0.105)
+      k_mu_muon_mass=(vMu+vK).M()
+        
+     
+    return [k_opp_l_mass, k_mu_hadron_mass, k_mu_muon_mass]
+
+def PAssymVarMC(collections):
+    muons=collections[0]
+    Bcands=collections[1]
+    Bidx=collections[2]
+
+    mu_found=False
+    assym=-99.
+    mu_vtx=TVector3()
+    for mu in muons:
+      if getattr(mu,"isTriggering")==0:
+           continue
+      mu_vtx.SetXYZ(getattr(mu,"vx"),getattr(mu,"vy"),getattr(mu,"vz"))
+      mu_found=True
+      break;
+    if not mu_found or Bidx<0:
+       return [assym]   
+    Bcand=Bcands[Bidx]
+    b_vtx=TVector3()
+    b_vtx.SetXYZ(getattr(Bcand,"vtx_x"), getattr(Bcand,"vtx_y"), getattr(Bcand,"vtx_z"))
+    k_p=TVector3()
+    k_p.SetPtEtaPhi(getattr(Bcand,"fit_k_pt"), getattr(Bcand,"fit_k_eta"), getattr(Bcand,"fit_k_phi"))
+    e1_p=TVector3(getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"))
+    e2_p=TVector3(getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"))
+    assym= (((e1_p+e2_p).Cross(b_vtx-mu_vtx)).Mag()-(k_p.Cross(b_vtx-mu_vtx)).Mag())/(((e1_p+e2_p).Cross(b_vtx-mu_vtx)).Mag()+(k_p.Cross(b_vtx-mu_vtx)).Mag()) 
+     
+    return [assym]
+
 

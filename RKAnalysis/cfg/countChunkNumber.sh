@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-DIR="/eos/cms/store/cmst3/user/gkaratha/cmgTuple_PFeKEE_11B_v5.4"
+DIR="/eos/cms/store/cmst3/user/gkaratha/cmgTuple_TagKMuMu_12B_v5.6"
 
-Nexp=31; #need expected+1 
-
+Nexp=21; #need expected+1 
+Details=false
 DeleteTempFiles=false  #those having BParkNANO_data_*.root
 
 for i in "$DIR"/*
@@ -13,15 +13,16 @@ do
      continue
    fi
    RES=$(ls -lh $i | wc -l)
-#   echo $i,$RES
-   if [[ $RES -ne $Nexp ]]
-   then
-     echo $RES, $Nexp
-     echo "problem on $i"
-     ls $i
-     if [ "$DeleteTempFiles" = true ]; then
-        echo "Deleting files BParkNANO_data_*.root"
-        rm $i/BParkNANO_data_*.root
+   echo $i,$RES
+   if [ "$details" = true ];then
+     if [[ $RES -ne $Nexp ]]
+     then
+       echo $RES, $Nexp
+       echo "problem on $i"
+       if [ "$DeleteTempFiles" = true ]; then
+          echo "Deleting files BParkNANO_data_*.root"
+          rm $i/BParkNANO_data_*.root
+     fi
      fi
    fi
 done
