@@ -151,7 +151,6 @@ def main( options, args ):
 
 if __name__ == '__main__':
     from optparse import OptionParser
-    
     parser = OptionParser()
     parser.usage = """
     %prog <name> <analysis_cfg>

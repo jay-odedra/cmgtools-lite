@@ -4,6 +4,20 @@ from os import listdir
 from os.path import isfile, join
 import argparse
 
+def loop_subdir(mypath,output):
+    print "loop",mypath
+    if "000" not in mypath:
+       for subdir in listdir(mypath):
+           print "subdir call",mypath+"/"+subdir
+           loop_subdir(mypath+"/"+subdir,output)
+    else:
+       print "save"       
+       path=mypath.split("/")[3:]
+       with open(output,'a') as txt:
+         text="{name} = kreator.makeDataComponentFromEOS('{name}','/{path}/','.*root')\n".format(name=path[-3]+"_"+path[-1],path="/".join(path))
+         txt.write(text+"\n")
+       txt.close()
+       
 
 if __name__ == "__main__":
 
@@ -14,44 +28,29 @@ if __name__ == "__main__":
 
 
   options = parser.parse_args()
-  sampleNames=[]
-  text="# COMPONENT CREATOR\nfrom CMGTools.RootTools.samples.ComponentCreator import ComponentCreator\nkreator = ComponentCreator()\n\n\n\n"
+  if "py" not in options.outputName:
+    options.outputName+=".py"
+
+  with open(options.outputName,'w') as txt:
+     txt.write("# COMPONENT CREATOR\nfrom CMGTools.RootTools.samples.ComponentCreator import ComponentCreator\nkreator = ComponentCreator()\n\n\n\n")
+  txt.close()
 
   for mypath in options.mypaths:
-   for dirname, dirnames, filenames in os.walk(mypath):
-     if '0000' not in dirnames: 
-       continue
-     words = dirname.split("/")
-     filterCut=False
-     if len(options.eraFilter)>0:
-       filterCut=True
-       for i in words:
-         for kwd in options.eraFilter:
-           if kwd in i:
-             filterCut=False
-     if filterCut:
-        continue
-     for word in words:
-       if 'crab' not in word:
-         continue;
-       print words
-       pth=""
-       for i in range(3,len(words)):
-         pth+="/"+words[i]
-       for j in dirnames:
-         pth2=pth+"/"+j+"/"
-         text+="{name} = kreator.makeDataComponentFromEOS('{name}','{path}','.*root')\n".format(name=word+"_"+j,path=pth2)
-         sampleNames.append(word+"_"+j)
- #   print text
-#    print 
-  text+="\n\nsamples = ["
-  for sample in  sampleNames:
-    if sample != sampleNames[-1]:
-      text+=sample+","
-    else:
-      text+=sample+"] \n\n\n\n"
-
-  text+='if __name__ == "__main__":\n\tfrom CMGTools.RootTools.samples.tools import runMain\n\trunMain(samples, localobjs=locals())'
-  with open(options.outputName+".py",'w') as out:
-     out.write(text)
-
+    for dir1 in listdir(mypath):
+      print "subdir call ",mypath+"/"+dir1
+      loop_subdir(mypath+"/"+dir1,options.outputName)
+    print "ok"
+  
+  samples=[]
+  with open(options.outputName,'r') as txt:
+    lines = txt.readlines()
+    for line in lines:
+      if "=" in line.split() and not "kreator" in line.split():
+        samples.append( line.split()[0] )
+  txt.close()
+  with open(options.outputName,'a') as txt:
+    text="\n\nsamples = ["+(",".join(samples))+"] \n\n\n\n"
+    text+='if __name__ == "__main__":\n\tfrom CMGTools.RootTools.samples.tools import runMain\n\trunMain(samples, localobjs=locals())'  
+    txt.write(text)
+  txt.close()
+  print "ready"
