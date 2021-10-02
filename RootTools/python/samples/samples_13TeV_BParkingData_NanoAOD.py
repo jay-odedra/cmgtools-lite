@@ -4,78 +4,240 @@ kreator = ComponentCreator()
 
 
 #part1
-crab_data_Run2018A_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part1_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018A_part1/200116_150535/0000/','.*root')
-crab_data_Run2018A_part1_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part1_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018A_part1/200116_150535/0001/','.*root')
-crab_data_Run2018B_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part1_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018B_part1/200116_150810/0000/','.*root')
-crab_data_Run2018B_part1_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part1_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018B_part1/200116_150810/0001/','.*root')
-crab_data_Run2018C_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part1_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018C_part1/200116_151112/0000/','.*root')
-crab_data_Run2018C_part1_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part1_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018C_part1/200116_151112/0001/','.*root')
-crab_data_Run2018D_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018D_part1/200116_151214/0000/','.*root')
-crab_data_Run2018D_part1_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018D_part1/200116_151214/0001/','.*root')
-crab_data_Run2018D_part1_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0002','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018D_part1/200116_151214/0002/','.*root')
-crab_data_Run2018D_part1_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0003','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018D_part1/200116_151214/0003/','.*root')
-crab_data_Run2018D_part1_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0004','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018D_part1/200116_151214/0004/','.*root')
-crab_data_Run2018D_part1_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0005','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH1/crab_data_Run2018D_part1/200116_151214/0005/','.*root')
+crab_data_Run2018A_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part1_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018A_part1/210305_221032/0000/','.*root')
+crab_data_Run2018A_part1_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part1_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018A_part1/210305_221032/0001/','.*root')
+crab_data_Run2018B_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part1_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018B_part1/210305_221634/0000/','.*root')
+crab_data_Run2018B_part1_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part1_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018B_part1/210305_221634/0001/','.*root')
+crab_data_Run2018B_part1_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part1_0002','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018B_part1_missingLumis/210329_121225/0000/','.*root')
+crab_data_Run2018C_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part1_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018C_part1/210305_222135/0000/','.*root')
+crab_data_Run2018C_part1_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part1_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018C_part1/210305_222135/0001/','.*root')
+crab_data_Run2018D_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018D_part1/210305_222409/0000/','.*root')
+crab_data_Run2018D_part1_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018D_part1/210305_222409/0001/','.*root')
+crab_data_Run2018D_part1_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0002','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018D_part1/210305_222409/0002/','.*root')
+crab_data_Run2018D_part1_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0003','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018D_part1/210305_222409/0003/','.*root')
+crab_data_Run2018D_part1_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0004','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018D_part1/210305_222409/0004/','.*root')
+crab_data_Run2018D_part1_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0005','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018D_part1/210305_222409/0005/','.*root')
+crab_data_Run2018D_part1_0006 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part1_0006','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018D_part1_missingLumis/210329_121409/0000/','.*root')
+
 
 #part2
-crab_data_Run2018A_part2_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part2_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018A_part2/200116_162432/0000/','.*root')
-crab_data_Run2018A_part2_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part2_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018A_part2/200116_162432/0001/','.*root')
-crab_data_Run2018B_part2_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part2_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018B_part2/200116_162718/0000/','.*root')
-crab_data_Run2018B_part2_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part2_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018B_part2/200116_162718/0001/','.*root')
-crab_data_Run2018C_part2_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part2_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018C_part2/200116_162917/0000/','.*root')
-crab_data_Run2018C_part2_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part2_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018C_part2/200116_162917/0001/','.*root')
-crab_data_Run2018D_part2_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018D_part2/200116_165722/0000/','.*root')
-crab_data_Run2018D_part2_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018D_part2/200116_165722/0001/','.*root')
-crab_data_Run2018D_part2_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0002','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018D_part2/200116_165722/0002/','.*root')
-crab_data_Run2018D_part2_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0003','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018D_part2/200116_165722/0003/','.*root')
-crab_data_Run2018D_part2_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0004','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018D_part2/200116_165722/0004/','.*root')
-crab_data_Run2018D_part2_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0005','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH2/crab_data_Run2018D_part2/200116_165722/0005/','.*root')
+crab_data_Run2018A_part2_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part2_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018A_part2/210310_142346/0000/','.*root')
+crab_data_Run2018A_part2_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part2_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018A_part2/210310_142346/0001/','.*root')
+crab_data_Run2018B_part2_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part2_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018B_part2/210310_142257/0000/','.*root')
+crab_data_Run2018B_part2_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part2_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018B_part2/210310_142257/0001/','.*root')
+crab_data_Run2018C_part2_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part2_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018C_part2/210310_142431/0000/','.*root')
+crab_data_Run2018C_part2_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part2_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018C_part2/210310_142431/0001/','.*root')
+crab_data_Run2018D_part2_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018D_part2/210310_145836/0000/','.*root')
+crab_data_Run2018D_part2_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018D_part2/210310_145836/0001/','.*root')
+crab_data_Run2018D_part2_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0002','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018D_part2/210310_145836/0002/','.*root')
+crab_data_Run2018D_part2_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0003','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018D_part2/210310_145836/0003/','.*root')
+crab_data_Run2018D_part2_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0004','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018D_part2/210310_145836/0004/','.*root')
+crab_data_Run2018D_part2_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part2_0005','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar10/ParkingBPH2/crab_data_Run2018D_part2/210310_145836/0005/','.*root')
 
 #part3
-crab_data_Run2018A_part3_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part3_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH3/crab_data_Run2018A_part3/200116_213248/0000/','.*root')
-crab_data_Run2018A_part3_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part3_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH3/crab_data_Run2018A_part3/200116_213248/0001/','.*root')
-crab_data_Run2018B_part3_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part3_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH3/crab_data_Run2018B_part3/200116_213159/0000/','.*root')
-crab_data_Run2018B_part3_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part3_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH3/crab_data_Run2018B_part3/200116_213159/0001/','.*root')
-crab_data_Run2018C_part3_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part3_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH3/crab_data_Run2018C_part3/200116_213339/0000/','.*root')
-crab_data_Run2018C_part3_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part3_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH3/crab_data_Run2018C_part3/200116_213339/0001/','.*root')
-crab_data_Run2018D_part3_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan17/ParkingBPH3/crab_data_Run2018D_part3/200117_074527/0000/','.*root')
-crab_data_Run2018D_part3_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan17/ParkingBPH3/crab_data_Run2018D_part3/200117_074527/0001/','.*root')
-crab_data_Run2018D_part3_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0002','/store/cmst3/group/bpark/BParkingNANO_2020Jan17/ParkingBPH3/crab_data_Run2018D_part3/200117_074527/0002/','.*root')
-crab_data_Run2018D_part3_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0003','/store/cmst3/group/bpark/BParkingNANO_2020Jan17/ParkingBPH3/crab_data_Run2018D_part3/200117_074527/0003/','.*root')
-crab_data_Run2018D_part3_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0004','/store/cmst3/group/bpark/BParkingNANO_2020Jan17/ParkingBPH3/crab_data_Run2018D_part3/200117_074527/0004/','.*root')
-crab_data_Run2018D_part3_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0005','/store/cmst3/group/bpark/BParkingNANO_2020Jan17/ParkingBPH3/crab_data_Run2018D_part3/200117_074527/0005/','.*root')
+crab_data_Run2018A_part3_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part3_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018A_part3/210305_222019/0000/','.*root')
+crab_data_Run2018A_part3_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part3_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018A_part3/210305_222019/0001/','.*root')
+crab_data_Run2018B_part3_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part3_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018B_part3/210305_221932/0000/','.*root')
+crab_data_Run2018B_part3_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part3_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018B_part3/210305_221932/0001/','.*root')
+crab_data_Run2018C_part3_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part3_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018C_part3/210305_222100/0000/','.*root')
+crab_data_Run2018C_part3_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part3_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018C_part3/210305_222100/0001/','.*root')
+crab_data_Run2018D_part3_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018D_part3/210305_222225/0000/','.*root')
+crab_data_Run2018D_part3_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018D_part3/210305_222225/0001/','.*root')
+crab_data_Run2018D_part3_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0002','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018D_part3/210305_222225/0002/','.*root')
+crab_data_Run2018D_part3_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0003','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018D_part3/210305_222225/0003/','.*root')
+crab_data_Run2018D_part3_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0004','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018D_part3/210305_222225/0004/','.*root')
+crab_data_Run2018D_part3_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part3_0005','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH3/crab_data_Run2018D_part3/210305_222225/0005/','.*root')
 
 #part4
-crab_data_Run2018A_part4_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part4_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018A_part4/200116_172624/0000/','.*root')
-crab_data_Run2018A_part4_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part4_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018A_part4/200116_172624/0001/','.*root')
-crab_data_Run2018B_part4_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part4_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018B_part4/200116_172741/0000/','.*root')
-crab_data_Run2018C_part4_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part4_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018C_part4/200116_172852/0000/','.*root')
-crab_data_Run2018C_part4_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part4_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018C_part4/200116_172852/0001/','.*root')
-crab_data_Run2018D_part4_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018D_part4/200116_173014/0000/','.*root')
-crab_data_Run2018D_part4_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018D_part4/200116_173014/0001/','.*root')
-crab_data_Run2018D_part4_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0002','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018D_part4/200116_173014/0002/','.*root')
-crab_data_Run2018D_part4_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0003','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018D_part4/200116_173014/0003/','.*root')
-crab_data_Run2018D_part4_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0004','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018D_part4/200116_173014/0004/','.*root')
-crab_data_Run2018D_part4_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0005','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH4/crab_data_Run2018D_part4/200116_173014/0005/','.*root')
+crab_data_Run2018A_part4_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part4_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018A_part4/210306_185422/0000/','.*root')
+crab_data_Run2018A_part4_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part4_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018A_part4/210306_185422/0001/','.*root')
+crab_data_Run2018B_part4_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part4_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018B_part4/210306_185522/0000/','.*root')
+crab_data_Run2018B_part4_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part4_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018B_part4/210306_185522/0001/','.*root')
+crab_data_Run2018C_part4_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part4_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018C_part4/210306_185621/0000/','.*root')
+crab_data_Run2018C_part4_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part4_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018C_part4/210306_185621/0001/','.*root')
+crab_data_Run2018D_part4_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018D_part4/210306_185726/0000/','.*root')
+crab_data_Run2018D_part4_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018D_part4/210306_185726/0001/','.*root')
+crab_data_Run2018D_part4_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0002','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018D_part4/210306_185726/0002/','.*root')
+crab_data_Run2018D_part4_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0003','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018D_part4/210306_185726/0003/','.*root')
+crab_data_Run2018D_part4_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0004','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018D_part4/210306_185726/0004/','.*root')
+crab_data_Run2018D_part4_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part4_0005','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar06/ParkingBPH4/crab_data_Run2018D_part4/210306_185726/0005/','.*root')
 
 #part5
-crab_data_Run2018A_part5_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part5_0000','/store/cmst3/group/bpark/BParkingNANO_2020Feb05/ParkingBPH5/crab_data_Run2018A_part5/200205_165610/0000/','.*root')
-crab_data_Run2018A_part5_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part5_0001','/store/cmst3/group/bpark/BParkingNANO_2020Feb05/ParkingBPH5/crab_data_Run2018A_part5/200205_165610/0001/','.*root')
-crab_data_Run2018B_part5_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part5_0000','/store/cmst3/group/bpark/BParkingNANO_2020Feb05/ParkingBPH5/crab_data_Run2018B_part5/200205_165723/0000/','.*root')
-crab_data_Run2018B_part5_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part5_0001','/store/cmst3/group/bpark/BParkingNANO_2020Feb05/ParkingBPH5/crab_data_Run2018B_part5/200205_165723/0001/','.*root')
-crab_data_Run2018C_part5_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part5_0000','/store/cmst3/group/bpark/BParkingNANO_2020Feb05/ParkingBPH5/crab_data_Run2018C_part5/200205_170223/0000/','.*root')
-crab_data_Run2018C_part5_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part5_0001','/store/cmst3/group/bpark/BParkingNANO_2020Feb05/ParkingBPH5/crab_data_Run2018C_part5/200205_170223/0001/','.*root')
-crab_data_Run2018D_part5_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0000','/store/cmst3/group/bpark/BParkingNANO_2020Feb07/ParkingBPH5/crab_data_Run2018D_part5/200207_191502/0000/','.*root')
-crab_data_Run2018D_part5_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0001','/store/cmst3/group/bpark/BParkingNANO_2020Feb07/ParkingBPH5/crab_data_Run2018D_part5/200207_191502/0001/','.*root')
-crab_data_Run2018D_part5_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0002','/store/cmst3/group/bpark/BParkingNANO_2020Feb07/ParkingBPH5/crab_data_Run2018D_part5/200207_191502/0002/','.*root')
-crab_data_Run2018D_part5_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0003','/store/cmst3/group/bpark/BParkingNANO_2020Feb07/ParkingBPH5/crab_data_Run2018D_part5/200207_191502/0003/','.*root')
-crab_data_Run2018D_part5_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0004','/store/cmst3/group/bpark/BParkingNANO_2020Feb07/ParkingBPH5/crab_data_Run2018D_part5/200207_191502/0004/','.*root')
-crab_data_Run2018D_part5_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0005','/store/cmst3/group/bpark/BParkingNANO_2020Feb07/ParkingBPH5/crab_data_Run2018D_part5/200207_191502/0005/','.*root')
+crab_data_Run2018A_part5_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part5_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018A_part5/210305_215924/0000/','.*root')
+crab_data_Run2018A_part5_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part5_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018A_part5/210305_215924/0001/','.*root')
+crab_data_Run2018B_part5_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part5_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018B_part5/210305_220057/0000/','.*root')
+crab_data_Run2018B_part5_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part5_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018B_part5/210305_220057/0001/','.*root')
+crab_data_Run2018C_part5_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part5_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018C_part5/210305_220217/0000/','.*root')
+crab_data_Run2018C_part5_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018C_part5_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018C_part5/210305_220217/0001/','.*root')
+crab_data_Run2018D_part5_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018D_part5/210305_220325/0000/','.*root')
+crab_data_Run2018D_part5_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018D_part5/210305_220325/0001/','.*root')
+crab_data_Run2018D_part5_0002 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0002','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018D_part5/210305_220325/0002/','.*root')
+crab_data_Run2018D_part5_0003 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0003','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018D_part5/210305_220325/0003/','.*root')
+crab_data_Run2018D_part5_0004 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0004','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018D_part5/210305_220325/0004/','.*root')
+crab_data_Run2018D_part5_0005 = kreator.makeDataComponentFromEOS('crab_data_Run2018D_part5_0005','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH5/crab_data_Run2018D_part5/210305_220325/0005/','.*root')
 
 #part6
-crab_data_Run2018A_part6_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part6_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH6/crab_data_Run2018A_part6/200116_173128/0000/','.*root')
-crab_data_Run2018A_part6_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part6_0001','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH6/crab_data_Run2018A_part6/200116_173128/0001/','.*root')
-crab_data_Run2018B_part6_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part6_0000','/store/cmst3/group/bpark/BParkingNANO_2020Jan16/ParkingBPH6/crab_data_Run2018B_part6/200116_173248/0000/','.*root')
+crab_data_Run2018A_part6_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part6_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH6/crab_data_Run2018A_part6/210305_221453/0000/','.*root')
+crab_data_Run2018A_part6_0001 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part6_0001','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH6/crab_data_Run2018A_part6/210305_221453/0001/','.*root')
+crab_data_Run2018B_part6_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018B_part6_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH6/crab_data_Run2018B_part6/210305_221938/0000/','.*root')
+
+#BKG partA
+bkg_Run2018A_part1_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part1_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH1/crab_data_Run2018A_part1/210502_025149/0000/','.*root')
+bkg_Run2018A_part1_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part1_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH1/crab_data_Run2018A_part1/210502_025149/0001/','.*root')
+bkg_Run2018A_part2_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part2_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH2/crab_data_Run2018A_part2/210502_025240/0000/','.*root')
+bkg_Run2018A_part2_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part2_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH2/crab_data_Run2018A_part2/210502_025240/0001/','.*root')
+bkg_Run2018A_part3_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part3_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH3/crab_data_Run2018A_part3/210502_025331/0000/','.*root')
+bkg_Run2018A_part3_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part3_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH3/crab_data_Run2018A_part3/210502_025331/0001/','.*root')
+bkg_Run2018A_part4_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part4_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH4/crab_data_Run2018A_part4/210502_025421/0000/','.*root')
+bkg_Run2018A_part4_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part4_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH4/crab_data_Run2018A_part4/210502_025421/0001/','.*root')
+bkg_Run2018A_part5_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part5_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH5/crab_data_Run2018A_part5/210502_025512/0000/','.*root')
+bkg_Run2018A_part5_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part5_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH5/crab_data_Run2018A_part5/210502_025512/0001/','.*root')
+bkg_Run2018A_part6_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part6_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH6/crab_data_Run2018A_part6/210502_025601/0000/','.*root')
+bkg_Run2018A_part6_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018A_part6_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH6/crab_data_Run2018A_part6/210502_025601/0001/','.*root')
+
+#BKG partB
+bkg_Run2018B_part1_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part1_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH1/crab_data_Run2018B_part1/210502_024636/0000/','.*root')
+bkg_Run2018B_part1_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part1_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH1/crab_data_Run2018B_part1/210502_024636/0001/','.*root')
+bkg_Run2018B_part2_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part2_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH2/crab_data_Run2018B_part2/210502_024729/0000/','.*root')
+bkg_Run2018B_part2_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part2_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH2/crab_data_Run2018B_part2/210502_024729/0001/','.*root')
+bkg_Run2018B_part3_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part3_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH3/crab_data_Run2018B_part3/210502_024821/0000/','.*root')
+bkg_Run2018B_part3_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part3_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH3/crab_data_Run2018B_part3/210502_024821/0001/','.*root')
+bkg_Run2018B_part4_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part4_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH4/crab_data_Run2018B_part4/210502_024912/0000/','.*root')
+bkg_Run2018B_part4_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part4_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH4/crab_data_Run2018B_part4/210502_024912/0001/','.*root')
+bkg_Run2018B_part5_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part5_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH5/crab_data_Run2018B_part5/210502_025004/0000/','.*root')
+bkg_Run2018B_part5_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part5_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH5/crab_data_Run2018B_part5/210502_025004/0001/','.*root')
+bkg_Run2018B_part6_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018B_part6_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH6/crab_data_Run2018B_part6/210502_025055/0000/','.*root')
+
+#BKG part C
+bkg_Run2018C_part1_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part1_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH1/crab_data_Run2018C_part1/210502_025732/0000/','.*root')
+bkg_Run2018C_part1_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part1_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH1/crab_data_Run2018C_part1/210502_025732/0001/','.*root')
+bkg_Run2018C_part2_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part2_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH2/crab_data_Run2018C_part2/210502_025823/0000/','.*root')
+bkg_Run2018C_part2_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part2_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH2/crab_data_Run2018C_part2/210502_025823/0001/','.*root')
+bkg_Run2018C_part3_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part3_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH3/crab_data_Run2018C_part3/210502_025914/0000/','.*root')
+bkg_Run2018C_part3_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part3_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH3/crab_data_Run2018C_part3/210502_025914/0001/','.*root')
+bkg_Run2018C_part4_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part4_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH4/crab_data_Run2018C_part4/210502_030004/0000/','.*root')
+bkg_Run2018C_part4_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part4_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH4/crab_data_Run2018C_part4/210502_030004/0001/','.*root')
+bkg_Run2018C_part5_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part5_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH5/crab_data_Run2018C_part5/210502_030056/0000/','.*root')
+bkg_Run2018C_part5_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018C_part5_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May02/ParkingBPH5/crab_data_Run2018C_part5/210502_030056/0001/','.*root')
+
+#BKG part D 1
+bkg_Run2018D_part1_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part1_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH1/crab_data_Run2018D_part1/210506_210709/0000/','.*root')
+bkg_Run2018D_part1_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part1_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH1/crab_data_Run2018D_part1/210506_210709/0001/','.*root')
+bkg_Run2018D_part1_0002 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part1_0002','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH1/crab_data_Run2018D_part1/210506_210709/0002/','.*root')
+bkg_Run2018D_part1_0003 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part1_0003','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH1/crab_data_Run2018D_part1/210506_210709/0003/','.*root')
+bkg_Run2018D_part1_0004 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part1_0004','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH1/crab_data_Run2018D_part1/210506_210709/0004/','.*root')
+bkg_Run2018D_part1_0005 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part1_0005','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH1/crab_data_Run2018D_part1/210506_210709/0005/','.*root')
+
+#BKG part D 2
+bkg_Run2018D_part2_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part2_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH2/crab_data_Run2018D_part2/210506_210824/0000/','.*root')
+bkg_Run2018D_part2_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part2_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH2/crab_data_Run2018D_part2/210506_210824/0001/','.*root')
+bkg_Run2018D_part2_0002 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part2_0002','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH2/crab_data_Run2018D_part2/210506_210824/0002/','.*root')
+bkg_Run2018D_part2_0003 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part2_0003','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH2/crab_data_Run2018D_part2/210506_210824/0003/','.*root')
+bkg_Run2018D_part2_0004 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part2_0004','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH2/crab_data_Run2018D_part2/210506_210824/0004/','.*root')
+bkg_Run2018D_part2_0005 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part2_0005','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH2/crab_data_Run2018D_part2/210506_210824/0005/','.*root')
+
+#BKG part D 3
+bkg_Run2018D_part3_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part3_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH3/crab_data_Run2018D_part3/210506_211310/0000/','.*root')
+bkg_Run2018D_part3_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part3_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH3/crab_data_Run2018D_part3/210506_211310/0001/','.*root')
+bkg_Run2018D_part3_0002 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part3_0002','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH3/crab_data_Run2018D_part3/210506_211310/0002/','.*root')
+bkg_Run2018D_part3_0003 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part3_0003','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH3/crab_data_Run2018D_part3/210506_211310/0003/','.*root')
+bkg_Run2018D_part3_0004 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part3_0004','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH3/crab_data_Run2018D_part3/210506_211310/0004/','.*root')
+bkg_Run2018D_part3_0005 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part3_0005','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May06/ParkingBPH3/crab_data_Run2018D_part3/210506_211310/0005/','.*root')
+
+#BKG part D 4
+bkg_Run2018D_part4_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part4_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH4/crab_data_Run2018D_part4/210502_224842/0000/','.*root')
+bkg_Run2018D_part4_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part4_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH4/crab_data_Run2018D_part4/210502_224842/0001/','.*root')
+bkg_Run2018D_part4_0002 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part4_0002','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH4/crab_data_Run2018D_part4/210502_224842/0002/','.*root')
+bkg_Run2018D_part4_0003 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part4_0003','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH4/crab_data_Run2018D_part4/210502_224842/0003/','.*root')
+bkg_Run2018D_part4_0004 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part4_0004','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH4/crab_data_Run2018D_part4/210502_224842/0004/','.*root')
+bkg_Run2018D_part4_0005 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part4_0005','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH4/crab_data_Run2018D_part4/210502_224842/0005/','.*root')
+
+#BKG part D 5
+bkg_Run2018D_part5_0000 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part5_0000','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH5/crab_data_Run2018D_part5/210502_224927/0000/','.*root')
+bkg_Run2018D_part5_0001 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part5_0001','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH5/crab_data_Run2018D_part5/210502_224927/0001/','.*root')
+bkg_Run2018D_part5_0002 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part5_0002','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH5/crab_data_Run2018D_part5/210502_224927/0002/','.*root')
+bkg_Run2018D_part5_0003 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part5_0003','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH5/crab_data_Run2018D_part5/210502_224927/0003/','.*root')
+bkg_Run2018D_part5_0004 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part5_0004','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH5/crab_data_Run2018D_part5/210502_224927/0004/','.*root')
+bkg_Run2018D_part5_0005 = kreator.makeDataComponentFromEOS('kee_bkg_Run2018D_part5_0005','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May03/ParkingBPH5/crab_data_Run2018D_part5/210502_224927/0005/','.*root')
+
+
+#bkg kmumu
+#part1
+kmumu_bkg_Run2018A_part1_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part1_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018A_part1/210626_084419/0000/','.*root')
+kmumu_bkg_Run2018A_part1_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part1_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018A_part1/210626_084419/0001/','.*root')
+kmumu_bkg_Run2018B_part1_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part1_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018B_part1/210626_084048/0000/','.*root')
+kmumu_bkg_Run2018B_part1_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part1_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018B_part1/210626_084048/0001/','.*root')
+kmumu_bkg_Run2018C_part1_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part1_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018C_part1/210626_083747/0000/','.*root')
+kmumu_bkg_Run2018C_part1_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part1_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018C_part1/210626_083747/0001/','.*root')
+kmumu_bkg_Run2018D_part1_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part1_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018D_part1/210626_083103/0000/','.*root')
+kmumu_bkg_Run2018D_part1_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part1_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018D_part1/210626_083103/0001/','.*root')
+kmumu_bkg_Run2018D_part1_0002 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part1_0002','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018D_part1/210626_083103/0002/','.*root')
+kmumu_bkg_Run2018D_part1_0003 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part1_0003','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018D_part1/210626_083103/0003/','.*root')
+kmumu_bkg_Run2018D_part1_0004 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part1_0004','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018D_part1/210626_083103/0004/','.*root')
+kmumu_bkg_Run2018D_part1_0005 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part1_0005','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH1/crab_data_Run2018D_part1/210626_083103/0005/','.*root')
+
+#part2
+kmumu_bkg_Run2018A_part2_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part2_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018A_part2/210626_084455/0000/','.*root')
+kmumu_bkg_Run2018A_part2_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part2_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018A_part2/210626_084455/0001/','.*root')
+kmumu_bkg_Run2018B_part2_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part2_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018B_part2/210626_084123/0000/','.*root')
+kmumu_bkg_Run2018B_part2_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part2_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018B_part2/210626_084123/0001/','.*root')
+kmumu_bkg_Run2018C_part2_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part2_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018C_part2/210626_083823/0000/','.*root')
+kmumu_bkg_Run2018C_part2_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part2_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018C_part2/210626_083823/0001/','.*root')
+kmumu_bkg_Run2018D_part2_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part2_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018D_part2/210626_083139/0000/','.*root')
+kmumu_bkg_Run2018D_part2_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part2_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018D_part2/210626_083139/0001/','.*root')
+kmumu_bkg_Run2018D_part2_0002 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part2_0002','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018D_part2/210626_083139/0002/','.*root')
+kmumu_bkg_Run2018D_part2_0003 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part2_0003','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018D_part2/210626_083139/0003/','.*root')
+kmumu_bkg_Run2018D_part2_0004 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part2_0004','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018D_part2/210626_083139/0004/','.*root')
+kmumu_bkg_Run2018D_part2_0005 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part2_0005','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH2/crab_data_Run2018D_part2/210626_083139/0005/','.*root')
+
+
+#part3
+kmumu_bkg_Run2018A_part3_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part3_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018A_part3/210626_084531/0000/','.*root')
+kmumu_bkg_Run2018A_part3_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part3_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018A_part3/210626_084531/0001/','.*root')
+kmumu_bkg_Run2018B_part3_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part3_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018B_part3/210626_084158/0000/','.*root')
+kmumu_bkg_Run2018B_part3_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part3_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018B_part3/210626_084158/0001/','.*root')
+kmumu_bkg_Run2018C_part3_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part3_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018C_part3/210626_083858/0000/','.*root')
+kmumu_bkg_Run2018C_part3_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part3_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018C_part3/210626_083858/0001/','.*root')
+kmumu_bkg_Run2018D_part3_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part3_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018D_part3/210626_083214/0000/','.*root')
+kmumu_bkg_Run2018D_part3_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part3_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018D_part3/210626_083214/0001/','.*root')
+kmumu_bkg_Run2018D_part3_0002 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part3_0002','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018D_part3/210626_083214/0002/','.*root')
+kmumu_bkg_Run2018D_part3_0003 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part3_0003','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018D_part3/210626_083214/0003/','.*root')
+kmumu_bkg_Run2018D_part3_0004 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part3_0004','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018D_part3/210626_083214/0004/','.*root')
+kmumu_bkg_Run2018D_part3_0005 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part3_0005','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH3/crab_data_Run2018D_part3/210626_083214/0005/','.*root')
+
+
+#part4
+kmumu_bkg_Run2018A_part4_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part4_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018A_part4/210626_084607/0000/','.*root')
+kmumu_bkg_Run2018A_part4_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part4_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018A_part4/210626_084607/0001/','.*root')
+kmumu_bkg_Run2018B_part4_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part4_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018B_part4/210626_084234/0000/','.*root')
+kmumu_bkg_Run2018B_part4_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part4_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018B_part4/210626_084234/0001/','.*root')
+kmumu_bkg_Run2018C_part4_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part4_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018C_part4/210626_083935/0000/','.*root')
+kmumu_bkg_Run2018C_part4_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part4_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018C_part4/210626_083935/0001/','.*root')
+kmumu_bkg_Run2018D_part4_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part4_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018D_part4/210626_083250/0000/','.*root')
+kmumu_bkg_Run2018D_part4_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part4_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018D_part4/210626_083250/0001/','.*root')
+kmumu_bkg_Run2018D_part4_0002 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part4_0002','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018D_part4/210626_083250/0002/','.*root')
+kmumu_bkg_Run2018D_part4_0003 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part4_0003','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018D_part4/210626_083250/0003/','.*root')
+kmumu_bkg_Run2018D_part4_0004 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part4_0004','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018D_part4/210626_083250/0004/','.*root')
+kmumu_bkg_Run2018D_part4_0005 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part4_0005','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH4/crab_data_Run2018D_part4/210626_083250/0005/','.*root')
+
+
+
+#part5
+kmumu_bkg_Run2018A_part5_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part5_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018A_part5/210626_084643/0000/','.*root')
+kmumu_bkg_Run2018A_part5_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018A_part5_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018A_part5/210626_084643/0001/','.*root')
+kmumu_bkg_Run2018B_part5_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part5_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018B_part5/210626_084309/0000/','.*root')
+kmumu_bkg_Run2018B_part5_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018B_part5_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018B_part5/210626_084309/0001/','.*root')
+kmumu_bkg_Run2018C_part5_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part5_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018C_part5/210626_084010/0000/','.*root')
+kmumu_bkg_Run2018C_part5_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018C_part5_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018C_part5/210626_084010/0001/','.*root')
+kmumu_bkg_Run2018D_part5_0000 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part5_0000','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018D_part5/210626_083325/0000/','.*root')
+kmumu_bkg_Run2018D_part5_0001 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part5_0001','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018D_part5/210626_083325/0001/','.*root')
+kmumu_bkg_Run2018D_part5_0002 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part5_0002','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018D_part5/210626_083325/0002/','.*root')
+kmumu_bkg_Run2018D_part5_0003 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part5_0003','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018D_part5/210626_083325/0003/','.*root')
+kmumu_bkg_Run2018D_part5_0004 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part5_0004','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018D_part5/210626_083325/0004/','.*root')
+kmumu_bkg_Run2018D_part5_0005 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2018D_part5_0005','/store/cmst3/group/bpark/gmelachr/same_sign_muons/BParkingNANO_2021Jun26/ParkingBPH5/crab_data_Run2018D_part5/210626_083325/0005/','.*root')
+
+
+
 
 #2017 Charmonium
 crab_data_Run2017B_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017B_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017B/200421_120220/0000/','.*root')
@@ -112,10 +274,10 @@ crab_data_Run2016H_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016H_Doubl
 
 
 
-samples = [crab_data_Run2018A_part1_0000,crab_data_Run2018A_part1_0001,crab_data_Run2018B_part1_0000,crab_data_Run2018B_part1_0001,crab_data_Run2018C_part1_0000,crab_data_Run2018C_part1_0001,crab_data_Run2018D_part1_0000,crab_data_Run2018D_part1_0001,crab_data_Run2018D_part1_0002,crab_data_Run2018D_part1_0003,crab_data_Run2018D_part1_0004,crab_data_Run2018D_part1_0005,
+samples = [crab_data_Run2018A_part1_0000,crab_data_Run2018A_part1_0001,crab_data_Run2018B_part1_0000,crab_data_Run2018B_part1_0001,crab_data_Run2018C_part1_0000,crab_data_Run2018C_part1_0001,crab_data_Run2018D_part1_0000,crab_data_Run2018D_part1_0001,crab_data_Run2018D_part1_0002,crab_data_Run2018D_part1_0003,crab_data_Run2018D_part1_0004,crab_data_Run2018D_part1_0005,crab_data_Run2018B_part1_0002,crab_data_Run2018D_part1_0006,
 crab_data_Run2018A_part2_0000,crab_data_Run2018A_part2_0001,crab_data_Run2018B_part2_0000,crab_data_Run2018B_part2_0001,crab_data_Run2018C_part2_0000,crab_data_Run2018C_part2_0001,crab_data_Run2018D_part2_0000,crab_data_Run2018D_part2_0001,crab_data_Run2018D_part2_0002,crab_data_Run2018D_part2_0003,crab_data_Run2018D_part2_0004,crab_data_Run2018D_part2_0005,
 crab_data_Run2018A_part3_0000,crab_data_Run2018A_part3_0001,crab_data_Run2018B_part3_0000,crab_data_Run2018B_part3_0001,crab_data_Run2018C_part3_0000,crab_data_Run2018C_part3_0001,crab_data_Run2018D_part3_0000,crab_data_Run2018D_part3_0001,crab_data_Run2018D_part3_0002,crab_data_Run2018D_part3_0003,crab_data_Run2018D_part3_0004,crab_data_Run2018D_part3_0005,
-crab_data_Run2018A_part4_0000,crab_data_Run2018A_part4_0001,crab_data_Run2018B_part4_0000,crab_data_Run2018C_part4_0000,crab_data_Run2018C_part4_0001,crab_data_Run2018D_part4_0000,crab_data_Run2018D_part4_0001,crab_data_Run2018D_part4_0002,crab_data_Run2018D_part4_0003,crab_data_Run2018D_part4_0004,crab_data_Run2018D_part4_0005,
+crab_data_Run2018A_part4_0000,crab_data_Run2018A_part4_0001,crab_data_Run2018B_part4_0000,crab_data_Run2018C_part4_0000,crab_data_Run2018B_part4_0001,crab_data_Run2018C_part4_0001,crab_data_Run2018D_part4_0000,crab_data_Run2018D_part4_0001,crab_data_Run2018D_part4_0002,crab_data_Run2018D_part4_0003,crab_data_Run2018D_part4_0004,crab_data_Run2018D_part4_0005,
 crab_data_Run2018A_part5_0000,crab_data_Run2018A_part5_0001,crab_data_Run2018B_part5_0000,crab_data_Run2018B_part5_0001,crab_data_Run2018C_part5_0000,crab_data_Run2018C_part5_0001,crab_data_Run2018D_part5_0000,crab_data_Run2018D_part5_0001,crab_data_Run2018D_part5_0002,crab_data_Run2018D_part5_0003,crab_data_Run2018D_part5_0004,crab_data_Run2018D_part5_0005,
 crab_data_Run2018A_part6_0000,crab_data_Run2018A_part6_0001,crab_data_Run2018B_part6_0000,
 crab_data_Run2017B_Charmonium_0000,crab_data_Run2017C_Charmonium_0000,
@@ -131,7 +293,49 @@ crab_data_Run2016H_Charmonium,
 crab_data_Run2016B_DoubleMuon,crab_data_Run2016C_DoubleMuon,
 crab_data_Run2016D_DoubleMuon,crab_data_Run2016E_DoubleMuon,
 crab_data_Run2016F_DoubleMuon,crab_data_Run2016G_DoubleMuon,
-crab_data_Run2016H_DoubleMuon
+crab_data_Run2016H_DoubleMuon,
+bkg_Run2018A_part1_0000, bkg_Run2018A_part1_0001, bkg_Run2018A_part2_0000,
+bkg_Run2018A_part2_0001, bkg_Run2018A_part3_0000, bkg_Run2018A_part3_0001, 
+bkg_Run2018A_part4_0000, bkg_Run2018A_part4_0001, bkg_Run2018A_part5_0000,
+bkg_Run2018A_part5_0001, bkg_Run2018A_part6_0000, bkg_Run2018A_part6_0001,
+bkg_Run2018B_part1_0000, bkg_Run2018B_part1_0001, bkg_Run2018B_part2_0000,
+bkg_Run2018B_part2_0001, bkg_Run2018B_part3_0000, bkg_Run2018B_part3_0001, 
+bkg_Run2018B_part4_0000, bkg_Run2018B_part4_0001, bkg_Run2018B_part5_0000, 
+bkg_Run2018B_part5_0001, bkg_Run2018B_part6_0000, bkg_Run2018C_part1_0000, 
+bkg_Run2018C_part1_0001, bkg_Run2018C_part2_0000, bkg_Run2018C_part2_0001, 
+bkg_Run2018C_part3_0000, bkg_Run2018C_part3_0001, bkg_Run2018C_part4_0000, 
+bkg_Run2018C_part4_0001, bkg_Run2018C_part5_0000, bkg_Run2018C_part5_0001,
+bkg_Run2018D_part1_0000, bkg_Run2018D_part1_0001, bkg_Run2018D_part1_0002,
+bkg_Run2018D_part1_0003, bkg_Run2018D_part1_0004, bkg_Run2018D_part1_0005,
+bkg_Run2018D_part2_0000, bkg_Run2018D_part2_0001, #bkg_Run2018D_part2_0002,
+#bkg_Run2018D_part2_0003, bkg_Run2018D_part2_0004, bkg_Run2018D_part2_0005,
+bkg_Run2018D_part3_0000, bkg_Run2018D_part3_0001, bkg_Run2018D_part3_0002,
+bkg_Run2018D_part3_0003, bkg_Run2018D_part3_0004, bkg_Run2018D_part3_0005,
+bkg_Run2018D_part4_0000, bkg_Run2018D_part4_0001, bkg_Run2018D_part4_0002,
+bkg_Run2018D_part4_0003, bkg_Run2018D_part4_0004, bkg_Run2018D_part4_0005,
+bkg_Run2018D_part5_0000, bkg_Run2018D_part5_0001, bkg_Run2018D_part5_0002,
+bkg_Run2018D_part5_0003, bkg_Run2018D_part5_0004, bkg_Run2018D_part5_0005,
+kmumu_bkg_Run2018A_part1_0000, kmumu_bkg_Run2018A_part1_0001, kmumu_bkg_Run2018A_part2_0000,
+kmumu_bkg_Run2018A_part2_0001, kmumu_bkg_Run2018A_part3_0000, kmumu_bkg_Run2018A_part3_0001,
+kmumu_bkg_Run2018A_part4_0000, kmumu_bkg_Run2018A_part4_0001, kmumu_bkg_Run2018A_part5_0000,
+kmumu_bkg_Run2018A_part5_0001, 
+kmumu_bkg_Run2018B_part1_0000, kmumu_bkg_Run2018B_part1_0001, kmumu_bkg_Run2018B_part2_0000,
+kmumu_bkg_Run2018B_part2_0001, kmumu_bkg_Run2018B_part3_0000, kmumu_bkg_Run2018B_part3_0001,
+kmumu_bkg_Run2018B_part4_0000, kmumu_bkg_Run2018B_part4_0001, kmumu_bkg_Run2018B_part5_0000,
+kmumu_bkg_Run2018B_part5_0001, kmumu_bkg_Run2018C_part1_0000,
+kmumu_bkg_Run2018C_part1_0001, kmumu_bkg_Run2018C_part2_0000, kmumu_bkg_Run2018C_part2_0001,
+kmumu_bkg_Run2018C_part3_0000, kmumu_bkg_Run2018C_part3_0001, kmumu_bkg_Run2018C_part4_0000,
+kmumu_bkg_Run2018C_part4_0001, kmumu_bkg_Run2018C_part5_0000, kmumu_bkg_Run2018C_part5_0001,
+kmumu_bkg_Run2018D_part1_0000, kmumu_bkg_Run2018D_part1_0001, kmumu_bkg_Run2018D_part1_0002,
+kmumu_bkg_Run2018D_part1_0003, kmumu_bkg_Run2018D_part1_0004, kmumu_bkg_Run2018D_part1_0005,
+kmumu_bkg_Run2018D_part2_0000, kmumu_bkg_Run2018D_part2_0001, kmumu_bkg_Run2018D_part2_0002,
+kmumu_bkg_Run2018D_part2_0003, kmumu_bkg_Run2018D_part2_0004, kmumu_bkg_Run2018D_part2_0005,
+kmumu_bkg_Run2018D_part3_0000, kmumu_bkg_Run2018D_part3_0001, kmumu_bkg_Run2018D_part3_0002,
+kmumu_bkg_Run2018D_part3_0003, kmumu_bkg_Run2018D_part3_0004, kmumu_bkg_Run2018D_part3_0005,
+kmumu_bkg_Run2018D_part4_0000, kmumu_bkg_Run2018D_part4_0001, kmumu_bkg_Run2018D_part4_0002,
+kmumu_bkg_Run2018D_part4_0003, kmumu_bkg_Run2018D_part4_0004, kmumu_bkg_Run2018D_part4_0005,
+kmumu_bkg_Run2018D_part5_0000, kmumu_bkg_Run2018D_part5_0001, kmumu_bkg_Run2018D_part5_0002,
+kmumu_bkg_Run2018D_part5_0003, kmumu_bkg_Run2018D_part5_0004, kmumu_bkg_Run2018D_part5_0005
 ] 
 
 
