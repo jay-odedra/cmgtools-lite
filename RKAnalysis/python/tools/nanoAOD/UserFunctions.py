@@ -386,7 +386,13 @@ def D0VarsMC(collections):
     else:
        vL.SetPtEtaPhiM( getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"),0.493)
     vK.SetPtEtaPhiM( getattr(Bcand,"fit_k_pt"), getattr(Bcand,"fit_k_eta"), getattr(Bcand,"fit_k_phi"),0.139)
-    k_opp_l_mass=(vL+vK).M()
+    k_opp_l_mass_n1 = (vL+vK).M()
+    vL.SetPtEtaPhiM(vL.Pt(),vL.Eta(),vL.Phi(),0.139)
+    vK.SetPtEtaPhiM(vK.Pt(),vK.Eta(),vK.Phi(),0.493)
+    k_opp_l_mass_n2 = (vL+vK).M()
+    k_opp_l_mass=k_opp_l_mass_n1
+    if k_opp_l_mass_n2<k_opp_l_mass_n1:
+       k_opp_l_mass=k_opp_l_mass_n2
      
     if mucharge!=0 and mucharge!=kcharge:
       k_mu_hadron_mass=(vMu+vK).M()
