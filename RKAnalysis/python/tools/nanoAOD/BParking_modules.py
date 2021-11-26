@@ -198,7 +198,7 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
     process.append(D0Vars)
     PAssymVar = functionWrapper(
       functionName="PAssymVar",
-      collections=["Muon","SkimBToKEE"],
+      collections=["PV_x","PV_y","PV_z","SkimBToKEE"],
       createdBranches=["SkimBToKEE_p_assymetry"],
       nCol="nSkimBToKEE"
     )
@@ -661,7 +661,7 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    process.append(D0Vars)
    PAssymVar = functionWrapper(
      functionName="PAssymVarMC",
-     collections=["Muon","BToKEE","recoB_Idx"],
+     collections=["PV_x","PV_y","PV_z","BToKEE","recoB_Idx"],
      createdBranches=["recoB_p_assymetry"]
 
    )
@@ -784,7 +784,7 @@ def KstarPiEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    process.append(D0Vars)
    PAssymVar = functionWrapper(
      functionName="PAssymVarMC",
-     collections=["Muon","BToKEE","recoB_Idx"],
+     collections=["PV_x","PV_y","PV_z","BToKEE","recoB_Idx"],
      createdBranches=["recoB_p_assymetry"]
 
    )
@@ -906,7 +906,7 @@ def KstarKEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    process.append(D0Vars)
    PAssymVar = functionWrapper(
      functionName="PAssymVarMC",
-     collections=["Muon","BToKEE","recoB_Idx"],
+     collections=["PV_x","PV_y","PV_z","BToKEE","recoB_Idx"],
      createdBranches=["recoB_p_assymetry"]
 
    )

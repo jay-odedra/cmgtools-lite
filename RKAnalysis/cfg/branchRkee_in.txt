@@ -1,5 +1,4 @@
 drop SV_*
-drop PV_*
 drop L1_*
 drop TrigObj_*
 drop fixedGrid*
@@ -7,4 +6,4 @@ drop BToKMuMu_*
 drop OtherPV_*
 keep Muon_*
 keep nSV
-keep PV_npvs
+keep PV_*

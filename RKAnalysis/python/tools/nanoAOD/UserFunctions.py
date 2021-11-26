@@ -177,31 +177,26 @@ def D0Vars(collections):
     return [k_opp_l_mass, k_mu_hadron_mass, k_mu_muon_mass]
 
 def PAssymVar(collections):
-    muons=collections[0]
-    Bcands=collections[1]
+    pv_x=collections[0]
+    pv_y=collections[1]
+    pv_z=collections[2]
+    Bcands=collections[3]
 
-    mu_found=False
     assym=[]
-    mu_vtx=TVector3()
-    for mu in muons:
-      if getattr(mu,"isTriggering")==0:
-           continue
-      mu_vtx.SetXYZ(getattr(mu,"vx"),getattr(mu,"vy"),getattr(mu,"vz"))
-      mu_found=True
-      break;
-       
+    pv_vtx=TVector3()
+    pv_vtx.SetXYZ(pv_x,pv_y,pv_z) 
+
     for Bcand in Bcands:
-      if not mu_found:
-         assym.append(-99)
-         continue   
       b_vtx=TVector3()
       b_vtx.SetXYZ(getattr(Bcand,"vtx_x"), getattr(Bcand,"vtx_y"), getattr(Bcand,"vtx_z"))
       k_p=TVector3()
+      e1_p=TVector3()
+      e2_p=TVector3()
       k_p.SetPtEtaPhi(getattr(Bcand,"fit_k_pt"), getattr(Bcand,"fit_k_eta"), getattr(Bcand,"fit_k_phi"))
-      e1_p=TVector3(getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"))
-      e2_p=TVector3(getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"))
-      assym.append( (((e1_p+e2_p).Cross(b_vtx-mu_vtx)).Mag()-(k_p.Cross(b_vtx-mu_vtx)).Mag())/(((e1_p+e2_p).Cross(b_vtx-mu_vtx)).Mag()+(k_p.Cross(b_vtx-mu_vtx)).Mag()) )
-     
+      e1_p.SetPtEtaPhi(getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"))
+      e2_p.SetPtEtaPhi(getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"))
+      assym.append( (((e1_p+e2_p).Cross(pv_vtx-b_vtx)).Mag()-(k_p.Cross(pv_vtx-b_vtx)).Mag())/(((e1_p+e2_p).Cross(pv_vtx-b_vtx)).Mag()+(k_p.Cross(pv_vtx-b_vtx)).Mag()) )
+
     return [assym]
 
 
@@ -404,30 +399,29 @@ def D0VarsMC(collections):
     return [k_opp_l_mass, k_mu_hadron_mass, k_mu_muon_mass]
 
 def PAssymVarMC(collections):
-    muons=collections[0]
-    Bcands=collections[1]
-    Bidx=collections[2]
+    pv_x=collections[0]
+    pv_y=collections[1]
+    pv_z=collections[2]
+    Bcands=collections[3]
+    Bidx=collections[4]
 
-    mu_found=False
     assym=-99.
-    mu_vtx=TVector3()
-    for mu in muons:
-      if getattr(mu,"isTriggering")==0:
-           continue
-      mu_vtx.SetXYZ(getattr(mu,"vx"),getattr(mu,"vy"),getattr(mu,"vz"))
-      mu_found=True
-      break;
-    if not mu_found or Bidx<0:
-       return [assym]   
+    if Bidx<0:
+       return [assym]
+    pv_vtx=TVector3()
+    pv_vtx.SetXYZ(pv_x,pv_y,pv_z)
+
     Bcand=Bcands[Bidx]
     b_vtx=TVector3()
     b_vtx.SetXYZ(getattr(Bcand,"vtx_x"), getattr(Bcand,"vtx_y"), getattr(Bcand,"vtx_z"))
     k_p=TVector3()
+    e1_p=TVector3()
+    e2_p=TVector3()
     k_p.SetPtEtaPhi(getattr(Bcand,"fit_k_pt"), getattr(Bcand,"fit_k_eta"), getattr(Bcand,"fit_k_phi"))
-    e1_p=TVector3(getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"))
-    e2_p=TVector3(getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"))
-    assym= (((e1_p+e2_p).Cross(b_vtx-mu_vtx)).Mag()-(k_p.Cross(b_vtx-mu_vtx)).Mag())/(((e1_p+e2_p).Cross(b_vtx-mu_vtx)).Mag()+(k_p.Cross(b_vtx-mu_vtx)).Mag()) 
-     
+    e1_p.SetPtEtaPhi(getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"))
+    e2_p.SetPtEtaPhi(getattr(Bcand,"fit_l2_pt"), getattr(Bcand,"fit_l2_eta"), getattr(Bcand,"fit_l2_phi"))
+    assym= (((e1_p+e2_p).Cross(pv_vtx-b_vtx)).Mag()-(k_p.Cross(pv_vtx-b_vtx)).Mag())/(((e1_p+e2_p).Cross(pv_vtx-b_vtx)).Mag()+(k_p.Cross(pv_vtx-b_vtx)).Mag()) 
+
     return [assym]
 
 

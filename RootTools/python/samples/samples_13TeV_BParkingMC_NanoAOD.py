@@ -31,7 +31,7 @@ BuToKEE_onlyLowpTPF_part1 = kreator.makeDataComponentFromEOS('BuToKEE_onlyLowpTP
 
 BuToKEE_onlyLowpTPF_part2 = kreator.makeDataComponentFromEOS('BuToKEE_onlyLowpTPF_part2','/store/cmst3/group/bpark/gkaratha/BParkingNANO_2021May13/BuToKee_MufilterPt6_SoftQCDnonD_TuneCP5_13TeV-pythia8-evtgen/crab_BuToKee_mcpart2/210513_062129/0000/','.*root')
 
-BuToKEE_bothE_correctPU_biased = kreator.makeDataComponentFromEOS('BuToKEE_bothE_correctPU_iased','/store/cmst3/group/bpark//gkaratha/Nano_BothEKEE_correctPU_v3.0_26_08_2021/BuToKee_MufilterPt6Eta1p6_SoftQCDnonD_TuneCP5_13TeV-pythia8-evtgen/crab_BuToKee_mcpart3/210825_223758/0000/','.*root')
+BuToKEE_bothE_correctPU_biased = kreator.makeDataComponentFromEOS('BuToKEE_bothE_correctPU_biased','/store/cmst3/group/bpark//gkaratha/Nano_BothEKEE_correctPU_v3.0_26_08_2021/BuToKee_MufilterPt6Eta1p6_SoftQCDnonD_TuneCP5_13TeV-pythia8-evtgen/crab_BuToKee_mcpart3/210825_223758/0000/','.*root')
 
 BuToKJpsiEE_bothE_correctPU_unbiased = kreator.makeDataComponentFromEOS('BuToKJpsiEE_bothE_correctPU_unbiased','/store/cmst3/group/bpark//gkaratha/Nano_BothEKEE_KJpsiEE_correctPU_unbiased_v3.0_29_08_2021/BuToKJpsi_Toee_Mufilter_SoftQCDnonD_TuneCP5_13TeV-pythia8-evtgen/crab_BuToKJpsi_Toee_mcpart3/210829_194150/0000/','.*root')
 
