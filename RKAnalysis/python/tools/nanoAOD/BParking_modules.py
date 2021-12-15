@@ -30,6 +30,7 @@ def KMuMuData ( process, Bcuts,tag):
     from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.collectionSkimmer import collectionSkimmer
     from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.collectionEmbeder import collectionEmbeder
     from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.branchCreator import branchCreator
+    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.functionWrapper import functionWrapper
 
     BKLLSelection = lambda l : l.fit_pt > Bcuts["Pt" ] and l.fit_cos2D > Bcuts["Cos2D"] and l.svprob > Bcuts["Prob"] and l.l_xy_unc >0 and (l.l_xy)/l.l_xy_unc > Bcuts["LxySign"] and l.mll_fullfit>Bcuts["Mllmin"] and l.fit_mass>Bcuts["MinMass"] and l.fit_mass<Bcuts["MaxMass"] and l.mll_fullfit<Bcuts["Mllmax"]
 
@@ -38,12 +39,13 @@ def KMuMuData ( process, Bcuts,tag):
                             selector = BKLLSelection,
                             branches = ["fit_pt","fit_mass","mass","l_xy",
                                         "l_xy_unc","fit_cos2D","svprob",
-                                        "l1Idx","l2Idx","kIdx","fit_eta",
+                                        "l1Idx","l2Idx","kIdx",
+                                        "fit_eta","fit_phi",
                                         "mll_fullfit","fit_massErr",
                                         "fit_l1_pt","fit_l1_eta","fit_l1_phi",
                                         "fit_l2_pt","fit_l2_eta","fit_l2_phi",
                                         "fit_k_pt","fit_k_eta","fit_k_phi",
-                                        "charge"
+                                        "charge","k_svip3d","k_svip3d_err"
                                          ],
                             TriggerMuonId = "Muon_isTriggering",
                             selectTagMuons = tag,
@@ -52,22 +54,22 @@ def KMuMuData ( process, Bcuts,tag):
     process.append(BSkim)
     Mu1 = collectionEmbeder( inputColl = "Muon",
                              embededColl = "SkimBToKMuMu",
-                             inputBranches = ["softId","vz","pfRelIso03_all","isTriggering","dxy","dxyErr","charge","isGlobal","isPFcand","looseId","mediumId"],
-                             embededBranches = ["l1_softId","l1_vz","l1_iso","l1_isTrg","l1_dxy","l1_dxy_err","l1_charge","l1_globalId","l1_pfId","l1_looseId","l1_mediumId"], 
+                             inputBranches = ["softId","vx","vy","vz","pfRelIso03_all","isTriggering","dxy","dxyErr","charge","mediumId"],
+                             embededBranches = ["l1_softId","l1_vx","l1_vy","l1_vz","l1_iso","l1_isTrg","l1_dxy","l1_dxyErr","l1_charge","l1_mediumId"], 
                              embededCollIdx = "l1Idx"
     )
     process.append(Mu1)
     Mu2 = collectionEmbeder( inputColl = "Muon",
                              embededColl = "SkimBToKMuMu",
-                             inputBranches = ["softId","vz","pfRelIso03_all","isTriggering","dxy","dxyErr","charge","isGlobal","isPFcand","looseId","mediumId"],
-                             embededBranches = ["l2_softId","l2_vz","l2_iso","l2_isTrg","l2_dxy","l2_dxy_err","l2_charge","l2_globalId","l2_pfId","l2_looseId","l2_mediumId"], 
+                             inputBranches = ["softId","vx","vy","vz","pfRelIso03_all","isTriggering","dxy","dxyErr","charge","mediumId"],
+                             embededBranches = ["l2_softId","l2_vx","l2_vy","l2_vz","l2_iso","l2_isTrg","l2_dxy","l2_dxyErr","l2_charge","l2_mediumId"], 
                              embededCollIdx = "l2Idx"
     )
     process.append(Mu2)
     K = collectionEmbeder( inputColl = "ProbeTracks",
                            embededColl = "SkimBToKMuMu",
-                           inputBranches = ["vz","charge","isMatchedToMuon"],
-                           embededBranches = ["k_vz","k_charge","k_isMatchedToMuon"],  
+                           inputBranches = ["vx","vy","vz","charge","isMatchedToMuon"],
+                           embededBranches = ["k_vx","k_vy","k_vz","k_charge","k_isMatchedToMuon"],  
                            embededCollIdx = "kIdx"
     )
     process.append(K)
@@ -77,14 +79,23 @@ def KMuMuData ( process, Bcuts,tag):
         inputBranches=[["l_xy","l_xy_unc"],["l1_vz","l2_vz"],
                        ["k_vz","l1_vz","l2_vz"],
                        ["fit_l1_eta","fit_l1_phi","fit_l2_eta","fit_l2_phi"],
-                       ["fit_k_eta","fit_k_phi","fit_l1_eta","fit_l1_phi","fit_l2_eta","fit_l2_phi"]],
+                       ["fit_k_eta","fit_k_phi","fit_l1_eta","fit_l1_phi","fit_l2_eta","fit_l2_phi"],
+                       ["l1_dxy","l1_dxyErr"],["l2_dxy","l2_dxyErr"]],
         operation=["{0}/{1}","abs({0}-{1})",
                    "min(abs({0}-{1}),abs({0}-{2}))",
                    "deltaR({0},{1},{2},{3})",
-                   "min( deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))"],
-        createdBranches=["l_xy_sig","l1l2_dz","lk_dz","l1l2_dr","lk_dr"],
+                   "min( deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))",
+                   "{0}/{1}","{0}/{1}"],
+        createdBranches=["l_xy_sig","l1l2_dz","lk_dz","l1l2_dr","lk_dr","l1_dxy_sig","l2_dxy_sig"],
     )
     process.append(CreateVars)
+    D0Vars = functionWrapper(
+      functionName="D0Vars",
+      collections=["SkimBToKMuMu"],
+      createdBranches=["SkimBToKMuMu_kl_massKPi","SkimBToKMuMu_kl_massMuMu"],
+      nCol="nSkimBToKMuMu"
+    )
+    process.append(D0Vars)
     return process
 
 def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
@@ -142,28 +153,28 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
     El1 = collectionEmbeder( inputColl = "Electron",
                              embededColl = "SkimBToKEE",
                              inputBranches = ["vx","vy","vz","charge"],
-                             embededBranches = ["l1Vx","l1Vy","l1Vz","l1Charge"], 
+                             embededBranches = ["l1_vx","l1_vy","l1_vz","l1_charge"], 
                              embededCollIdx = "l1Idx"
     )
     process.append(El1)
     El2 = collectionEmbeder( inputColl = "Electron",
                              embededColl = "SkimBToKEE",
                              inputBranches = ["vx","vy","vz","charge"],
-                             embededBranches = ["l2Vx","l2Vy","l2Vz","l2Charge"],
+                             embededBranches = ["l2_vx","l2_vy","l2_vz","l2_charge"],
                              embededCollIdx = "l2Idx"
     )
     process.append(El2)
     K = collectionEmbeder( inputColl = "ProbeTracks",
                            embededColl = "SkimBToKEE",
                            inputBranches = ["vx","vy","vz","DCASig","dzTrg","isMatchedToMuon","charge"],
-                           embededBranches = ["kVx","kVy","kVz","kDca_sig","kDz","kMu_matched","kCharge"],
+                           embededBranches = ["k_vx","k_vy","k_vz","k_dca_sig","k_dz","kMu_matched","k_charge"],
                            embededCollIdx = "kIdx"
     )
     process.append(K)
     # in case of inf in L_xy/unc produces -99
     CreateVars = branchCreator(
         collection="SkimBToKEE",
-        inputBranches=[["l_xy","l_xy_unc"],["l1Vz","l2Vz"],["kVz","l1Vz","l2Vz"]
+        inputBranches=[["l_xy","l_xy_unc"],["l1_vz","l2_vz"],["k_vz","l1_vz","l2_vz"]
                       ,["fit_l1_eta","fit_l1_phi","fit_l2_eta","fit_l2_phi"],
                        ["fit_k_eta","fit_k_phi","fit_l1_eta","fit_l1_phi","fit_l2_eta","fit_l2_phi"]],
         operation=["{0}/{1}","abs({0}-{1})","min(abs({0}-{1}),abs({0}-{2}))",
@@ -191,8 +202,8 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
     process.append(ClosestTrkVars)
     D0Vars = functionWrapper(
       functionName="D0Vars",
-      collections=["Muon","SkimBToKEE"],
-      createdBranches=["SkimBToKEE_k_opp_l_mass","SkimBToKEE_k_mu_d0_mass","SkimBToKEE_k_mu_jpsi_mass"],
+      collections=["SkimBToKEE"],
+      createdBranches=["SkimBToKEE_kl_massKPi","SkimBToKEE_kl_massMuMu"],
       nCol="nSkimBToKEE"
     )
     process.append(D0Vars)
@@ -203,15 +214,7 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
       nCol="nSkimBToKEE"
     )
     process.append(PAssymVar)
-    #RankingVars = functionWrapper(
-    #  functionName="RankingVars",
-    #  collections=["SkimBToKEE"],
-    #  createdBranches=["SkimBToKEE_sv_rank"],
-    #  nCol="nSkimBToKEE"
-    #)
-    #process.append(RankingVars)
     return process
-
 
 def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.genDecayConstructorPython import genDecayConstructorPython
@@ -219,11 +222,12 @@ def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.compositeRecoMatcher import compositeRecoMatcher
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.branchCreatorMC import branchCreatorMC
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.genTriggerMuon import genTriggerMuon
+   from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.functionWrapper import functionWrapper
   
    path_list=["HLT_Mu9_IP6"]
    pt_cut=8.5
    skip_tag=False
-   skip_probe=True
+   skip_probe=False
    if not tag or trgUnbiased:
      path_list=[]
      pt_cut=None
@@ -245,7 +249,7 @@ def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoMu1 = genRecoMatcher( recoInput="Muon",
                              genInput = "genMu1",
                              output = "recoMu1",
-                             branches = ["pt","eta","phi","softId","vz","pfRelIso03_all","dxy","dxyErr","isGlobal","isPFcand","mediumId"],
+                             branches = ["pt","eta","phi","charge","softId","vx","vy","vz","pfRelIso03_all","dxy","dxyErr","mediumId"],
                              addChargeMatching=False,
                              skipNotMatched=False,
                              DRcut=0.1
@@ -254,7 +258,7 @@ def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoMu2 = genRecoMatcher( recoInput="Muon",
                              genInput = "genMu2",
                              output = "recoMu2",
-                             branches = ["pt","eta","phi","softId","vz","pfRelIso03_all","dxy","dxyErr","isGlobal","isPFcand","mediumId"],
+                             branches = ["pt","eta","phi","charge","softId","vx","vy","vz","pfRelIso03_all","dxy","dxyErr","mediumId"],
                              addChargeMatching=False,
                              skipNotMatched=False,
                              DRcut=0.1
@@ -275,7 +279,7 @@ def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoK = genRecoMatcher( recoInput="ProbeTracks",
                              genInput = "genK",
                              output = "recoK",
-                             branches = ["vz","isMatchedToMuon"],
+                             branches = ["vx","vy","vz","isMatchedToMuon","charge"],
                              skipNotMatched=False,
                              DRcut=0.1
    )                             
@@ -311,16 +315,45 @@ def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
                      ["recoMu1_vz","recoMu2_vz"],
                      ["recoK_vz","recoMu1_vz","recoMu2_vz"],
                      ["recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"], 
-                     ["recoB_fit_k_eta","recoB_fit_k_phi","recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"]
+                     ["recoB_fit_k_eta","recoB_fit_k_phi","recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"],
+                     ["recoMu1_dxy","recoMu1_dxyErr"],
+                     ["recoMu2_dxy","recoMu2_dxyErr"]
                    ],
       operation=["{0}/{1}","abs({0}-{1})",
                  "min(abs({0}-{1}),abs({0}-{2}))","deltaR({0},{1},{2},{3})",
-                 "min(deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))"
+                 "min(deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))",
+                 "{0}/{1}","{0}/{1}"
                 ],
-      createdBranches=["recoB_l_xy_sig","recoB_l1l2Dz","recoB_lKDz","recoB_l1l2Dr","recoB_lKDr"],
+      createdBranches=["recoB_l_xy_sig","recoB_l1l2Dz","recoB_lKDz","recoB_l1l2Dr","recoB_lKDr","recoMu1_dxy_sig","recoMu2_dxy_sig"],
       checkForBCandBranch="recoB_l_xy" #if provided branch puts -99 when branch value is -99. eg Useful for evt where recoK is found but B not
     )
    process.append(CreateVars)
+   D0VarsMC = functionWrapper(
+     functionName="D0VarsMC",
+     collections=["recoMu1_charge","recoB_fit_l1_pt","recoB_fit_l1_eta","recoB_fit_l1_phi","recoMu2_charge","recoB_fit_l2_pt","recoB_fit_l2_eta","recoB_fit_l2_phi","recoK_charge","recoB_fit_k_pt","recoB_fit_k_eta","recoB_fit_k_phi"],
+#     collections=["recoB","recoB_Idx","recoMu1_charge","recoMu2_charge","recoK_charge"],
+     createdBranches=["recoB_kl_massKPi","recoB_kl_massMuMu"],
+   )
+   process.append(D0VarsMC)
+   FONLL = functionWrapper(
+     functionName="FONLL",
+     collections=["genB_pt"],
+     createdBranches=["FONLL_Weight"],
+   )
+   process.append(FONLL)
+   muon1_mediumID_SF = functionWrapper(
+     functionName="muon_mediumID_SF",
+     collections=["recoMu1_pt","recoMu1_eta"],
+     createdBranches=["recoMu1_mediumID_SF"],
+   )
+   process.append(muon1_mediumID_SF)
+   muon2_mediumID_SF = functionWrapper(
+     functionName="muon_mediumID_SF",
+     collections=["recoMu2_pt","recoMu2_eta"],
+     createdBranches=["recoMu2_mediumID_SF"],
+   )
+   process.append(muon2_mediumID_SF)
+
    return process  
 
 def KstarPiMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
@@ -329,6 +362,7 @@ def KstarPiMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.compositeRecoMatcher import compositeRecoMatcher
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.branchCreatorMC import branchCreatorMC
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.genTriggerMuon import genTriggerMuon
+   from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.functionWrapper import functionWrapper
   
    path_list=["HLT_Mu9_IP6"]
    pt_cut=8.5
@@ -355,7 +389,7 @@ def KstarPiMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoMu1 = genRecoMatcher( recoInput="Muon",
                              genInput = "genMu1",
                              output = "recoMu1",
-                             branches = ["pt","eta","phi","softId","vz","pfRelIso03_all","dxy","dxyErr","isGlobal","isPFcand","mediumId"],
+                             branches = ["pt","eta","phi","charge","softId","vx","vy","vz","pfRelIso03_all","dxy","dxyErr","mediumId"],
                              addChargeMatching=False,
                              skipNotMatched=False,
                              DRcut=0.1
@@ -364,7 +398,7 @@ def KstarPiMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoMu2 = genRecoMatcher( recoInput="Muon",
                              genInput = "genMu2",
                              output = "recoMu2",
-                             branches = ["pt","eta","phi","softId","vz","pfRelIso03_all","dxy","dxyErr","isGlobal","isPFcand","mediumId"],
+                             branches = ["pt","eta","phi","charge","softId","vx","vy","vz","pfRelIso03_all","dxy","dxyErr","mediumId"],
                              addChargeMatching=False,
                              skipNotMatched=False,
                              DRcut=0.1
@@ -385,7 +419,7 @@ def KstarPiMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoPi = genRecoMatcher( recoInput="ProbeTracks",
                              genInput = "genPi",
                              output = "recoK",
-                             branches = ["vz","isMatchedToMuon"],
+                             branches = ["vx","vy","vz","isMatchedToMuon","charge"],
                              skipNotMatched=False,
                              DRcut=0.1
    )                             
@@ -398,7 +432,8 @@ def KstarPiMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
                              outputColl = "recoB",
                              cuts_vars=cuts_on_B_vars,
                              cuts=cuts_on_B,
-                             branches = ["fit_pt","fit_eta","fit_phi",
+                             branches = [
+                                        "fit_pt","fit_eta","fit_phi",
                                          "fit_mass","mll_fullfit","l_xy",
                                          "l_xy_unc","fit_cos2D","svprob",
                                          "fit_massErr","b_iso04",
@@ -421,16 +456,45 @@ def KstarPiMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
                      ["recoMu1_vz","recoMu2_vz"],
                      ["recoK_vz","recoMu1_vz","recoMu2_vz"],
                      ["recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"], 
-                     ["recoB_fit_k_eta","recoB_fit_k_phi","recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"]
+                     ["recoB_fit_k_eta","recoB_fit_k_phi","recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"],
+                     ["recoMu1_dxy","recoMu1_dxyErr"],
+                     ["recoMu2_dxy","recoMu2_dxyErr"]
                    ],
       operation=["{0}/{1}","abs({0}-{1})",
                  "min(abs({0}-{1}),abs({0}-{2}))","deltaR({0},{1},{2},{3})",
-                 "min(deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))"
+                 "min(deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))",
+                 "{0}/{1}","{0}/{1}"
                 ],
-      createdBranches=["recoB_l_xy_sig","recoB_l1l2Dz","recoB_lKDz","recoB_l1l2Dr","recoB_lKDr"],
+      createdBranches=["recoB_l_xy_sig","recoB_l1l2Dz","recoB_lKDz","recoB_l1l2Dr","recoB_lKDr","recoMu1_dxy_sig","recoMu2_dxy_sig"],
       checkForBCandBranch="recoB_l_xy" #if provided branch puts -99 when branch value is -99. eg Useful for evt where recoK is found but B not
     )
    process.append(CreateVars)
+   D0VarsMC = functionWrapper(
+     functionName="D0VarsMC",
+     collections=["recoMu1_charge","recoB_fit_l1_pt","recoB_fit_l1_eta","recoB_fit_l1_phi","recoMu2_charge","recoB_fit_l2_pt","recoB_fit_l2_eta","recoB_fit_l2_phi","recoK_charge","recoB_fit_k_pt","recoB_fit_k_eta","recoB_fit_k_phi"],
+#     collections=["recoB","recoB_Idx","recoMu1_charge","recoMu2_charge","recoK_charge"],
+     createdBranches=["recoB_kl_massKPi","recoB_kl_massMuMu"],
+   )
+   process.append(D0VarsMC)
+   FONLL = functionWrapper(
+     functionName="FONLL",
+     collections=["genB_pt"],
+     createdBranches=["FONLL_Weight"],
+   )
+   process.append(FONLL)
+   muon1_mediumID_SF = functionWrapper(
+     functionName="muon_mediumID_SF",
+     collections=["recoMu1_pt","recoMu1_eta"],
+     createdBranches=["recoMu1_mediumID_SF"],
+   )
+   process.append(muon1_mediumID_SF)
+   muon2_mediumID_SF = functionWrapper(
+     functionName="muon_mediumID_SF",
+     collections=["recoMu2_pt","recoMu2_eta"],
+     createdBranches=["recoMu2_mediumID_SF"],
+   )
+   process.append(muon2_mediumID_SF)
+ 
    return process  
 
 
@@ -440,6 +504,7 @@ def KstarKMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.compositeRecoMatcher import compositeRecoMatcher
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.branchCreatorMC import branchCreatorMC
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.genTriggerMuon import genTriggerMuon
+   from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.functionWrapper import functionWrapper
   
    path_list=["HLT_Mu9_IP6"]
    pt_cut=8.5
@@ -466,7 +531,7 @@ def KstarKMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoMu1 = genRecoMatcher( recoInput="Muon",
                              genInput = "genMu1",
                              output = "recoMu1",
-                             branches = ["pt","eta","phi","softId","vz","pfRelIso03_all","dxy","dxyErr","isGlobal","isPFcand","mediumId"],
+                             branches = ["pt","eta","phi","charge","softId","vx","vy","vz","pfRelIso03_all","dxy","dxyErr","mediumId"],
                              addChargeMatching=False,
                              skipNotMatched=False,
                              DRcut=0.1
@@ -475,7 +540,7 @@ def KstarKMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoMu2 = genRecoMatcher( recoInput="Muon",
                              genInput = "genMu2",
                              output = "recoMu2",
-                             branches = ["pt","eta","phi","softId","vz","pfRelIso03_all","dxy","dxyErr","isGlobal","isPFcand","mediumId"],
+                             branches = ["pt","eta","phi","charge","softId","vx","vy","vz","pfRelIso03_all","dxy","dxyErr","mediumId"],
                              addChargeMatching=False,
                              skipNotMatched=False,
                              DRcut=0.1
@@ -496,7 +561,7 @@ def KstarKMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    RecoK = genRecoMatcher( recoInput="ProbeTracks",
                              genInput = "genK",
                              output = "recoK",
-                             branches = ["vz","isMatchedToMuon"],
+                             branches = ["vx","vy","vz","isMatchedToMuon","charge"],
                              skipNotMatched=False,
                              DRcut=0.1
    )                             
@@ -509,7 +574,8 @@ def KstarKMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
                              outputColl = "recoB",
                              cuts_vars=cuts_on_B_vars,
                              cuts=cuts_on_B,
-                             branches = ["fit_pt","fit_eta","fit_phi",
+                             branches = [
+                                         "fit_pt","fit_eta","fit_phi",
                                          "fit_mass","mll_fullfit","l_xy",
                                          "l_xy_unc","fit_cos2D","svprob",
                                          "fit_massErr","b_iso04",
@@ -532,16 +598,44 @@ def KstarKMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
                      ["recoMu1_vz","recoMu2_vz"],
                      ["recoK_vz","recoMu1_vz","recoMu2_vz"],
                      ["recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"], 
-                     ["recoB_fit_k_eta","recoB_fit_k_phi","recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"]
+                     ["recoB_fit_k_eta","recoB_fit_k_phi","recoB_fit_l1_eta","recoB_fit_l1_phi","recoB_fit_l2_eta","recoB_fit_l2_phi"],
+                     ["recoMu1_dxy","recoMu1_dxyErr"],
+                     ["recoMu2_dxy","recoMu2_dxyErr"]                
                    ],
       operation=["{0}/{1}","abs({0}-{1})",
                  "min(abs({0}-{1}),abs({0}-{2}))","deltaR({0},{1},{2},{3})",
-                 "min(deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))"
+                 "min(deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))",
+                 "{0}/{1}","{0}/{1}"
                 ],
-      createdBranches=["recoB_l_xy_sig","recoB_l1l2Dz","recoB_lKDz","recoB_l1l2Dr","recoB_lKDr"],
+      createdBranches=["recoB_l_xy_sig","recoB_l1l2Dz","recoB_lKDz","recoB_l1l2Dr","recoB_lKDr","recoMu1_dxy_sig","recoMu2_dxy_sig"],
       checkForBCandBranch="recoB_l_xy" #if provided branch puts -99 when branch value is -99. eg Useful for evt where recoK is found but B not
     )
    process.append(CreateVars)
+   D0VarsMC = functionWrapper(
+     functionName="D0VarsMC",
+     collections=["recoMu1_charge","recoB_fit_l1_pt","recoB_fit_l1_eta","recoB_fit_l1_phi","recoMu2_charge","recoB_fit_l2_pt","recoB_fit_l2_eta","recoB_fit_l2_phi","recoK_charge","recoB_fit_k_pt","recoB_fit_k_eta","recoB_fit_k_phi"],
+#     collections=["recoB","recoB_Idx","recoMu1_charge","recoMu2_charge","recoK_charge"],
+     createdBranches=["recoB_kl_massKPi","recoB_kl_massMuMu"],
+   )
+   process.append(D0VarsMC)
+   FONLL = functionWrapper(
+     functionName="FONLL",
+     collections=["genB_pt"],
+     createdBranches=["FONLL_Weight"],
+   )
+   process.append(FONLL)
+   muon1_mediumID_SF = functionWrapper(
+     functionName="muon_mediumID_SF",
+     collections=["recoMu1_pt","recoMu1_eta"],
+     createdBranches=["recoMu1_mediumID_SF"],
+   )
+   process.append(muon1_mediumID_SF)
+   muon2_mediumID_SF = functionWrapper(
+     functionName="muon_mediumID_SF",
+     collections=["recoMu2_pt","recoMu2_eta"],
+     createdBranches=["recoMu2_mediumID_SF"],
+   )
+   process.append(muon2_mediumID_SF)
    return process  
 
 
