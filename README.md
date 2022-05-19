@@ -8,6 +8,7 @@ For the general recipe, [follow these instructions](https://twiki.cern.ch/twiki/
 ## Installation 
 
 #### CMSSW version
+
 ```
 SCRAM_ARCH=slc7_amd64_gcc700
 cmsrel CMSSW_10_4_0
@@ -15,7 +16,9 @@ cd CMSSW_10_4_0/src
 cmsenv
 git cms-init
 ```
-#### Add centrall CMG
+
+#### Add central CMG
+
 ```
 git remote add cmg-central https://github.com/CERN-PH-CMG/cmg-cmssw.git -f  -t heppy_104X_dev
 git checkout -b heppy_104X_dev cmg-central/heppy_104X_dev
@@ -23,28 +26,51 @@ git cms-addpkg PhysicsTools/Heppy
 git cms-addpkg PhysicsTools/HeppyCore
 cd $CMSSW_BASE/src/PhysicsTools
 ```
-#### Add B Parking code
+
+#### Add (BParking-specific) NanoAODTools 
+
 ```
-git clone -b NanoToolsBPark https://github.com/gkaratha/nanoAOD-tools NanoAODTools
-cd $CMSSW_BASE/src
-git clone -b bpark_cmg https://github.com/gkaratha/cmgtools-lite CMGTools
-cd $CMSSW_BASE/src
+cd $CMSSW_BASE/src/PhysicsTools
+git clone -b NanoToolsBPark git@github.com:CMSRKR3/nanoAOD-tools.git NanoAODTools
 ```
+
+#### Add (RK-specific) CMGTools
+
+```
+cd $CMSSW_BASE/src
+git clone -b CMSRKR3 git@github.com:CMSRKR3/cmgtools-lite CMGTools
+```
+
 #### Compile
+
 ```
+cd $CMSSW_BASE/src
 scram b -j 8
 ```
+
+#### Run (working examples)
+
+```
+nanopy.py test run_RK_fromNanoAOD_cfg.py -N 10000 -o kmumu -o jpsi -o mc -o filterSample=BuToKJpsiMuMu_test -o dimuon # MC
+nanopy.py test run_RK_fromNanoAOD_cfg.py -N 10000 -o kmumu -o jpsi -o data -o filterSample=Charmonium_test # data
+```
+
 ## Basic code
+
 ```
 NanoAOD ntuples definition: CMGTools/RootTools/python/samples/samples_13TeV_BParkingData_NanoAOD.py
 Module sequence and structure: CMGTools/RKAnalysis/python/tools/nanoAOD/BParking_modules.py
 Configuration: CMGTools/RKAnalysis/cfg/run_RK_fromNanoAOD_cfg.py
 Plotting: CMGTools/RKAnalysis/python/plotter/experimental/plotter2.py
 ```
+
 ## Usage
+
 ```
 ```
+
 #### Skimming NanoAOD
+
 ```
 Main code (ie modules to run and running order) defined in BParking_modules.py
 Local run: nanopy.py <folder>  run_RK_fromNanoAOD_cfg.py -N <evts per dataset> -o xxx=yyy
@@ -62,10 +88,10 @@ Options:
 - psi2s same for excited jpsi
 - test to take one file per dataset
 - single for single threaded run. this needs "--single"
-
-
 ```
+
 #### Proxy error
+
 ```
 In the following error, during submission in condor, is encountered:
 
@@ -73,3 +99,4 @@ Submitting job(s)ERROR: use_x509userproxy=/afs/cern.ch/work/r/ratramon/CMSSW_10_
 
 go to PhysicsTools/HeppyCore/scripts and comment out the line use_x509userproxy = \$ENV(X509_USER_PROXY) from both run_condor.sh and run_condor_simple.sh
 then re-compile
+```
