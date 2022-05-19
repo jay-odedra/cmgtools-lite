@@ -2,6 +2,7 @@
 from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 kreator = ComponentCreator()
 
+Charmonium_test = kreator.makePrivateMCComponent('Charmonium_test','/eos/cms/store/group/phys_bphys/ec/RKR3/test/test_files',['NANOAOD_Charmonium_2018_124X.root'])
 
 #part1
 crab_data_Run2018A_part1_0000 = kreator.makeDataComponentFromEOS('crab_data_Run2018A_part1_0000','/store/group/phys_bphys/bpark/nanoaod_RK2021/BParkingNANO_2021Mar05/ParkingBPH1/crab_data_Run2018A_part1/210305_221032/0000/','.*root')
@@ -240,60 +241,61 @@ kmumu_bkg_Run2018D_part5_0005 = kreator.makeDataComponentFromEOS('kmumu_bkg_Run2
 
 
 #2017 Charmonium
-crab_data_Run2017B_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017B_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017B/200421_120220/0000/','.*root')
-crab_data_Run2017C_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017C_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017C/200421_120340/0000/','.*root')
-crab_data_Run2017D_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017D_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017D/200421_120612/0000/','.*root')
-crab_data_Run2017E_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017E_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017E/200421_120710/0000/','.*root')
-crab_data_Run2017F_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017F_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017F/200421_120805/0000/','.*root')
+#crab_data_Run2017B_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017B_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017B/200421_120220/0000/','.*root')
+#crab_data_Run2017C_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017C_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017C/200421_120340/0000/','.*root')
+#crab_data_Run2017D_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017D_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017D/200421_120612/0000/','.*root')
+#crab_data_Run2017E_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017E_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017E/200421_120710/0000/','.*root')
+#crab_data_Run2017F_Charmonium_0000 = kreator.makeDataComponentFromEOS('Run2017F_Charmonium_0000','/store/cmst3/group/bpark/gkaratha/Charmonium_2017_2/BParkingNANO_2020Apr21/Charmonium/crab_data_Run2017F/200421_120805/0000/','.*root')
 
 #2017 DoubleMuon LowMass
-crab_data_Run2017B_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017B_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017B/200421_134716/0000/','.*root')
-crab_data_Run2017C_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017C_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017C/200421_134828/0000/','.*root')
-crab_data_Run2017D_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017D_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017D/200421_134941/0000/','.*root')
-crab_data_Run2017E_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017E_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017E/200421_135201/0000/','.*root')
-crab_data_Run2017F_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017F_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017F/200421_135317/0000/','.*root')
+#crab_data_Run2017B_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017B_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017B/200421_134716/0000/','.*root')
+#crab_data_Run2017C_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017C_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017C/200421_134828/0000/','.*root')
+#crab_data_Run2017D_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017D_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017D/200421_134941/0000/','.*root')
+#crab_data_Run2017E_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017E_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017E/200421_135201/0000/','.*root')
+#crab_data_Run2017F_DoubleMuon_0000 = kreator.makeDataComponentFromEOS('Run2017F_DoubleMuon_0000','/store/cmst3/group/bpark/gkaratha/DoubleMuonLowMass_2017_2/BParkingNANO_2020Apr21/DoubleMuonLowMass/crab_doubleMuon_Run2017F/200421_135317/0000/','.*root')
 
 #2016 Charmonium
-crab_data_Run2016B_Charmonium = kreator.makeDataComponentFromEOS('Run2016B_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016B/200429_102824/0000/','.*root')
-crab_data_Run2016C_Charmonium = kreator.makeDataComponentFromEOS('Run2016C_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016C/200429_102928/0000/','.*root')
-crab_data_Run2016D_Charmonium = kreator.makeDataComponentFromEOS('Run2016D_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016D/200429_103117/0000/','.*root')
-crab_data_Run2016E_Charmonium = kreator.makeDataComponentFromEOS('Run2016E_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016E/200429_103309/0000/','.*root')
-crab_data_Run2016F_Charmonium = kreator.makeDataComponentFromEOS('Run2016F_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016F/200429_103518/0000/','.*root')
-crab_data_Run2016G_Charmonium = kreator.makeDataComponentFromEOS('Run2016G_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016G/200429_103623/0000/','.*root')
-crab_data_Run2016H_Charmonium = kreator.makeDataComponentFromEOS('Run2016H_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016H/200429_103724/0000/','.*root')
+#crab_data_Run2016B_Charmonium = kreator.makeDataComponentFromEOS('Run2016B_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016B/200429_102824/0000/','.*root')
+#crab_data_Run2016C_Charmonium = kreator.makeDataComponentFromEOS('Run2016C_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016C/200429_102928/0000/','.*root')
+#crab_data_Run2016D_Charmonium = kreator.makeDataComponentFromEOS('Run2016D_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016D/200429_103117/0000/','.*root')
+#crab_data_Run2016E_Charmonium = kreator.makeDataComponentFromEOS('Run2016E_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016E/200429_103309/0000/','.*root')
+#crab_data_Run2016F_Charmonium = kreator.makeDataComponentFromEOS('Run2016F_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016F/200429_103518/0000/','.*root')
+#crab_data_Run2016G_Charmonium = kreator.makeDataComponentFromEOS('Run2016G_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016G/200429_103623/0000/','.*root')
+#crab_data_Run2016H_Charmonium = kreator.makeDataComponentFromEOS('Run2016H_Charmonium','/store/cmst3/group/bpark/gkaratha/Charmonium_2016/BParkingNANO_2020Apr29/Charmonium/crab_charmonium_Run2016H/200429_103724/0000/','.*root')
 
 
 #2017 DoubleMuon LowMass
-crab_data_Run2016B_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016B_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016B/200429_103916/0000/','.*root')
-crab_data_Run2016C_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016C_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016C/200429_104206/0000/','.*root')
-crab_data_Run2016D_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016D_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016D/200429_104307/0000/','.*root')
-crab_data_Run2016E_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016E_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016E/200429_104409/0000/','.*root')
-crab_data_Run2016F_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016F_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016F/200429_104543/0000/','.*root')
-crab_data_Run2016G_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016G_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016G/200429_104659/0000/','.*root')
-crab_data_Run2016H_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016H_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016H/200429_104801/0000/','.*root')
+#crab_data_Run2016B_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016B_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016B/200429_103916/0000/','.*root')
+#crab_data_Run2016C_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016C_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016C/200429_104206/0000/','.*root')
+#crab_data_Run2016D_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016D_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016D/200429_104307/0000/','.*root')
+#crab_data_Run2016E_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016E_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016E/200429_104409/0000/','.*root')
+#crab_data_Run2016F_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016F_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016F/200429_104543/0000/','.*root')
+#crab_data_Run2016G_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016G_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016G/200429_104659/0000/','.*root')
+#crab_data_Run2016H_DoubleMuon = kreator.makeDataComponentFromEOS('Run2016H_DoubleMuon','/store/cmst3/group/bpark/gkaratha/DoubleMuon_2016/BParkingNANO_2020Apr29/DoubleMuonLowMass/crab_doublemuon_Run2016H/200429_104801/0000/','.*root')
 
 
 
-samples = [crab_data_Run2018A_part1_0000,crab_data_Run2018A_part1_0001,crab_data_Run2018B_part1_0000,crab_data_Run2018B_part1_0001,crab_data_Run2018C_part1_0000,crab_data_Run2018C_part1_0001,crab_data_Run2018D_part1_0000,crab_data_Run2018D_part1_0001,crab_data_Run2018D_part1_0002,crab_data_Run2018D_part1_0003,crab_data_Run2018D_part1_0004,crab_data_Run2018D_part1_0005,crab_data_Run2018B_part1_0002,crab_data_Run2018D_part1_0006,
+samples = [Charmonium_test,
+crab_data_Run2018A_part1_0000,crab_data_Run2018A_part1_0001,crab_data_Run2018B_part1_0000,crab_data_Run2018B_part1_0001,crab_data_Run2018C_part1_0000,crab_data_Run2018C_part1_0001,crab_data_Run2018D_part1_0000,crab_data_Run2018D_part1_0001,crab_data_Run2018D_part1_0002,crab_data_Run2018D_part1_0003,crab_data_Run2018D_part1_0004,crab_data_Run2018D_part1_0005,crab_data_Run2018B_part1_0002,crab_data_Run2018D_part1_0006,
 crab_data_Run2018A_part2_0000,crab_data_Run2018A_part2_0001,crab_data_Run2018B_part2_0000,crab_data_Run2018B_part2_0001,crab_data_Run2018C_part2_0000,crab_data_Run2018C_part2_0001,crab_data_Run2018D_part2_0000,crab_data_Run2018D_part2_0001,crab_data_Run2018D_part2_0002,crab_data_Run2018D_part2_0003,crab_data_Run2018D_part2_0004,crab_data_Run2018D_part2_0005,
 crab_data_Run2018A_part3_0000,crab_data_Run2018A_part3_0001,crab_data_Run2018B_part3_0000,crab_data_Run2018B_part3_0001,crab_data_Run2018C_part3_0000,crab_data_Run2018C_part3_0001,crab_data_Run2018D_part3_0000,crab_data_Run2018D_part3_0001,crab_data_Run2018D_part3_0002,crab_data_Run2018D_part3_0003,crab_data_Run2018D_part3_0004,crab_data_Run2018D_part3_0005,
 crab_data_Run2018A_part4_0000,crab_data_Run2018A_part4_0001,crab_data_Run2018B_part4_0000,crab_data_Run2018C_part4_0000,crab_data_Run2018B_part4_0001,crab_data_Run2018C_part4_0001,crab_data_Run2018D_part4_0000,crab_data_Run2018D_part4_0001,crab_data_Run2018D_part4_0002,crab_data_Run2018D_part4_0003,crab_data_Run2018D_part4_0004,crab_data_Run2018D_part4_0005,
 crab_data_Run2018A_part5_0000,crab_data_Run2018A_part5_0001,crab_data_Run2018B_part5_0000,crab_data_Run2018B_part5_0001,crab_data_Run2018C_part5_0000,crab_data_Run2018C_part5_0001,crab_data_Run2018D_part5_0000,crab_data_Run2018D_part5_0001,crab_data_Run2018D_part5_0002,crab_data_Run2018D_part5_0003,crab_data_Run2018D_part5_0004,crab_data_Run2018D_part5_0005,
 crab_data_Run2018A_part6_0000,crab_data_Run2018A_part6_0001,crab_data_Run2018B_part6_0000,
-crab_data_Run2017B_Charmonium_0000,crab_data_Run2017C_Charmonium_0000,
-crab_data_Run2017D_Charmonium_0000,crab_data_Run2017E_Charmonium_0000,
-crab_data_Run2017F_Charmonium_0000,
-crab_data_Run2017B_DoubleMuon_0000,crab_data_Run2017C_DoubleMuon_0000,
-crab_data_Run2017D_DoubleMuon_0000,crab_data_Run2017E_DoubleMuon_0000,
-crab_data_Run2017F_DoubleMuon_0000,
-crab_data_Run2016B_Charmonium,crab_data_Run2016C_Charmonium,
-crab_data_Run2016D_Charmonium,crab_data_Run2016E_Charmonium,
-crab_data_Run2016F_Charmonium,crab_data_Run2016G_Charmonium,
-crab_data_Run2016H_Charmonium,
-crab_data_Run2016B_DoubleMuon,crab_data_Run2016C_DoubleMuon,
-crab_data_Run2016D_DoubleMuon,crab_data_Run2016E_DoubleMuon,
-crab_data_Run2016F_DoubleMuon,crab_data_Run2016G_DoubleMuon,
-crab_data_Run2016H_DoubleMuon,
+#crab_data_Run2017B_Charmonium_0000,crab_data_Run2017C_Charmonium_0000,
+#crab_data_Run2017D_Charmonium_0000,crab_data_Run2017E_Charmonium_0000,
+#crab_data_Run2017F_Charmonium_0000,
+#crab_data_Run2017B_DoubleMuon_0000,crab_data_Run2017C_DoubleMuon_0000,
+#crab_data_Run2017D_DoubleMuon_0000,crab_data_Run2017E_DoubleMuon_0000,
+#crab_data_Run2017F_DoubleMuon_0000,
+#crab_data_Run2016B_Charmonium,crab_data_Run2016C_Charmonium,
+#crab_data_Run2016D_Charmonium,crab_data_Run2016E_Charmonium,
+#crab_data_Run2016F_Charmonium,crab_data_Run2016G_Charmonium,
+#crab_data_Run2016H_Charmonium,
+#crab_data_Run2016B_DoubleMuon,crab_data_Run2016C_DoubleMuon,
+#crab_data_Run2016D_DoubleMuon,crab_data_Run2016E_DoubleMuon,
+#crab_data_Run2016F_DoubleMuon,crab_data_Run2016G_DoubleMuon,
+#crab_data_Run2016H_DoubleMuon,
 bkg_Run2018A_part1_0000, bkg_Run2018A_part1_0001, bkg_Run2018A_part2_0000,
 bkg_Run2018A_part2_0001, bkg_Run2018A_part3_0000, bkg_Run2018A_part3_0001, 
 bkg_Run2018A_part4_0000, bkg_Run2018A_part4_0001, bkg_Run2018A_part5_0000,
