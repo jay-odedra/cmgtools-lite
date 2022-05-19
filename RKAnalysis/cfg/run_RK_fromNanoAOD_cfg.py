@@ -41,7 +41,7 @@ jpsi = getHeppyOption("jpsi",False)
 psi2s = getHeppyOption("psi2s",False)
 test = getHeppyOption("test")
 start_time = time.time()
-
+dimuon = getHeppyOption("dimuon",False) # Use di-muon trigger?
 
 if (not data) and (not mc):
    data=True
@@ -125,7 +125,7 @@ if kee and data:
      print "Only PF e flag AND only lowpT andPF e flag enabled. Results may be invalid. Terminate"
      exit()
   BparkSkim=SkimCuts("BToKEE",Bcuts)
-  modules = KEEData(modules,Bcuts,onlyPFe,onlyLowPtAndPFe) 
+  modules = KEEData(modules,Bcuts,onlyPFe,onlyLowPtAndPFe)
 
 
 ################################# MC ###########################################
@@ -133,11 +133,11 @@ if kee and data:
 if kmumu and mc:
   br_in = "branchRkmumu_in.txt"
   if not jpsi and not psi2s:
-     modules = KMuMuMC(modules,[],tagmu,trgUnbiased)
+     modules = KMuMuMC(modules,[],tagmu,trgUnbiased,dimuon)
   elif jpsi and not psi2s:
-     modules = KMuMuMC(modules,["443->13,-13"],tagmu,trgUnbiased)
+     modules = KMuMuMC(modules,["443->13,-13"],tagmu,trgUnbiased,dimuon)
   elif not jpsi and psi2s:
-     modules = KMuMuMC(modules,["100443->13,-13"],tagmu,trgUnbiased)
+     modules = KMuMuMC(modules,["100443->13,-13"],tagmu,trgUnbiased,dimuon)
   BparkSkim=""
 
 if kstarmumu_pimumu and mc:

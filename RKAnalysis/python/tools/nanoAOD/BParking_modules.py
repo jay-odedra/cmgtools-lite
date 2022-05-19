@@ -216,7 +216,7 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
     process.append(PAssymVar)
     return process
 
-def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
+def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False,dimuon=False):
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.genDecayConstructorPython import genDecayConstructorPython
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.genRecoMatcher import genRecoMatcher
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.compositeRecoMatcher import compositeRecoMatcher
@@ -224,8 +224,15 @@ def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False):
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.genTriggerMuon import genTriggerMuon
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.functionWrapper import functionWrapper
   
-   path_list=["HLT_Mu9_IP6"]
-   pt_cut=8.5
+   path_list=[]
+   pt_cut=-1.
+   print dimuon
+   if dimuon == False:
+       path_list=["HLT_Mu9_IP6"]
+       pt_cut=8.5
+   else:
+       path_list=["HLT_DoubleMu4_JpsiTrk_Displaced"]
+       pt_cut=4.
    skip_tag=False
    skip_probe=False
    if not tag or trgUnbiased:
