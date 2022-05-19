@@ -3,6 +3,7 @@ from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 kreator = ComponentCreator()
 
 
+BuToKJpsi_ToMuMu_test = kreator.makePrivateMCComponent('BuToKJpsiMuMu_test','/eos/cms/store/group/phys_bphys/ec/RKR3/test/test_files',['NANOAOD_BuToKJpsiToMuMu_124X.root'])
 
 BuToKJpsi_ToMuMu = kreator.makeDataComponentFromEOS('BuToKJpsiMuMu','/store/cmst3/group/bpark/gkaratha/NoTrgCut_CentralMC_BtoKll_MC_15_2_2020/BuToKJpsi_ToMuMu_MuFilter_SoftQCDnonD_TuneCP5_13TeV-pythia8-evtgen/crab_BuToKJpsi_ToMuMu_v0/200213_162954/0000/','.*root')
 BuToKMuMu = kreator.makeDataComponentFromEOS('BuToKMuMu','/store/cmst3/group/bpark/gkaratha/NoTrgCut_CentralMC_BtoKll_MC_15_2_2020/BuToK_ToMuMu_MuFilter_SoftQCDnonD_TuneCP5_13TeV-pythia8-evtgen/crab_BuToKMuMu_v0/200213_163107/0000/','.*root')
@@ -62,7 +63,8 @@ BdToKstarPsi2S_ToEE_bothE = kreator.makeDataComponentFromEOS('BdToKstarPsi2See_b
 #crab_BuToKMuMu_0000 = kreator.makeDataComponentFromEOS('crab_BuToKMuMu_0000','/store/cmst3/group/bpark/gkaratha/BToKMuMu_BToKJPsi_ToMuMu_MuFilter_18_12_2019/BParkingNANO_2019Dec16/BuToK_ToMuMu_MuFilter_SoftQCDnonD_TuneCP5_13TeV-pythia8-evtgen/crab_BuToKMuMu/191216_120214/0000/','.*root')
 
 
-samples = [BuToKJpsi_ToMuMu, BuToKMuMu, BuToKPsi2S_ToMuMu_unbiased, BuToKEE_onlyPF_part1,BdToKstarJpsiMuMu_part1, BdToKstarJpsiMuMu_part2, BuToKEE_onlyPF_part2, BuToKJpsi_ToEE_onlyPF_part1, BuToKJpsi_ToEE_onlyPF_part2, BuToKPsi2S_ToEE,BuToKMuMu_trgtest, BuToKJPsiMuMu_trgtest, BuToKPsi2S_ToEE_part1, BuToKPsi2S_ToEE_part2, BuToKEE_onlyLowpTPF_part1, BuToKEE_onlyLowpTPF_part2, BuToKJpsi_ToEE_LowpTPF, BdToKstarJpsiEE_part1, BdToKstarJpsiEE_part2,BdToKstarJpsiLowPtEE_part1, BdToKstarJpsiLowPtEE_part2, BuToKPsi2S_ToEE_bothE, BdToKstarPsi2S_ToEE_bothE, BuToKEE_bothE_correctPU_biased, BuToKJpsiEE_bothE_correctPU_unbiased, BuToKEE_bothE_correctPU_unbiased, BuToKPsi2S_ToMuMu_biased, BdToKstarPsi2S_ToMuMu_biased ] 
+samples = [BuToKJpsi_ToMuMu_test,
+BuToKJpsi_ToMuMu, BuToKMuMu, BuToKPsi2S_ToMuMu_unbiased, BuToKEE_onlyPF_part1,BdToKstarJpsiMuMu_part1, BdToKstarJpsiMuMu_part2, BuToKEE_onlyPF_part2, BuToKJpsi_ToEE_onlyPF_part1, BuToKJpsi_ToEE_onlyPF_part2, BuToKPsi2S_ToEE,BuToKMuMu_trgtest, BuToKJPsiMuMu_trgtest, BuToKPsi2S_ToEE_part1, BuToKPsi2S_ToEE_part2, BuToKEE_onlyLowpTPF_part1, BuToKEE_onlyLowpTPF_part2, BuToKJpsi_ToEE_LowpTPF, BdToKstarJpsiEE_part1, BdToKstarJpsiEE_part2,BdToKstarJpsiLowPtEE_part1, BdToKstarJpsiLowPtEE_part2, BuToKPsi2S_ToEE_bothE, BdToKstarPsi2S_ToEE_bothE, BuToKEE_bothE_correctPU_biased, BuToKJpsiEE_bothE_correctPU_unbiased, BuToKEE_bothE_correctPU_unbiased, BuToKPsi2S_ToMuMu_biased, BdToKstarPsi2S_ToMuMu_biased ] 
 
 
 
