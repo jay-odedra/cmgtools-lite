@@ -5,7 +5,7 @@ from ROOT import *
 import sys
 import time;
 
-sys.path.insert(1, '/afs/cern.ch/work/g/gkaratha/private/SUSYCMG/HLT/efficiency/Analizer/CMGforRk/CMSSW_10_4_0/src/CMGTools/RKAnalysis/python/plotter')
+sys.path.insert(1, '/afs/cern.ch/work/n/nzipper/public/Rk/Analysis/CMSSW_10_4_0/src/CMGTools/RKAnalysis/python/plotter')
 from cms_lumi import  CMS_lumi
 
 
@@ -244,6 +244,7 @@ if __name__ == "__main__":
       print "   KolmogorovTest =",ks_test
       # draw everything
       if "LogY" in args.cfg:  c.SetLogy()  
+      if "LogX" in args.cfg:  c.SetLogx(); hstack.SetMaximum(.1) 
       if args.ratio and len(args.inputPaths)==2:     
         ks_test = histos[0].KolmogorovTest(histos[1])
         print "   KolmogorovTest =",ks_test
@@ -254,7 +255,7 @@ if __name__ == "__main__":
        
 
       c.SaveAs(args.outputName+"/"+plot+".png");
-      c.SaveAs(args.outputName+"/"+plot+".pdf"); 
+      # c.SaveAs(args.outputName+"/"+plot+".pdf"); 
       del c
            
          

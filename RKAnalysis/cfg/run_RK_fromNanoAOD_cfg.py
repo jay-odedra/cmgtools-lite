@@ -39,7 +39,7 @@ onlyPFe = getHeppyOption("onlyPFe",False)
 onlyLowPtAndPFe = getHeppyOption("onlyLowPtAndPFe",False) # b cands with 1 low and 1 pf e only created
 jpsi = getHeppyOption("jpsi",False)
 psi2s = getHeppyOption("psi2s",False)
-test = getHeppyOption("test")
+test = getHeppyOption("test",False)
 start_time = time.time()
 dimuon = getHeppyOption("dimuon",False) # Use di-muon trigger?
 
@@ -50,11 +50,10 @@ if (not data) and (not mc):
 # get datasets  
 Ncomps=[]
 if data:
-  from CMGTools.RootTools.samples.samples_13TeV_BParkingData_NanoAOD import samples as allData 
+  from CMGTools.RootTools.samples.samples_DielectronX_BParkingData_NanoAOD import samples as allData 
   Ncomps = allData 
 if mc:
-  from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD import samples as allMC
-#  from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD_noregr import samples as allMC
+  from CMGTools.RootTools.samples.samples_DielectronX_BParkingMC_NanoAOD import samples as allMC
   Ncomps = allMC
 
 
@@ -110,7 +109,7 @@ if kmumu and data:
 
 if kee and data:
   br_in = "branchRkee_in.txt"
-  Bcuts=dict ( Pt=0, MinMass=0, MaxMass=6, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0, L2Pt= 0, KPt= 0, Mllmin=0, Mllmax=5 ) # no -preselection cuts 
+  Bcuts=dict ( Pt=0, MinMass=4.5, MaxMass=6, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0, L2Pt= 0, KPt= 0, Mllmin=2.8, Mllmax=3.3 ) # no -preselection cuts 
   if onlyPFe:
      #v2 preselection 2 PFe
 #     Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.5, Cos2D=0.8, Prob=0, L1Pt= 0.5, L2Pt= 0.5, KPt= 0.75, Mllmin=0.55, Mllmax=5 ) 
@@ -160,7 +159,6 @@ if kstarmumu_kmumu and mc:
      modules = KstarKMuMuMC(modules,["100443->13,-13","313->321,-211"],tagmu,trgUnbiased)
   BparkSkim=""
 
-
 if kee and mc: 
   br_in = "branchRkee_in.txt"
   if not jpsi and not psi2s:
@@ -169,7 +167,7 @@ if kee and mc:
      modules = KEEMC(modules,["443->11,-11"],onlyPFe,onlyLowPtAndPFe)
   elif not jpsi and psi2s:
      modules = KEEMC(modules,["100443->11,-11"],onlyPFe,onlyLowPtAndPFe)
-  BparkSkim=""
+  BparkSkim="BToKEE_fit_cos2D>0 && L1_DoubleEG9_er1p2_dR_Max0p7==1 && HLT_DoubleEle6_eta1p22_mMax6==1"
 
 if kstaree_piee and mc:
   br_in = "branchRkee_in.txt"

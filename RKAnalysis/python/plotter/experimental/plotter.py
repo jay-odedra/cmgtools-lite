@@ -5,7 +5,7 @@ from ROOT import *
 import time;
 import sys
 
-sys.path.insert(1, '/afs/cern.ch/work/g/gkaratha/private/SUSYCMG/HLT/efficiency/Analizer/CMGforRk/CMSSW_10_4_0/src/CMGTools/RKAnalysis/python/plotter')
+sys.path.insert(1, '/afs/cern.ch/work/n/nzipper/public/Rk/Analysis/CMSSW_10_4_0/src/CMGTools/RKAnalysis/python/plotter')
 from cms_lumi import  CMS_lumi
 
 
