@@ -39,7 +39,7 @@ onlyPFe = getHeppyOption("onlyPFe",False)
 onlyLowPtAndPFe = getHeppyOption("onlyLowPtAndPFe",False) # b cands with 1 low and 1 pf e only created
 jpsi = getHeppyOption("jpsi",False)
 psi2s = getHeppyOption("psi2s",False)
-test = getHeppyOption("test")
+test = getHeppyOption("test",False)
 start_time = time.time()
 dimuon = getHeppyOption("dimuon",False) # Use di-muon trigger?
 
