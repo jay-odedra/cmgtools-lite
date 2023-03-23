@@ -50,10 +50,10 @@ if (not data) and (not mc):
 # get datasets  
 Ncomps=[]
 if data:
-  from CMGTools.RootTools.samples.samples_13TeV_BParkingData_NanoAOD import samples as allData 
+  from CMGTools.RootTools.samples.samples_Run3_DiElectronTrigger_Data_NanoAOD import samples as allData 
   Ncomps = allData 
 if mc:
-  from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD import samples as allMC
+  from CMGTools.RootTools.samples.samples_Run3_DiElectronTrigger_MC_NanoAOD import samples as allMC
 #  from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD_noregr import samples as allMC
   Ncomps = allMC
 

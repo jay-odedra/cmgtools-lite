@@ -4,6 +4,5 @@ drop TrigObj_*
 drop fixedGrid*
 drop BToKMuMu_*
 drop OtherPV_*
-keep Muon_*
 keep nSV
 keep PV_*
