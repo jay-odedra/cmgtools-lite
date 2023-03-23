@@ -116,7 +116,7 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
                             output = "SkimBToKEE",
                             importedVariables = ["Electron_isPF","Electron_isPF"
                              ,"Electron_isPFoverlap","Electron_isPFoverlap",
-                              "Electron_pfmvaId","Electron_pfmvaId",
+                              "Electron_PFEleMvaID_Fall17NoIsoV2RawValue","Electron_PFEleMvaID_Fall17NoIsoV2RawValue",
                               "Electron_mvaId","Electron_mvaId"],
                             importIds = ["l1Idx","l2Idx",
                                          "l1Idx","l2Idx",
@@ -184,29 +184,29 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
     )
     process.append(CreateVars)
     from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.functionWrapper import functionWrapper
-    TagVars = functionWrapper(
-      functionName="TagVars",
-      collections=["ProbeTracks","Muon","SkimBToKEE"],
-      createdBranches=["SkimBToKEE_TagMuEtRatio","SkimBToKEE_TagMuDphi","SkimBToKEE_TagMu4Prod","SkimBToKEE_l1_dz","SkimBToKEE_l2_dz","SkimBToKEE_k_dz"],
-      nCol="nSkimBToKEE"
-    )
-    process.append(TagVars)
-    ClosestTrkVars = functionWrapper(
-      functionName="ClosestTrkVars",
-      collections=["ProbeTracks","SkimBToKEE","Electron"],
-      createdBranches=["SkimBToKEE_l1_trk_mass","SkimBToKEE_l2_trk_mass",
-                       "SkimBToKEE_trk_minxy1","SkimBToKEE_trk_minxy2",
-                       "SkimBToKEE_trk_minxy3","SkimBToKEE_trk_mean"],
-      nCol="nSkimBToKEE"
-    )
-    process.append(ClosestTrkVars)
-    D0Vars = functionWrapper(
-      functionName="D0Vars",
-      collections=["SkimBToKEE"],
-      createdBranches=["SkimBToKEE_kl_massKPi","SkimBToKEE_kl_massMuMu"],
-      nCol="nSkimBToKEE"
-    )
-    process.append(D0Vars)
+#    TagVars = functionWrapper(
+#      functionName="TagVars",
+#      collections=["ProbeTracks","Muon","SkimBToKEE"],
+#      createdBranches=["SkimBToKEE_TagMuEtRatio","SkimBToKEE_TagMuDphi","SkimBToKEE_TagMu4Prod","SkimBToKEE_l1_dz","SkimBToKEE_l2_dz","SkimBToKEE_k_dz"],
+#      nCol="nSkimBToKEE"
+#    )
+#    process.append(TagVars)
+#    ClosestTrkVars = functionWrapper(
+#      functionName="ClosestTrkVars",
+#      collections=["ProbeTracks","SkimBToKEE","Electron"],
+#      createdBranches=["SkimBToKEE_l1_trk_mass","SkimBToKEE_l2_trk_mass",
+#                       "SkimBToKEE_trk_minxy1","SkimBToKEE_trk_minxy2",
+#                       "SkimBToKEE_trk_minxy3","SkimBToKEE_trk_mean"],
+#      nCol="nSkimBToKEE"
+#    )
+#    process.append(ClosestTrkVars)
+#    D0Vars = functionWrapper(
+#      functionName="D0Vars",
+#      collections=["SkimBToKEE"],
+#      createdBranches=["SkimBToKEE_kl_massKPi","SkimBToKEE_kl_massMuMu"],
+#      nCol="nSkimBToKEE"
+#    )
+#    process.append(D0Vars)
     PAssymVar = functionWrapper(
       functionName="PAssymVar",
       collections=["PV_x","PV_y","PV_z","SkimBToKEE"],
