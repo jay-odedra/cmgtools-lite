@@ -116,16 +116,13 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
                             output = "SkimBToKEE",
                             importedVariables = ["Electron_isPF","Electron_isPF"
                              ,"Electron_isPFoverlap","Electron_isPFoverlap",
-                              "Electron_PFEleMvaID_Fall17NoIsoV2RawValue","Electron_PFEleMvaID_Fall17NoIsoV2RawValue",
-                              "Electron_mvaId","Electron_mvaId"],
+                              "Electron_PFEleMvaID_Fall17NoIsoV2RawValue","Electron_PFEleMvaID_Fall17NoIsoV2RawValue"],
                             importIds = ["l1Idx","l2Idx",
-                                         "l1Idx","l2Idx",
                                          "l1Idx","l2Idx",
                                          "l1Idx","l2Idx"],
                             varnames = ["l1isPF","l2isPF",
                                         "l1isPFoverlap","l2isPFoverlap",
-                                        "l1PFId","l2PFId",
-                                        "l1LowPtId","l2LowPtId"],
+                                        "l1PFId","l2PFId"],
                             selector = BKLLSelection,
                             branches = ["fit_pt","fit_eta","fit_phi",
                                         "fit_mass","l_xy","l_xy_unc",
@@ -140,7 +137,6 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
                                         "fit_l2_pt","fit_l2_eta","fit_l2_phi",
                                         "l2_iso04",
                                         "l1isPF","l2isPF","l1PFId","l2PFId",
-                                        "l1LowPtId","l2LowPtId",
                                         "b_iso04_dca","l1_iso04_dca",
                                         "l2_iso04_dca","k_iso04_dca",
                                         "k_svip3d","k_svip3d_err",
@@ -677,7 +673,7 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE1 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE1",
                              output = "recoE1",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","pfmvaId","isPFoverlap","mvaId","charge"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","isPFoverlap","charge"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -685,7 +681,7 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE2 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE2",
                              output = "recoE2",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","pfmvaId","isPFoverlap","mvaId","charge"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","isPFoverlap","charge"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -741,25 +737,25 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
     )
    process.append(CreateVars)
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.functionWrapper import functionWrapper
-   TagVars = functionWrapper(
-      functionName="TagVarsMC",
-      collections=["ProbeTracks","Muon","recoB_fit_pt","recoB_fit_eta","recoB_fit_phi","recoB_fit_mass","recoE1_vz","recoE2_vz","recoK_vz"],
-      createdBranches=["recoB_TagMuEtRatio","recoB_TagMuDphi","recoB_TagMu4Prod","recoB_l1_dz","recoB_l2_dz","recoB_k_dz"],
-    )
-   process.append(TagVars)
-   ClosestTrkVars = functionWrapper(
-      functionName="ClosestTrkVarsMC",
-      collections=["ProbeTracks","BToKEE","recoB_Idx","Electron","recoB_l1Idx","recoB_l2Idx"],
-      createdBranches=["recoB_l1_trk_mass","recoB_l2_trk_mass","recoB_trk_minxy1","recoB_trk_minxy2","recoB_trk_minxy3","recoB_trk_mean"],
-   )
-   process.append(ClosestTrkVars)
-   D0Vars = functionWrapper(
-     functionName="D0VarsMC",
-     collections=["Muon","BToKEE","recoB_Idx","recoE1_charge","recoE2_charge","recoK_charge"],
-     createdBranches=["recoB_k_opp_l_mass","recoB_k_mu_d0_mass","recoB_k_mu_jpsi_mass"]
-     
-   )
-   process.append(D0Vars)
+#   TagVars = functionWrapper(
+#      functionName="TagVarsMC",
+#      collections=["ProbeTracks","Muon","recoB_fit_pt","recoB_fit_eta","recoB_fit_phi","recoB_fit_mass","recoE1_vz","recoE2_vz","recoK_vz"],
+#      createdBranches=["recoB_TagMuEtRatio","recoB_TagMuDphi","recoB_TagMu4Prod","recoB_l1_dz","recoB_l2_dz","recoB_k_dz"],
+#    )
+#   process.append(TagVars)
+#   ClosestTrkVars = functionWrapper(
+#      functionName="ClosestTrkVarsMC",
+#      collections=["ProbeTracks","BToKEE","recoB_Idx","Electron","recoB_l1Idx","recoB_l2Idx"],
+#      createdBranches=["recoB_l1_trk_mass","recoB_l2_trk_mass","recoB_trk_minxy1","recoB_trk_minxy2","recoB_trk_minxy3","recoB_trk_mean"],
+#   )
+#   process.append(ClosestTrkVars)
+#   D0Vars = functionWrapper(
+#     functionName="D0VarsMC",
+#     collections=["Muon","BToKEE","recoB_Idx","recoE1_charge","recoE2_charge","recoK_charge"],
+#     createdBranches=["recoB_k_opp_l_mass","recoB_k_mu_d0_mass","recoB_k_mu_jpsi_mass"]
+#     
+#   )
+#   process.append(D0Vars)
    PAssymVar = functionWrapper(
      functionName="PAssymVarMC",
      collections=["PV_x","PV_y","PV_z","BToKEE","recoB_Idx"],
