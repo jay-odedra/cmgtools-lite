@@ -1,6 +1,5 @@
+drop *
 drop fixed*
 keep HLT_*
 keep nSV
-keep PV_npvs
 keep n*
-keep Electron*

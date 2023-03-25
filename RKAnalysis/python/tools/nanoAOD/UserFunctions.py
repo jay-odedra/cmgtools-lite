@@ -71,8 +71,8 @@ def ClosestTrkVars(collections):
     k_eta=getattr(recoK,"eta");       k_phi=getattr(recoK,"phi")
     b_eta=getattr(Bcand,"fit_eta");   b_phi=getattr(Bcand,"fit_phi")
 
-    vx_e1=getattr(Bcand,"l1Vx");   vy_e1=getattr(Bcand,"l1Vy")
-    vx_e2=getattr(Bcand,"l2Vx");   vy_e2=getattr(Bcand,"l2Vy")
+    vx_e1=getattr(Bcand,"l1_vx");   vy_e1=getattr(Bcand,"l1_vy")
+    vx_e2=getattr(Bcand,"l2_vx");   vy_e2=getattr(Bcand,"l2_vy")
     vx_b=getattr(Bcand,"vtx_x");   vy_b=getattr(Bcand,"vtx_y")
 
     min_distance_trk_e1=100;   

@@ -204,22 +204,22 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
 #      nCol="nSkimBToKEE"
 #    )
 #    process.append(TagVars)
-#    ClosestTrkVars = functionWrapper(
-#      functionName="ClosestTrkVars",
-#      collections=["ProbeTracks","SkimBToKEE","Electron"],
-#      createdBranches=["SkimBToKEE_l1_trk_mass","SkimBToKEE_l2_trk_mass",
-#                       "SkimBToKEE_trk_minxy1","SkimBToKEE_trk_minxy2",
-#                       "SkimBToKEE_trk_minxy3","SkimBToKEE_trk_mean"],
-#      nCol="nSkimBToKEE"
-#    )
-#    process.append(ClosestTrkVars)
-#    D0Vars = functionWrapper(
-#      functionName="D0Vars",
-#      collections=["SkimBToKEE"],
-#      createdBranches=["SkimBToKEE_kl_massKPi","SkimBToKEE_kl_massMuMu"],
-#      nCol="nSkimBToKEE"
-#    )
-#    process.append(D0Vars)
+    ClosestTrkVars = functionWrapper(
+      functionName="ClosestTrkVars",
+      collections=["ProbeTracks","SkimBToKEE","Electron"],
+      createdBranches=["SkimBToKEE_l1_trk_mass","SkimBToKEE_l2_trk_mass",
+                       "SkimBToKEE_trk_minxy1","SkimBToKEE_trk_minxy2",
+                       "SkimBToKEE_trk_minxy3","SkimBToKEE_trk_mean"],
+      nCol="nSkimBToKEE"
+    )
+    process.append(ClosestTrkVars)
+    D0Vars = functionWrapper(
+      functionName="D0Vars",
+      collections=["SkimBToKEE"],
+      createdBranches=["SkimBToKEE_kl_massKPi","SkimBToKEE_kl_massMuMu"],
+      nCol="nSkimBToKEE"
+    )
+    process.append(D0Vars)
     PAssymVar = functionWrapper(
       functionName="PAssymVar",
       collections=["PV_x","PV_y","PV_z","SkimBToKEE"],
