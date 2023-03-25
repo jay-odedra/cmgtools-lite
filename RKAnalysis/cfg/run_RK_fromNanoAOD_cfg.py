@@ -110,7 +110,8 @@ if kmumu and data:
 
 if kee and data:
   br_in = "branchRkee_in.txt"
-  Bcuts=dict ( Pt=0, MinMass=0, MaxMass=6, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0, L2Pt= 0, KPt= 0, Mllmin=0, Mllmax=5 ) # no -preselection cuts 
+  Bcuts=dict ( Pt=1.75, MinMass=4.7, MaxMass=5.7, LxySign=0, Cos2D=0.95, Prob=0.00001, L1Pt= 4.0, L2Pt= 4.0, KPt= 0.5, Mllmin=2.9, Mllmax=3.2, Loosewp=1, MaxEleEta=1.2, ip3d = 0.06, LLkaonDR = 0.03, eleDR=0.03, antid0cuts=2) # no -preselection cuts 
+
   if onlyPFe:
      #v2 preselection 2 PFe
 #     Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.5, Cos2D=0.8, Prob=0, L1Pt= 0.5, L2Pt= 0.5, KPt= 0.75, Mllmin=0.55, Mllmax=5 ) 
