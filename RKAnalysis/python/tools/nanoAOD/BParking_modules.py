@@ -139,7 +139,7 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
                                          "l1Idx","l2Idx"],
                             varnames = ["l1isPF","l2isPF",
                                         "l1isPFoverlap","l2isPFoverlap",
-                                        "l1raw","l2raw",
+                                        "l1rawMVAID","l2rawMVAID",
                                         "l1LooseWP","l2LooseWP"],
                             selector = BKLLSelection,
                             branches = ["fit_pt","fit_eta","fit_phi",
