@@ -1,4 +1,5 @@
 from PhysicsTools.HeppyCore.utils.deltar import deltaR
+
 def funcllkDR(keta,kphi,l1eta,l1phi,l2eta,l2phi):
   return min(deltaR(keta,kphi,l1eta,l1phi),deltaR(keta,kphi,l2eta,l2phi))
 
@@ -760,12 +761,12 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
 #      createdBranches=["recoB_TagMuEtRatio","recoB_TagMuDphi","recoB_TagMu4Prod","recoB_l1_dz","recoB_l2_dz","recoB_k_dz"],
 #    )
 #   process.append(TagVars)
-#   ClosestTrkVars = functionWrapper(
-#      functionName="ClosestTrkVarsMC",
-#      collections=["ProbeTracks","BToKEE","recoB_Idx","Electron","recoB_l1Idx","recoB_l2Idx"],
-#      createdBranches=["recoB_l1_trk_mass","recoB_l2_trk_mass","recoB_trk_minxy1","recoB_trk_minxy2","recoB_trk_minxy3","recoB_trk_mean"],
-#   )
-#   process.append(ClosestTrkVars)
+   ClosestTrkVars = functionWrapper(
+      functionName="ClosestTrkVarsMC",
+      collections=["ProbeTracks","BToKEE","recoB_Idx","Electron","recoB_l1Idx","recoB_l2Idx"],
+      createdBranches=["recoB_l1_trk_mass","recoB_l2_trk_mass","recoB_trk_minxy1","recoB_trk_minxy2","recoB_trk_minxy3","recoB_trk_mean"],
+   )
+   process.append(ClosestTrkVars)
 #   D0Vars = functionWrapper(
 #     functionName="D0VarsMC",
 #     collections=["Muon","BToKEE","recoB_Idx","recoE1_charge","recoE2_charge","recoK_charge"],

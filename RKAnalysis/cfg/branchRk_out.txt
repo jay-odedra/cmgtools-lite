@@ -1,4 +1,3 @@
-drop *
 drop fixed*
 keep HLT_*
 keep nSV

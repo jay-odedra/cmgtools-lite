@@ -110,7 +110,7 @@ if kmumu and data:
 
 if kee and data:
   br_in = "branchRkee_in.txt"
-  Bcuts=dict ( Pt=1.75, MinMass=4.7, MaxMass=5.7, LxySign=0, Cos2D=0.95, Prob=0.00001, L1Pt= 4.0, L2Pt= 4.0, KPt= 0.5, Mllmin=2.9, Mllmax=3.2, Loosewp=1, MaxEleEta=1.2, ip3d = 0.06, LLkaonDR = 0.03, eleDR=0.03, antid0cuts=2) # no -preselection cuts 
+  Bcuts=dict ( Pt=1.75, MinMass=4.7, MaxMass=5.7, LxySign=0, Cos2D=0.95, Prob=0.00001, L1Pt= 10.0, L2Pt= 4.0, KPt= 0.5, Mllmin=2.9, Mllmax=3.2, Loosewp=1, MaxEleEta=1.2, ip3d = 0.06, LLkaonDR = 0.03, eleDR=0.03, antid0cuts=2) # no -preselection cuts 
 
   if onlyPFe:
      #v2 preselection 2 PFe
@@ -170,8 +170,19 @@ if kee and mc:
      modules = KEEMC(modules,["443->11,-11"],onlyPFe,onlyLowPtAndPFe)
   elif not jpsi and psi2s:
      modules = KEEMC(modules,["100443->11,-11"],onlyPFe,onlyLowPtAndPFe)
-  BparkSkim=""
-
+  BparkSkim="Electron_PFEleMvaID_Fall17NoIsoV2wpLoose==1&&\
+      BToKEE_fit_l1_pt>4.0&&BToKEE_fit_l2_pt>4.0&&BToKEE_fit_l1_pt<100.0&&BToKEE_fit_l2_pt<100.0&&\
+      TMath::Abs(BToKEE_fit_l1_eta)<1.2&&TMath::Abs(BToKEE_fit_l2_eta)<1.2&&\
+      BToKEE_mll_fullfit<3.2&&BToKEE_mll_fullfit>2.9&&\
+      TMath::Abs(BToKEE_k_svip3d)<0.06&&\
+      BToKEE_fit_k_pt>0.5&&\
+      BToKEE_fit_cos2D>0.95&&\
+      BToKEE_svprob>0.00001&&\
+      BToKEE_fit_pt>1.75&&\
+      BToKEE_D0_mass_LepToK_KToPi>2.0&&\
+      BToKEE_D0_mass_LepToPi_KToK>2.0"
+# Need to add variable MLL region based on func input
+# Need to add llkDR & eleDR cuts
 if kstaree_piee and mc:
   br_in = "branchRkee_in.txt"
   if not jpsi and not psi2s:
