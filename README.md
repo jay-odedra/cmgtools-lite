@@ -31,14 +31,14 @@ cd $CMSSW_BASE/src/PhysicsTools
 
 ```
 cd $CMSSW_BASE/src/PhysicsTools
-git clone -b NanoToolsBPark git@github.com:CMSRKR3/nanoAOD-tools.git NanoAODTools
+git clone -b NanoToolsBPark git@github.com:DiElectronX/nanoAOD-tools.git NanoAODTools
 ```
 
 #### Add (RK-specific) CMGTools
 
 ```
 cd $CMSSW_BASE/src
-git clone -b CMSRKR3 git@github.com:CMSRKR3/cmgtools-lite CMGTools
+git clone -b CMSRKR3 git@github.com:DiElectronX/cmgtools-lite.git CMGTools
 ```
 
 #### Compile
@@ -53,6 +53,14 @@ scram b -j 8
 ```
 nanopy.py test run_RK_fromNanoAOD_cfg.py -N 10000 -o kmumu -o jpsi -o mc -o filterSample=BuToKJpsiMuMu_test -o dimuon # MC
 nanopy.py test run_RK_fromNanoAOD_cfg.py -N 10000 -o kmumu -o jpsi -o data -o filterSample=Charmonium_test # data
+```
+
+#### Run 3 /eos/ local jobs (working examples)
+
+```
+cd  CMGTools/Production/scripts/
+nanopy.py $CMSSW_BASE/src/output $CMSSW_BASE/src/CMGTools/RKAnalysis/cfg/run_RK_fromNanoAOD_cfg.py -N 10000 -o filterSample=test -o data -o kee # for data
+nanopy.py $CMSSW_BASE/src/output $CMSSW_BASE/src/CMGTools/RKAnalysis/cfg/run_RK_fromNanoAOD_cfg.py -N 10000 -o filterSample=test -o mc -o kee -o jpsi # for kee jpsi gen matching(Test File is Jpsi MC)
 ```
 
 ## Basic code
