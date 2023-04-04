@@ -215,20 +215,20 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
     #   nCol="nSkimBToKEE"
     # )
     # process.append(ClosestTrkVars)
-    # D0Vars = functionWrapper(
-    #   functionName="D0Vars",
-    #   collections=["SkimBToKEE"],
-    #   createdBranches=["SkimBToKEE_kl_massKPi","SkimBToKEE_kl_massMuMu"],
-    #   nCol="nSkimBToKEE"
-    # )
-    # process.append(D0Vars)
-    # PAssymVar = functionWrapper(
-    #   functionName="PAssymVar",
-    #   collections=["PV_x","PV_y","PV_z","SkimBToKEE"],
-    #   createdBranches=["SkimBToKEE_p_assymetry"],
-    #   nCol="nSkimBToKEE"
-    # )
-    # process.append(PAssymVar)
+    D0Vars = functionWrapper(
+      functionName="D0Vars",
+      collections=["SkimBToKEE"],
+      createdBranches=["SkimBToKEE_kl_massKPi"],
+      nCol="nSkimBToKEE"
+    )
+    process.append(D0Vars)
+    PAssymVar = functionWrapper(
+      functionName="PAssymVar",
+      collections=["PV_x","PV_y","PV_z","SkimBToKEE"],
+      createdBranches=["SkimBToKEE_p_assymetry"],
+      nCol="nSkimBToKEE"
+    )
+    process.append(PAssymVar)
     return process
 
 def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False,dimuon=False):
@@ -762,18 +762,18 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
   #     createdBranches=["recoB_TagMuEtRatio","recoB_TagMuDphi","recoB_TagMu4Prod","recoB_l1_dz","recoB_l2_dz","recoB_k_dz"],
   #   )
   #  process.append(TagVars)
-   ClosestTrkVars = functionWrapper(
-      functionName="ClosestTrkVarsMC",
-      collections=["ProbeTracks","BToKEE","recoB_Idx","Electron","recoB_l1Idx","recoB_l2Idx"],
-      createdBranches=["recoB_l1_trk_mass","recoB_l2_trk_mass","recoB_trk_minxy1","recoB_trk_minxy2","recoB_trk_minxy3","recoB_trk_mean"],
+  #  ClosestTrkVars = functionWrapper(
+  #    functionName="ClosestTrkVarsMC",
+  #    collections=["ProbeTracks","BToKEE","recoB_Idx","Electron","recoB_l1Idx","recoB_l2Idx"],
+  #    createdBranches=["recoB_l1_trk_mass","recoB_l2_trk_mass","recoB_trk_minxy1","recoB_trk_minxy2","recoB_trk_minxy3","recoB_trk_mean"],
+  #   )
+  #  process.append(ClosestTrkVars)
+   D0Vars = functionWrapper(
+     functionName="D0VarsMC",
+     collections=["BToKEE","recoE1_charge","recoE2_charge","recoK_charge","recoB_Idx"],
+     createdBranches=["recoB_k_opp_l_mass"]
    )
-   process.append(ClosestTrkVars)
-  #  D0Vars = functionWrapper(
-  #    functionName="D0VarsMC",
-  #    collections=["Muon","BToKEE","recoB_Idx","recoE1_charge","recoE2_charge","recoK_charge"],
-  #    createdBranches=["recoB_k_opp_l_mass","recoB_k_mu_d0_mass","recoB_k_mu_jpsi_mass"]
-  #  )
-  #  process.append(D0Vars)
+   process.append(D0Vars)
    PAssymVar = functionWrapper(
      functionName="PAssymVarMC",
      collections=["PV_x","PV_y","PV_z","BToKEE","recoB_Idx"],

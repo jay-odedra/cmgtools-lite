@@ -102,7 +102,7 @@ def legPos( options):
        continue;
     pos = (option.split("=") )[1]
     if pos =="BL":
-      newpos=(0.1,0.1,0.3,0.3)
+      newpos=(0.2,0.2,0.4,0.4)
     elif pos  =="BR":
       newpos=(0.7,0.1,0.9,0.3) 
     elif pos =="TL":
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     gROOT.SetBatch(True)
      
     for jdx,plot in enumerate(args.plotNames):
-      leg = TLegend(0.7,0.6,0.9,0.85)
+      leg = TLegend(legPos(args.cfg))
       histos=[]
       hstack= THStack("hs","histos")
       if args.ratio and len(args.inputPaths)==2:
@@ -244,7 +244,7 @@ if __name__ == "__main__":
       print "   KolmogorovTest =",ks_test
       # draw everything
       if "LogY" in args.cfg:  c.SetLogy()  
-      if "LogX" in args.cfg:  c.SetLogx(); hstack.SetMaximum(.1) 
+      if "LogX" in args.cfg:  c.SetLogx()
       if args.ratio and len(args.inputPaths)==2:     
         ks_test = histos[0].KolmogorovTest(histos[1])
         print "   KolmogorovTest =",ks_test

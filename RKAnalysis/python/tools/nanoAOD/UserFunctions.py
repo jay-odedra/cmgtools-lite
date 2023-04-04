@@ -137,7 +137,6 @@ def ClosestTrkVars(collections):
 def D0Vars(collections):
     Bcands=collections[0]
     trk_opp_l_kpi_mass=[]
-    trk_opp_l_mumu_mass=[]
        
     for Bcand in Bcands:
       vK=TLorentzVector()
@@ -147,7 +146,6 @@ def D0Vars(collections):
       if getattr(Bcand,"l1_charge") == getattr(Bcand,"l2_charge"):
          if getattr(Bcand,"l1_charge") == getattr(Bcand,"k_charge"):
             trk_opp_l_kpi_mass.append(-1)
-            trk_opp_l_mumu_mass.append(-1)
             continue;
          else:    
             vL.SetPtEtaPhiM( getattr(Bcand,"fit_l1_pt"), getattr(Bcand,"fit_l1_eta"), getattr(Bcand,"fit_l1_phi"),0.493)
@@ -165,11 +163,8 @@ def D0Vars(collections):
          trk_opp_l_kpi_mass.append((vL+vK).M())
       else:
          trk_opp_l_kpi_mass.append(k_l_mass_hypoth1)
-      vL.SetPtEtaPhiM( vL.Pt(),vL.Eta(),vL.Phi(),0.105)
-      vK.SetPtEtaPhiM( vK.Pt(),vK.Eta(),vK.Phi(),0.105)
-      trk_opp_l_mumu_mass.append((vL+vK).M())
      
-    return [trk_opp_l_kpi_mass,trk_opp_l_mumu_mass]
+    return [trk_opp_l_kpi_mass]
 
 def FONLL(collections):
     genB_pt=collections[0]
@@ -523,24 +518,26 @@ def ClosestTrkVarsMC(collections):
 
 def D0VarsMC(collections):
     
-    L1charge=collections[0]
-    L1Pt=collections[1]
-    L1Eta=collections[2]
-    L1Phi=collections[3]
-    L2charge=collections[4]
-    L2Pt=collections[5]
-    L2Eta=collections[6]
-    L2Phi=collections[7]
-    Kcharge=collections[8]
-    KPt=collections[9]
-    KEta=collections[10]
-    KPhi=collections[11]
-
+    Bcands = collections[0]
+    L1charge = collections[1]
+    L2charge = collections[2]
+    Kcharge  = collections[3]
+    Bidx=collections[4]
+    
     trk_opp_l_kpi_mass=-99
-    trk_opp_l_mumu_mass=-99
-       
-    if (L1charge<-1 or L2charge<-1 or Kcharge<-1):
-       return [trk_opp_l_kpi_mass,trk_opp_l_mumu_mass]
+    if (L1charge<-1 or L2charge<-1 or Kcharge<-1or Bidx<0):
+       return [trk_opp_l_kpi_mass]
+
+    Bcand=Bcands[Bidx]
+    L1Pt=getattr(Bcand,"fit_l1_pt")
+    L1Eta=getattr(Bcand,"fit_l1_eta")
+    L1Phi=getattr(Bcand,"fit_l1_phi")
+    L2Pt=getattr(Bcand,"fit_l2_pt")
+    L2Eta=getattr(Bcand,"fit_l2_eta")
+    L2Phi=getattr(Bcand,"fit_l2_phi")
+    KPt=getattr(Bcand,"fit_k_pt")
+    KEta=getattr(Bcand,"fit_k_eta")
+    KPhi=getattr(Bcand,"fit_k_phi")
 
     vK=TLorentzVector()
     vL=TLorentzVector()
@@ -554,12 +551,8 @@ def D0VarsMC(collections):
     vK.SetPtEtaPhiM(vK.Pt(),vK.Eta(),vK.Phi(),0.493)
     if trk_opp_l_kpi_mass>(vL+vK).M():
        trk_opp_l_kpi_mass=(vL+vK).M()
-    vK.SetPtEtaPhiM(vK.Pt(),vK.Eta(),vK.Phi(),0.105)
-    vL.SetPtEtaPhiM(vL.Pt(),vL.Eta(),vL.Phi(),0.105)
-    trk_opp_l_mumu_mass=(vL+vK).M()
         
-     
-    return [trk_opp_l_kpi_mass,trk_opp_l_mumu_mass]
+    return [trk_opp_l_kpi_mass]
 
 def PAssymVarMC(collections):
     pv_x=collections[0]
