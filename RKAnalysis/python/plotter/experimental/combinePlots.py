@@ -196,7 +196,7 @@ if __name__ == "__main__":
     gROOT.SetBatch(True)
      
     for jdx,plot in enumerate(args.plotNames):
-      leg = TLegend(legPos(args.cfg))
+      leg = TLegend(*legPos(args.cfg))
       histos=[]
       hstack= THStack("hs","histos")
       if args.ratio and len(args.inputPaths)==2:
@@ -232,9 +232,9 @@ if __name__ == "__main__":
         histos.append(h1)
      
       if "marker" in args.cfg:   
-        hstack.Draw("nostack,e1p")
+        hstack.Draw("NOSTACK E1P")
       else:
-        hstack.Draw("nostack,hist")
+        hstack.Draw("NOSTACK E HIST")
       leg.Draw("sames")
 #      cms().Draw("sames")
 #      head().Draw("sames")     
@@ -248,7 +248,7 @@ if __name__ == "__main__":
       if args.ratio and len(args.inputPaths)==2:     
         ks_test = histos[0].KolmogorovTest(histos[1])
         print "   KolmogorovTest =",ks_test
-        plot+="_ks_"+str(ks_test)
+        # plot+="_ks_"+str(ks_test)
         hratio = createRatio( histos[0], histos[1])
         pad2.cd()
         hratio.Draw("p")
