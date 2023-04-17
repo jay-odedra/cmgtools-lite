@@ -1,6 +1,6 @@
 drop SV_*
-drop L1_*
 drop TrigObj_*
 drop OtherPV_*
 keep nSV
 keep PV_*
+

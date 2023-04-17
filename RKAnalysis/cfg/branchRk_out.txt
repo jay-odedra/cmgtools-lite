@@ -1,4 +1,5 @@
 drop *_*
+keep L1_*
 keep HLT_*
 keep nSV
 keep PV_npvs
