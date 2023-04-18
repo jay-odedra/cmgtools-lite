@@ -108,17 +108,15 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
       BKLLSelection = lambda l : l.fit_pt > Bcuts["Pt" ] and l.fit_cos2D > Bcuts["Cos2D"] and l.svprob > Bcuts["Prob"] and l.l_xy_unc >0 and (l.l_xy)/l.l_xy_unc > Bcuts["LxySign"] and l.mll_fullfit>Bcuts["Mllmin"] and l.fit_mass>Bcuts["MinMass"] and l.fit_mass<Bcuts["MaxMass"] and l.mll_fullfit<Bcuts["Mllmax"] and l.l1isPF == 1 and l.l2isPF == 1 and l.l1PFId>-30.5 and l.l2PFId>-50.0
     elif use_1LowPt_1PF and not use_PF:
       BKLLSelection = lambda l : l.fit_pt > Bcuts["Pt" ] and l.fit_cos2D > Bcuts["Cos2D"] and l.svprob > Bcuts["Prob"] and l.l_xy_unc >0 and (l.l_xy)/l.l_xy_unc > Bcuts["LxySign"] and l.mll_fullfit>Bcuts["Mllmin"] and l.fit_mass>Bcuts["MinMass"] and l.fit_mass<Bcuts["MaxMass"] and l.mll_fullfit<Bcuts["Mllmax"] and ( (l.l1isPF == 1 and l.l2isPF == 0 and l.l2isPFoverlap==0 and l.l1PFId>-2.0 and l.l2LowPtId>0.0) or (l.l1isPF == 0 and l.l2isPF == 1 and l.l1isPFoverlap==0 and l.l2PFId>-2.0 and l.l1LowPtId>0.0) )
-    else:
-      BKLLSelection = lambda l : l.fit_pt > Bcuts["Pt" ] and l.fit_cos2D > Bcuts["Cos2D"] and l.svprob > Bcuts["Prob"] and l.l_xy_unc >0 and (l.l_xy)/l.l_xy_unc > Bcuts["LxySign"] and l.mll_fullfit>Bcuts["Mllmin"] and l.fit_mass>Bcuts["MinMass"] and l.fit_mass<Bcuts["MaxMass"] and l.mll_fullfit<Bcuts["Mllmax"]
     
     BSkim = collectionSkimmer(input = "BToKEE",
                             output = "SkimBToKEE",
                             importedVariables = [
                                 "Electron_isPF","Electron_isPF",
                                 "Electron_isPFoverlap","Electron_isPFoverlap",
-                                "Electron_PFEleMvaID_RetrainedRawValue","Electron_PFEleMvaID_RetrainedRawValue",
-                                "Electron_LPEleMvaID_2020Sept15RawValue","Electron_LPEleMvaID_2020Sept15RawValue", 
                                 "Electron_PFEleMvaID_Fall17NoIsoV2wpLoose", "Electron_PFEleMvaID_Fall17NoIsoV2wpLoose", 
+                                "Electron_PFEleMvaID_Fall17NoIsoV2wp80","Electron_PFEleMvaID_Fall17NoIsoV2wp80",
+                                "Electron_PFEleMvaID_Fall17NoIsoV2wp90","Electron_PFEleMvaID_Fall17NoIsoV2wp90",
                                 "Electron_convVeto","Electron_convVeto"],
                             importIds = ["l1Idx","l2Idx",
                                          "l1Idx","l2Idx",
@@ -128,9 +126,9 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
                                          "l1Idx","l2Idx"],
                             varnames = ["l1isPF","l2isPF",
                                         "l1isPFoverlap","l2isPFoverlap",
-                                        "l1PFId","l2PFId",
-                                        "l1LowPtId","l2LowPtId",
                                         "l1LooseId","l2LooseId",
+                                        "l1MediumId","l2MediumId",
+                                        "l1TightId","l2TightId",
                                         "l1ConvVeto","l2ConvVeto"],
                             selector = BKLLSelection,
                             branches = ["fit_pt","fit_eta","fit_phi",
@@ -145,8 +143,7 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
                                         "l1_iso04",
                                         "fit_l2_pt","fit_l2_eta","fit_l2_phi",
                                         "l2_iso04",
-                                        "l1isPF","l2isPF","l1PFId","l2PFId",
-                                        "l1LowPtId","l2LowPtId",
+                                        "l1isPF","l2isPF",
                                         "b_iso04_dca","l1_iso04_dca",
                                         "l2_iso04_dca","k_iso04_dca",
                                         "k_svip3d","k_svip3d_err",
@@ -664,11 +661,11 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    cuts_on_B = "True"
    cuts_on_B_vars = []
    if use_PF and not use_1lowPt_1PF:
-     cuts_on_lep= lambda l: l.isPF == 1 and l.PFEleMvaID_RetrainedRawValue>-5000
-     cuts_on_B_vars = ["recoE1_PFEleMvaID_RetrainedRawValue","recoE2_PFEleMvaID_RetrainedRawValue"]
+     cuts_on_lep= lambda l: l.isPF == 1 and l.pfmvaId>-5000
+     cuts_on_B_vars = ["recoE1_pfmvaId","recoE2_pfmvaId"]
      cuts_on_B = cuts_on_B+" and ( {0}>-300.5 or {1}>-300.5 )"
    elif use_1lowPt_1PF and not use_PF:
-     cuts_on_lep= lambda l: ( (l.isPF == 1 and l.PFEleMvaID_RetrainedRawValue>-20.0) or ( l.isPF == 0 and l.isPFoverlap==0 and l.LPEleMvaID_2020Sept15RawValue>-20.0) )
+     cuts_on_lep= lambda l: ( (l.isPF == 1 and l.pfmvaId>-20.0) or ( l.isPF == 0 and l.isPFoverlap==0 and l.mvaId>-20.0) )
      cuts_on_B_vars = ["recoE1_isPF","recoE2_isPF"]
      cuts_on_B = cuts_on_B+" and ( ({0}==1 and {1}==0) or  ( {0}==0 and {1}==1) )"
    
@@ -683,7 +680,7 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE1 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE1",
                              output = "recoE1",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","PFEleMvaID_RetrainedRawValue","isPFoverlap","LPEleMvaID_2020Sept15RawValue","charge","PFEleMvaID_Fall17NoIsoV2wpLoose","convVeto"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","isPFoverlap","charge","PFEleMvaID_Fall17NoIsoV2wpLoose","PFEleMvaID_Fall17NoIsoV2wp90","PFEleMvaID_Fall17NoIsoV2wp80","convVeto"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -691,7 +688,7 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE2 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE2",
                              output = "recoE2",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","PFEleMvaID_RetrainedRawValue","isPFoverlap","LPEleMvaID_2020Sept15RawValue","charge","PFEleMvaID_Fall17NoIsoV2wpLoose","convVeto"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","isPFoverlap","charge","PFEleMvaID_Fall17NoIsoV2wpLoose","PFEleMvaID_Fall17NoIsoV2wp90","PFEleMvaID_Fall17NoIsoV2wp80","convVeto"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -786,11 +783,11 @@ def KstarPiEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    cuts_on_B = "True"
    cuts_on_B_vars = []
    if use_PF and not use_1lowPt_1PF:
-     cuts_on_lep= lambda l: l.isPF == 1 and l.PFEleMvaID_RetrainedRawValue>-5000
-     cuts_on_B_vars = ["recoE1_PFEleMvaID_RetrainedRawValue","recoE2_PFEleMvaID_RetrainedRawValue"]
+     cuts_on_lep= lambda l: l.isPF == 1 and l.pfmvaId>-5000
+     cuts_on_B_vars = ["recoE1_pfmvaId","recoE2_pfmvaId"]
      cuts_on_B = cuts_on_B+" and ( {0}>-300.5 or {1}>-300.5 )"
    elif use_1lowPt_1PF and not use_PF:
-     cuts_on_lep= lambda l: ( (l.isPF == 1 and l.PFEleMvaID_RetrainedRawValue>-20.0) or ( l.isPF == 0 and l.isPFoverlap==0 and l.LPEleMvaID_2020Sept15RawValue>-20.0) )
+     cuts_on_lep= lambda l: ( (l.isPF == 1 and l.pfmvaId>-20.0) or ( l.isPF == 0 and l.isPFoverlap==0 and l.mvaId>-20.0) )
      cuts_on_B_vars = ["recoE1_isPF","recoE2_isPF"]
      cuts_on_B = cuts_on_B+" and ( ({0}==1 and {1}==0) or  ( {0}==0 and {1}==1) )"
    
@@ -805,7 +802,7 @@ def KstarPiEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE1 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE1",
                              output = "recoE1",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","PFEleMvaID_RetrainedRawValue","isPFoverlap","LPEleMvaID_2020Sept15RawValue","charge"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","pfmvaId","isPFoverlap","mvaId","charge"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -813,7 +810,7 @@ def KstarPiEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE2 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE2",
                              output = "recoE2",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","PFEleMvaID_RetrainedRawValue","isPFoverlap","LPEleMvaID_2020Sept15RawValue","charge"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","pfmvaId","isPFoverlap","mvaId","charge"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -908,11 +905,11 @@ def KstarKEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    cuts_on_B = "True"
    cuts_on_B_vars = []
    if use_PF and not use_1lowPt_1PF:
-     cuts_on_lep= lambda l: l.isPF == 1 and l.PFEleMvaID_RetrainedRawValue>-5000
-     cuts_on_B_vars = ["recoE1_PFEleMvaID_RetrainedRawValue","recoE2_PFEleMvaID_RetrainedRawValue"]
+     cuts_on_lep= lambda l: l.isPF == 1 and l.pfmvaId>-5000
+     cuts_on_B_vars = ["recoE1_pfmvaId","recoE2_pfmvaId"]
      cuts_on_B = cuts_on_B+" and ( {0}>-300.5 or {1}>-300.5 )"
    elif use_1lowPt_1PF and not use_PF:
-     cuts_on_lep= lambda l: ( (l.isPF == 1 and l.PFEleMvaID_RetrainedRawValue>-20.0) or ( l.isPF == 0 and l.isPFoverlap==0 and l.LPEleMvaID_2020Sept15RawValue>-20.0) )
+     cuts_on_lep= lambda l: ( (l.isPF == 1 and l.pfmvaId>-20.0) or ( l.isPF == 0 and l.isPFoverlap==0 and l.mvaId>-20.0) )
      cuts_on_B_vars = ["recoE1_isPF","recoE2_isPF"]
      cuts_on_B = cuts_on_B+" and ( ({0}==1 and {1}==0) or  ( {0}==0 and {1}==1) )"
    
@@ -927,7 +924,7 @@ def KstarKEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE1 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE1",
                              output = "recoE1",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","PFEleMvaID_RetrainedRawValue","isPFoverlap","LPEleMvaID_2020Sept15RawValue","charge"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","pfmvaId","isPFoverlap","mvaId","charge"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -935,7 +932,7 @@ def KstarKEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE2 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE2",
                              output = "recoE2",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","PFEleMvaID_RetrainedRawValue","isPFoverlap","LPEleMvaID_2020Sept15RawValue","charge"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","pfmvaId","isPFoverlap","mvaId","charge"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
