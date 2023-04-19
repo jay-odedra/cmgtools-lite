@@ -57,7 +57,6 @@ if mc:
   Ncomps = allMC
 
 
-print Ncomps[0].files
 #create components
 selectedComponents=[]
 if not test:
