@@ -5,7 +5,7 @@ from ROOT import *
 import sys
 import time;
 
-sys.path.insert(1, '/afs/cern.ch/work/g/gkaratha/private/SUSYCMG/HLT/efficiency/Analizer/CMGforRk/CMSSW_10_4_0/src/CMGTools/RKAnalysis/python/plotter')
+sys.path.insert(1, '/afs/cern.ch/work/n/nzipper/public/Rk/Analysis/CMSSW_10_4_0/src/CMGTools/RKAnalysis/python/plotter')
 from cms_lumi import  CMS_lumi
 
 
@@ -102,7 +102,7 @@ def legPos( options):
        continue;
     pos = (option.split("=") )[1]
     if pos =="BL":
-      newpos=(0.1,0.1,0.3,0.3)
+      newpos=(0.2,0.2,0.4,0.4)
     elif pos  =="BR":
       newpos=(0.7,0.1,0.9,0.3) 
     elif pos =="TL":
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     gROOT.SetBatch(True)
      
     for jdx,plot in enumerate(args.plotNames):
-      leg = TLegend(0.7,0.6,0.9,0.85)
+      leg = TLegend(*legPos(args.cfg))
       histos=[]
       hstack= THStack("hs","histos")
       if args.ratio and len(args.inputPaths)==2:
@@ -232,9 +232,9 @@ if __name__ == "__main__":
         histos.append(h1)
      
       if "marker" in args.cfg:   
-        hstack.Draw("nostack,e1p")
+        hstack.Draw("NOSTACK E1P")
       else:
-        hstack.Draw("nostack,hist")
+        hstack.Draw("NOSTACK E HIST")
       leg.Draw("sames")
 #      cms().Draw("sames")
 #      head().Draw("sames")     
@@ -244,17 +244,18 @@ if __name__ == "__main__":
       print "   KolmogorovTest =",ks_test
       # draw everything
       if "LogY" in args.cfg:  c.SetLogy()  
+      if "LogX" in args.cfg:  c.SetLogx()
       if args.ratio and len(args.inputPaths)==2:     
         ks_test = histos[0].KolmogorovTest(histos[1])
         print "   KolmogorovTest =",ks_test
-        plot+="_ks_"+str(ks_test)
+        # plot+="_ks_"+str(ks_test)
         hratio = createRatio( histos[0], histos[1])
         pad2.cd()
         hratio.Draw("p")
        
 
       c.SaveAs(args.outputName+"/"+plot+".png");
-      c.SaveAs(args.outputName+"/"+plot+".pdf"); 
+      # c.SaveAs(args.outputName+"/"+plot+".pdf"); 
       del c
            
          

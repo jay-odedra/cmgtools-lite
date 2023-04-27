@@ -39,7 +39,7 @@ onlyPFe = getHeppyOption("onlyPFe",False)
 onlyLowPtAndPFe = getHeppyOption("onlyLowPtAndPFe",False) # b cands with 1 low and 1 pf e only created
 jpsi = getHeppyOption("jpsi",False)
 psi2s = getHeppyOption("psi2s",False)
-test = getHeppyOption("test")
+test = getHeppyOption("test",False)
 start_time = time.time()
 dimuon = getHeppyOption("dimuon",False) # Use di-muon trigger?
 
@@ -50,15 +50,13 @@ if (not data) and (not mc):
 # get datasets  
 Ncomps=[]
 if data:
-  from CMGTools.RootTools.samples.samples_13TeV_BParkingData_NanoAOD import samples as allData 
+  from CMGTools.RootTools.samples.samples_DielectronX_BParkingData_NanoAOD import samples as allData 
   Ncomps = allData 
 if mc:
-  from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD import samples as allMC
-#  from CMGTools.RootTools.samples.samples_13TeV_BParkingMC_NanoAOD_noregr import samples as allMC
+  from CMGTools.RootTools.samples.samples_DielectronX_BParkingMC_NanoAOD import samples as allMC
   Ncomps = allMC
 
 
-print Ncomps[0].files
 #create components
 selectedComponents=[]
 if not test:
@@ -89,11 +87,9 @@ from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import Pos
 # B parking code
 from CMGTools.RKAnalysis.tools.nanoAOD.BParking_modules import *
 
-
 BparkSkim = ""
 modules = []
 br_in = ""
-
 
 # code loaded here just like in cmssw cfg
 if kmumu and data:
@@ -110,16 +106,10 @@ if kmumu and data:
 
 if kee and data:
   br_in = "branchRkee_in.txt"
-  Bcuts=dict ( Pt=0, MinMass=0, MaxMass=6, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0, L2Pt= 0, KPt= 0, Mllmin=0, Mllmax=5 ) # no -preselection cuts 
+  Bcuts=dict(Pt=0, MinMass=0, MaxMass=9999., LxySign=0, Cos2D=0, Prob=0, L1Pt= 0, L2Pt= 0, KPt= 0, Mllmin=0, Mllmax=9999. ) # no -preselection cuts 
   if onlyPFe:
-     #v2 preselection 2 PFe
-#     Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.5, Cos2D=0.8, Prob=0, L1Pt= 0.5, L2Pt= 0.5, KPt= 0.75, Mllmin=0.55, Mllmax=5 ) 
-     #Bcuts=dict ( Pt= 3.0, MinMass=4.7, MaxMass=6.0, LxySign=0, Cos2D=0, Prob=0.001, L1Pt= 2.0, L2Pt= 2.0, KPt=0.7, Mllmin=1.05, Mllmax=5.0 )
      Bcuts=dict ( Pt=0, MinMass=0, MaxMass=6, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0, L2Pt= 0, KPt= 0, Mllmin=0, Mllmax=5 ) # no -preselection cuts
   if onlyLowPtAndPFe:
-     #v2 preselection Low Pt + PFe
-     #Bcuts=dict ( Pt= 4.5, MinMass=4.7, MaxMass=6.0, LxySign=0.8, Cos2D=0.9, Prob=0.05, L1Pt= 2.0, L2Pt= 0.8, KPt= 0.9, Mllmin=0.5, Mllmax=3.5 ) 
-     #Bcuts=dict ( Pt= 3.0, MinMass=4.7, MaxMass=6.0, LxySign=0, Cos2D=0, Prob=0.01, L1Pt= 2.0, L2Pt= 1.0, KPt=1.0, Mllmin=1.05, Mllmax=5.0 )
      Bcuts=dict ( Pt=0, MinMass=0, MaxMass=6, LxySign=0, Cos2D=0, Prob=0, L1Pt= 0, L2Pt= 0, KPt= 0, Mllmin=0, Mllmax=5 ) # no -preselection cuts
   if onlyPFe and onlyLowPtAndPFe: 
      print "Only PF e flag AND only lowpT andPF e flag enabled. Results may be invalid. Terminate"
@@ -160,7 +150,6 @@ if kstarmumu_kmumu and mc:
      modules = KstarKMuMuMC(modules,["100443->13,-13","313->321,-211"],tagmu,trgUnbiased)
   BparkSkim=""
 
-
 if kee and mc: 
   br_in = "branchRkee_in.txt"
   if not jpsi and not psi2s:
@@ -169,7 +158,7 @@ if kee and mc:
      modules = KEEMC(modules,["443->11,-11"],onlyPFe,onlyLowPtAndPFe)
   elif not jpsi and psi2s:
      modules = KEEMC(modules,["100443->11,-11"],onlyPFe,onlyLowPtAndPFe)
-  BparkSkim=""
+  BparkSkim="BToKEE_fit_cos2D>0"
 
 if kstaree_piee and mc:
   br_in = "branchRkee_in.txt"
@@ -196,7 +185,7 @@ if kstaree_kee and mc:
 branchsel_in = os.environ['CMSSW_BASE']+"/src/CMGTools/RKAnalysis/cfg/"+br_in
 
 # only write the branches in this file in ADDITION of what is produce by module
-branchsel_out = os.environ['CMSSW_BASE']+"/src/CMGTools/RKAnalysis/cfg/branchRk_out.txt"
+branchsel_out = os.environ['CMSSW_BASE']+"/src/CMGTools/RKAnalysis/cfg/branchRkee_out.txt"
 
 
 compression = "ZLIB:3" #"LZ4:4" #"LZMA:9"
