@@ -1,6 +1,7 @@
 # COMPONENT CREATOR
 from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 kreator = ComponentCreator()
+smallsampletest = kreator.makeDataComponentFromEOS("smallsampletest","/store/group/phys_bphys/DiElectronX/jodedra/singulartestmc/", ".*root")
 
 BuToKEE_postEE         = kreator.makeDataComponentFromEOS('BuToKEE_postEE', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar10/BuToKEE_SoftQCD_TuneCP5_13p6TeV_pythia8-evtgen/crab_BuToKee_v1_postEE/230310_173557/0000/', '.*root')
 BuToKEE_preEE          = kreator.makeDataComponentFromEOS('BuToKEE_preEE', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar10/BuToKEE_SoftQCD_TuneCP5_13p6TeV_pythia8-evtgen/crab_BuToKee_v1_preEE/230310_173544/0000/', '.*root')
@@ -21,25 +22,25 @@ BuToKstarJPsi_preEE    = kreator.makeDataComponentFromEOS('BuToKstarJPsi_preEE',
 BuToKstarPsi2s_postEE  = kreator.makeDataComponentFromEOS('BuToKstarPsi2s_postEE', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar14/BuToKstarPsi2s_KstarToK0Pi_Psi2sToEE_K0ToPiPi_SoftQCD_TuneCP5_13p6TeV_pythia8-evtgen/crab_BuToKstarPsi2S_Toee_v1_postEE/230314_170442/0000/', '.*root')
 BuToKstarPsi2s_preEE   = kreator.makeDataComponentFromEOS('BuToKstarPsi2s_preEE', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar14/BuToKstarPsi2s_KstarToK0Pi_Psi2sToEE_K0ToPiPi_SoftQCD_TuneCP5_13p6TeV_pythia8-evtgen/crab_BuToKstarPsi2S_Toee_v1_preEE/230314_170417/0000/', '.*root')
 
-samples = [
-        BuToKEE_postEE, 
-        BuToKEE_preEE, 
-        BuToKJPsi_postEE, 
-        BuToKJPsi_preEE, 
-        BuToKPsi2s_postEE, 
-        BuToKPsi2s_preEE, 
-        BdToK0starEE_postEE, 
-        BdToK0starEE_preEE, 
-        BdToK0starJPsi_postEE, 
-        BdToK0starJPsi_preEE, 
-        BdToK0starPsi2s_postEE, 
-        BdToK0starPsi2s_preEE, 
-        BuToKstarEE_postEE, 
-        BuToKstarEE_preEE, 
-        BuToKstarJPsi_postEE, 
-        BuToKstarJPsi_preEE, 
-        BuToKstarPsi2s_postEE, 
-        BuToKstarPsi2s_preEE
+samples = [smallsampletest,
+#        BuToKEE_postEE, 
+#        BuToKEE_preEE, 
+#        BuToKJPsi_postEE, 
+#        BuToKJPsi_preEE, 
+#        BuToKPsi2s_postEE, 
+#        BuToKPsi2s_preEE, 
+#        BdToK0starEE_postEE, 
+#        BdToK0starEE_preEE, 
+#        BdToK0starJPsi_postEE, 
+#        BdToK0starJPsi_preEE, 
+#        BdToK0starPsi2s_postEE, 
+#        BdToK0starPsi2s_preEE, 
+#        BuToKstarEE_postEE, 
+#        BuToKstarEE_preEE, 
+#        BuToKstarJPsi_postEE, 
+#        BuToKstarJPsi_preEE, 
+#        BuToKstarPsi2s_postEE, 
+#        BuToKstarPsi2s_preEE
 ]
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 from ROOT import TLorentzVector,TVector3
 from math import sqrt
 from PhysicsTools.HeppyCore.utils.deltar import deltaR
+import xgboost as xgb
 
 def TagVars(collections):
   results=[]; Et_ratio=[]; Dphi=[]; projB=[]; DzTagMuK=[]; DzTagMuL1=[]; 
@@ -165,6 +166,8 @@ def D0Vars(collections):
          trk_opp_l_kpi_mass.append(k_l_mass_hypoth1)
      
     return [trk_opp_l_kpi_mass]
+  
+
 
 def FONLL(collections):
     genB_pt=collections[0]
@@ -579,3 +582,80 @@ def PAssymVarMC(collections):
     assym= (((e1_p+e2_p).Cross(pv_vtx-b_vtx)).Mag()-(k_p.Cross(pv_vtx-b_vtx)).Mag())/(((e1_p+e2_p).Cross(pv_vtx-b_vtx)).Mag()+(k_p.Cross(pv_vtx-b_vtx)).Mag()) 
 
     return [assym]
+  
+  
+def TriggerWeight(collections):
+    triggernames = [
+        "L1_DoubleEG11_er1p2_dR_Max0p6",
+        "L1_DoubleEG10p5_er1p2_dR_Max0p6",
+        "L1_DoubleEG10_er1p2_dR_Max0p6",
+        "L1_DoubleEG9p5_er1p2_dR_Max0p6",
+        "L1_DoubleEG9_er1p2_dR_Max0p7",
+        "L1_DoubleEG8p5_er1p2_dR_Max0p7",
+        "L1_DoubleEG8_er1p2_dR_Max0p7",
+        "L1_DoubleEG7p5_er1p2_dR_Max0p7",
+        "L1_DoubleEG7_er1p2_dR_Max0p8",
+        "L1_DoubleEG6p5_er1p2_dR_Max0p8",
+        "L1_DoubleEG6_er1p2_dR_Max0p8",
+        "L1_DoubleEG5p5_er1p2_dR_Max0p8",
+        "L1_DoubleEG5_er1p2_dR_Max0p9",
+        "L1_DoubleEG4p5_er1p2_dR_Max0p9",
+        "L1_DoubleEG4_er1p2_dR_Max0p9",
+        "HLT_DoubleEle10_eta1p22_mMax6",
+        "HLT_DoubleEle9p5_eta1p22_mMax6",
+        "HLT_DoubleEle9_eta1p22_mMax6",
+        "HLT_DoubleEle8p5_eta1p22_mMax6",
+        "HLT_DoubleEle8_eta1p22_mMax6",
+        "HLT_DoubleEle7p5_eta1p22_mMax6",
+        "HLT_DoubleEle7_eta1p22_mMax6",
+        "HLT_DoubleEle6p5_eta1p22_mMax6",
+        "HLT_DoubleEle6_eta1p22_mMax6",
+        "HLT_DoubleEle5p5_eta1p22_mMax6",
+        "HLT_DoubleEle5_eta1p22_mMax6",
+        "HLT_DoubleEle4p5_eta1p22_mMax6",
+        "HLT_DoubleEle4_eta1p22_mMax6",
+    ]
+    triggers = { name : trig for name,trig in zip(triggernames,collections)}
+    trigger_dict = {
+        'L1_4p5_HLT_4p0'  : 0.0009,
+        'L1_5p0_HLT_4p0'  : 0.0012,
+        'L1_5p5_HLT_4p0'  : 0.0191,
+        'L1_5p5_HLT_6p0'  : 0.0044,
+        'L1_6p0_HLT_4p0'  : 0.0742,
+        'L1_6p5_HLT_4p5'  : 0.1067,
+        'L1_7p0_HLT_5p0'  : 0.0786,
+        'L1_7p5_HLT_5p0'  : 0.0483,
+        'L1_8p0_HLT_5p0'  : 0.2035,
+        'L1_8p5_HLT_5p0'  : 0.0199,
+        'L1_8p5_HLT_5p5'  : 0.0986,
+        'L1_9p0_HLT_6p0'  : 0.2612,
+        'L1_10p5_HLT_5p0' : 0.003,
+        'L1_10p5_HLT_6p5' : 0.0335,
+        'L1_11p0_HLT_6p5' : 0.0466, 
+    }
+
+    weight = 0
+    for path, wgt in trigger_dict.items():
+      il1 = path.split('_')[1].replace('p0','_')
+      ihlt = path.split('_')[3].replace('p0','_')
+
+      l1b = [b for b in triggers if ''.join(['L1_DoubleEG',il1]) in b]
+      hltb = [b for b in triggers if ''.join(['HLT_DoubleEle',ihlt]) in b]
+      assert len(l1b)==1
+      assert len(hltb)==1
+
+      if triggers[l1b[0]] and triggers[hltb[0]]:
+        weight += wgt
+
+    return [weight]
+  
+def BDTevaluator(collections,othervars):
+    
+    ModelLocation = othervars[0]
+    FeatureNames = othervars[1]
+    booster = xgb.Booster()
+    booster.load_model('/afs/cern.ch/user/j/jodedra/PRESELECTIONCMGTOOLS/CMSSW_10_4_0/src/bdtmodels/XGB_89.json')
+    data = xgb.DMatrix(data=collections, feature_names=FeatureNames)
+    Score = booster.predict(data)
+        
+    return [Score]

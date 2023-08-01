@@ -114,7 +114,7 @@ if kee and data:
   if onlyPFe and onlyLowPtAndPFe: 
      print "Only PF e flag AND only lowpT andPF e flag enabled. Results may be invalid. Terminate"
      exit()
-  BparkSkim=SkimCuts("BToKEE",Bcuts)
+  #BparkSkim=SkimCuts("BToKEE",Bcuts)
   modules = KEEData(modules,Bcuts,onlyPFe,onlyLowPtAndPFe)
 
 
@@ -158,7 +158,8 @@ if kee and mc:
      modules = KEEMC(modules,["443->11,-11"],onlyPFe,onlyLowPtAndPFe)
   elif not jpsi and psi2s:
      modules = KEEMC(modules,["100443->11,-11"],onlyPFe,onlyLowPtAndPFe)
-  BparkSkim="BToKEE_fit_cos2D>0"
+  BparkSkim=""
+  modules = TriggerWeightsMC(modules)
 
 if kstaree_piee and mc:
   br_in = "branchRkee_in.txt"

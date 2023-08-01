@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 def SkimCuts(Bdecay,Bcuts):
     BParking_skim_cut = ("Sum$( "+
@@ -102,7 +103,7 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
     from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.collectionEmbeder import collectionEmbeder
     from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.branchCreator import branchCreator
 
-    BKLLSelection = lambda l : l.fit_pt > Bcuts["Pt" ] and l.fit_cos2D > Bcuts["Cos2D"] and l.svprob > Bcuts["Prob"] and l.l_xy_unc >0 and (l.l_xy)/l.l_xy_unc > Bcuts["LxySign"] and l.mll_fullfit>Bcuts["Mllmin"] and l.fit_mass>Bcuts["MinMass"] and l.fit_mass<Bcuts["MaxMass"] and l.mll_fullfit<Bcuts["Mllmax"]
+    BKLLSelection = lambda l : True # l.fit_pt > Bcuts["Pt" ] and l.fit_cos2D > Bcuts["Cos2D"] and l.svprob > Bcuts["Prob"] and l.l_xy_unc >0 and (l.l_xy)/l.l_xy_unc > Bcuts["LxySign"] and l.mll_fullfit>Bcuts["Mllmin"] and l.fit_mass>Bcuts["MinMass"] and l.fit_mass<Bcuts["MaxMass"] and l.mll_fullfit<Bcuts["Mllmax"]
     
     if use_PF and not use_1LowPt_1PF:
       BKLLSelection = lambda l : l.fit_pt > Bcuts["Pt" ] and l.fit_cos2D > Bcuts["Cos2D"] and l.svprob > Bcuts["Prob"] and l.l_xy_unc >0 and (l.l_xy)/l.l_xy_unc > Bcuts["LxySign"] and l.mll_fullfit>Bcuts["Mllmin"] and l.fit_mass>Bcuts["MinMass"] and l.fit_mass<Bcuts["MaxMass"] and l.mll_fullfit<Bcuts["Mllmax"] and l.l1isPF == 1 and l.l2isPF == 1 and l.l1PFId>-30.5 and l.l2PFId>-50.0
@@ -117,9 +118,13 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
                                          "Electron_PFEleMvaID_Fall17NoIsoV2wpLoose", "Electron_PFEleMvaID_Fall17NoIsoV2wpLoose", 
                                          "Electron_PFEleMvaID_Fall17NoIsoV2wp90","Electron_PFEleMvaID_Fall17NoIsoV2wp90",
                                          "Electron_PFEleMvaID_Fall17NoIsoV2wp80","Electron_PFEleMvaID_Fall17NoIsoV2wp80",
-                                         "Electron_convVeto","Electron_convVeto"
+                                         "Electron_convVeto","Electron_convVeto",
+                                         "Electron_PFEleMvaID_Fall17NoIsoV2RawValue","Electron_PFEleMvaID_Fall17NoIsoV2RawValue",
+                                         "Electron_PFEleMvaID_RetrainedRawValue","Electron_PFEleMvaID_RetrainedRawValue"
                             ],
                             importIds = [
+                                         "l1Idx","l2Idx",
+                                         "l1Idx","l2Idx",
                                          "l1Idx","l2Idx",
                                          "l1Idx","l2Idx",
                                          "l1Idx","l2Idx",
@@ -133,30 +138,34 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
                                         "l1_LooseId","l2_LooseId",
                                         "l1_MediumId","l2_MediumId",
                                         "l1_TightId","l2_TightId",
-                                        "l1_ConvVeto","l2_ConvVeto"
+                                        "l1_ConvVeto","l2_ConvVeto",
+                                        "l1_PFMvaID_Fall17","l2_PFMvaID_Fall17",
+                                        "l1_PFMvaID_retrained","l2_PFMvaID_retrained"
                             ],
                             selector = BKLLSelection,
                             branches = [
-                                        "fit_pt","fit_eta","fit_phi",
-                                        "fit_mass","l_xy","l_xy_unc",
-                                        "fit_cos2D","svprob","fit_massErr",
-                                        "b_iso04","mll_fullfit",
-                                        "vtx_x","vtx_y","vtx_z",
-                                        "l1Idx","l2Idx","kIdx",
-                                        "fit_k_pt","fit_k_eta","fit_k_phi",
-                                        "fit_l1_pt","fit_l1_eta","fit_l1_phi",
-                                        "fit_l2_pt","fit_l2_eta","fit_l2_phi",
-                                        "l1_iso04","l2_iso04",
-                                        "l1_isPF","l2_isPF","k_iso04",
-                                        "l1_isPFoverlap","l2_isPFoverlap",
-                                        "l1_LooseId","l2_LooseId",
-                                        "l1_MediumId","l2_MediumId",
-                                        "l1_TightId","l2_TightId",
-                                        "l1_ConvVeto","l2_ConvVeto",
-                                        "l1_iso04_dca","l2_iso04_dca",
-                                        "b_iso04_dca","k_iso04_dca",
-                                        "k_svip3d","k_svip3d_err",
-                                        "l1_n_isotrk_dca","l2_n_isotrk_dca","k_n_isotrk_dca"
+                                       "fit_pt","fit_eta","fit_phi","D0_mass_LepToK_KToPi","D0_mass_LepToPi_KToK",
+                                       "fit_mass","l_xy","l_xy_unc",
+                                       "fit_cos2D","svprob","fit_massErr",
+                                       "b_iso04","mll_fullfit",
+                                       "vtx_x","vtx_y","vtx_z",
+                                       "l1Idx","l2Idx","kIdx",
+                                       "fit_k_pt","fit_k_eta","fit_k_phi",
+                                       "fit_l1_pt","fit_l1_eta","fit_l1_phi",
+                                       "fit_l2_pt","fit_l2_eta","fit_l2_phi",
+                                       "l1_iso04","l2_iso04",
+                                       "l1_isPF","l2_isPF","k_iso04",
+                                       "l1_isPFoverlap","l2_isPFoverlap",
+                                       "l1_LooseId","l2_LooseId",
+                                       "l1_MediumId","l2_MediumId",
+                                       "l1_TightId","l2_TightId",
+                                       "l1_ConvVeto","l2_ConvVeto",
+                                       "l1_PFMvaID_Fall17","l2_PFMvaID_Fall17",
+                                       "l1_PFMvaID_retrained","l2_PFMvaID_retrained",
+                                       "l1_iso04_dca","l2_iso04_dca",
+                                       "b_iso04_dca","k_iso04_dca",
+                                       "k_svip3d","k_svip3d_err",
+                                       "l1_n_isotrk_dca","l2_n_isotrk_dca","k_n_isotrk_dca"
                             ],
                             flat = False
     )
@@ -225,6 +234,14 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
       nCol="nSkimBToKEE"
     )
     process.append(PAssymVar)
+    BDTevaluator = functionWrapper(
+      functionName="BDTevaluator",
+      collections=["SkimBToKEE_fit_pt","SkimBToKEE_fit_l2_pt","SkimBToKEE_l2_PFMvaID_retrained","SkimBToKEE_l1_PFMvaID_retrained"],
+      createdBranches=["BDTSCORE"],
+      othervars=['/afs/cern.ch/user/j/jodedra/PRESELECTIONCMGTOOLS/CMSSW_10_4_0/src/bdtmodels/XGB_89.json',['SkimBToKEE_fit_pt', 'SkimBToKEE_fit_l2_pt', 'SkimBToKEE_l2_PFMvaID_retrained', 'SkimBToKEE_l1_PFMvaID_retrained']]
+    )
+    process.append(BDTevaluator)
+
     return process
 
 def KMuMuMC (process,Jpsi=[],tag=False,trgUnbiased=False,dimuon=False):
@@ -664,7 +681,9 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.genRecoMatcher import genRecoMatcher
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.compositeRecoMatcher import compositeRecoMatcher
    from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.branchCreatorMC import branchCreatorMC
-
+   from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.collectionSkimmer import collectionSkimmer
+   from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.collectionEmbeder import collectionEmbeder
+   from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.branchCreator import branchCreator
    cuts_on_lep = lambda l: True
    cuts_on_B = "True"
    cuts_on_B_vars = []
@@ -688,7 +707,7 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE1 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE1",
                              output = "recoE1",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","isPFoverlap","charge","PFEleMvaID_Fall17NoIsoV2wpLoose","PFEleMvaID_Fall17NoIsoV2wp90","PFEleMvaID_Fall17NoIsoV2wp80","convVeto"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","isPFoverlap","charge","PFEleMvaID_Fall17NoIsoV2RawValue","PFEleMvaID_RetrainedRawValue","PFEleMvaID_Fall17NoIsoV2wpLoose","PFEleMvaID_Fall17NoIsoV2wp90","PFEleMvaID_Fall17NoIsoV2wp80","convVeto"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -696,7 +715,7 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    RecoE2 = genRecoMatcher( recoInput="Electron",
                              genInput = "genE2",
                              output = "recoE2",
-                             branches = ["pt","eta","phi","vx","vy","vz","isPF","isPFoverlap","charge","PFEleMvaID_Fall17NoIsoV2wpLoose","PFEleMvaID_Fall17NoIsoV2wp90","PFEleMvaID_Fall17NoIsoV2wp80","convVeto"],
+                             branches = ["pt","eta","phi","vx","vy","vz","isPF","isPFoverlap","charge","PFEleMvaID_Fall17NoIsoV2RawValue","PFEleMvaID_RetrainedRawValue","PFEleMvaID_Fall17NoIsoV2wpLoose","PFEleMvaID_Fall17NoIsoV2wp90","PFEleMvaID_Fall17NoIsoV2wp80","convVeto"],
                              cuts=cuts_on_lep,
                              skipNotMatched=False
    )                             
@@ -708,7 +727,70 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
                              skipNotMatched=False
    )                             
    process.append(RecoK)
-   RecoB = compositeRecoMatcher(   compositeColl = "BToKEE",
+   BKLLSelection = lambda l : True #l.fit_pt > Bcuts["Pt" ] and l.fit_cos2D > Bcuts["Cos2D"] and l.svprob > Bcuts["Prob"] and l.l_xy_unc >0 and (l.l_xy)/l.l_xy_unc > Bcuts["LxySign"] and l.mll_fullfit>Bcuts["Mllmin"] and l.fit_mass>Bcuts["MinMass"] and l.fit_mass<Bcuts["MaxMass"] and l.mll_fullfit<Bcuts["Mllmax"] and ( (l.l1isPF == 1 and l.l2isPF == 0 and l.l2isPFoverlap==0 and l.l1PFId>-2.0 and l.l2LowPtId>0.0) or (l.l1isPF == 0 and l.l2isPF == 1 and l.l1isPFoverlap==0 and l.l2PFId>-2.0 and l.l1LowPtId>0.0) )
+    
+   BSkim = collectionSkimmer(input = "BToKEE",
+                           output = "preSkimBToKEE",
+                           importedVariables = [
+                                        "Electron_isPF","Electron_isPF",
+                                        "Electron_isPFoverlap","Electron_isPFoverlap",
+                                        "Electron_PFEleMvaID_Fall17NoIsoV2wpLoose", "Electron_PFEleMvaID_Fall17NoIsoV2wpLoose", 
+                                        "Electron_PFEleMvaID_Fall17NoIsoV2wp90","Electron_PFEleMvaID_Fall17NoIsoV2wp90",
+                                        "Electron_PFEleMvaID_Fall17NoIsoV2wp80","Electron_PFEleMvaID_Fall17NoIsoV2wp80",
+                                        "Electron_convVeto","Electron_convVeto",
+                                        "Electron_PFEleMvaID_Fall17NoIsoV2RawValue","Electron_PFEleMvaID_Fall17NoIsoV2RawValue",
+                                        "Electron_PFEleMvaID_RetrainedRawValue","Electron_PFEleMvaID_RetrainedRawValue"
+                           ],
+                           importIds = [
+                                        "l1Idx","l2Idx",
+                                        "l1Idx","l2Idx",
+                                        "l1Idx","l2Idx",
+                                        "l1Idx","l2Idx",
+                                        "l1Idx","l2Idx",
+                                        "l1Idx","l2Idx",
+                                        "l1Idx","l2Idx",
+                                        "l1Idx","l2Idx"
+                           ],
+                           varnames = [
+                                       "l1_isPF","l2_isPF",
+                                       "l1_isPFoverlap","l2_isPFoverlap",
+                                       "l1_LooseId","l2_LooseId",
+                                       "l1_MediumId","l2_MediumId",
+                                       "l1_TightId","l2_TightId",
+                                       "l1_ConvVeto","l2_ConvVeto",
+                                       "l1_PFMvaID_Fall17","l2_PFMvaID_Fall17",
+                                       "l1_PFMvaID_retrained","l2_PFMvaID_retrained"
+                           ],
+                           selector = BKLLSelection,
+                           branches = [
+                                       "fit_pt","fit_eta","fit_phi","D0_mass_LepToK_KToPi","D0_mass_LepToPi_KToK",
+                                       "fit_mass","l_xy","l_xy_unc",
+                                       "fit_cos2D","svprob","fit_massErr",
+                                       "b_iso04","mll_fullfit",
+                                       "vtx_x","vtx_y","vtx_z",
+                                       "l1Idx","l2Idx","kIdx",
+                                       "fit_k_pt","fit_k_eta","fit_k_phi",
+                                       "fit_l1_pt","fit_l1_eta","fit_l1_phi",
+                                       "fit_l2_pt","fit_l2_eta","fit_l2_phi",
+                                       "l1_iso04","l2_iso04",
+                                       "l1_isPF","l2_isPF","k_iso04",
+                                       "l1_isPFoverlap","l2_isPFoverlap",
+                                       "l1_LooseId","l2_LooseId",
+                                       "l1_MediumId","l2_MediumId",
+                                       "l1_TightId","l2_TightId",
+                                       "l1_ConvVeto","l2_ConvVeto",
+                                       "l1_PFMvaID_Fall17","l2_PFMvaID_Fall17",
+                                       "l1_PFMvaID_retrained","l2_PFMvaID_retrained",
+                                       "l1_iso04_dca","l2_iso04_dca",
+                                       "b_iso04_dca","k_iso04_dca",
+                                       "k_svip3d","k_svip3d_err",
+                                       "l1_n_isotrk_dca","l2_n_isotrk_dca","k_n_isotrk_dca"
+                           ],
+                           flat = False
+   ) 
+   process.append(BSkim)
+
+   RecoB = compositeRecoMatcher(   compositeColl = "preSkimBToKEE",
                              lepCompositeIdxs = ["l1Idx","l2Idx"],
                              hadronCompositeIdxs = ["kIdx"],
                              lepMatchedRecoIdxs = ["recoE1_Idx","recoE2_Idx"],
@@ -716,38 +798,50 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
                              outputColl = "recoB",
                              cuts_vars=cuts_on_B_vars,
                              cuts=cuts_on_B,
-                             branches =["fit_pt","fit_eta","fit_phi","fit_mass",
-                                         "l_xy","l_xy_unc","fit_cos2D","svprob",
-                                         "fit_massErr","b_iso04", "mll_fullfit",
-                                         "l1Idx","l2Idx","kIdx",
-                                         "vtx_x","vtx_y","vtx_z",
-                                         "fit_l1_pt","fit_l1_eta","fit_l1_phi",
-                                         "l1_iso04",
-                                         "fit_l2_pt","fit_l2_eta","fit_l2_phi",
-                                         "l2_iso04",
-                                         "fit_k_pt","fit_k_eta","fit_k_phi",
-                                         "k_iso04",
-                                         "b_iso04_dca","l1_iso04_dca",
-                                         "l2_iso04_dca","k_iso04_dca",
-                                         "k_svip3d","k_svip3d_err",
-                                        "l1_n_isotrk_dca","l2_n_isotrk_dca",
-                                        "k_n_isotrk_dca"
+                             branches =[
+                                       "fit_pt","fit_eta","fit_phi","D0_mass_LepToK_KToPi","D0_mass_LepToPi_KToK",
+                                       "fit_mass","l_xy","l_xy_unc",
+                                       "fit_cos2D","svprob","fit_massErr",
+                                       "b_iso04","mll_fullfit",
+                                       "vtx_x","vtx_y","vtx_z",
+                                       "l1Idx","l2Idx","kIdx",
+                                       "fit_k_pt","fit_k_eta","fit_k_phi",
+                                       "fit_l1_pt","fit_l1_eta","fit_l1_phi",
+                                       "fit_l2_pt","fit_l2_eta","fit_l2_phi",
+                                       "l1_iso04","l2_iso04",
+                                       "l1_isPF","l2_isPF","k_iso04",
+                                       "l1_isPFoverlap","l2_isPFoverlap",
+                                       "l1_LooseId","l2_LooseId",
+                                       "l1_MediumId","l2_MediumId",
+                                       "l1_TightId","l2_TightId",
+                                       "l1_ConvVeto","l2_ConvVeto",
+                                       "l1_PFMvaID_Fall17","l2_PFMvaID_Fall17",
+                                       "l1_PFMvaID_retrained","l2_PFMvaID_retrained",
+                                       "l1_iso04_dca","l2_iso04_dca",
+                                       "b_iso04_dca","k_iso04_dca",
+                                       "k_svip3d","k_svip3d_err",
+                                       "l1_n_isotrk_dca","l2_n_isotrk_dca","k_n_isotrk_dca"
                                         ],
                              sortTwoLepByIdx=True,
                              lepLabelsToSort = ["l1","l2"]# branches need to have lep labels between "_" eg fit_l1_pt or l1_iso - lep indexes also sorted
    )                                  
    process.append(RecoB)
+
    # in case of inf in L_xy/unc produces -99
    CreateVars = branchCreatorMC(
-      inputBranches=[["recoB_l_xy","recoB_l_xy_unc"], ["recoE1_vz","recoE2_vz"],
+      inputBranches=[["recoB_k_svip3d","recoB_k_svip3d_err"],
+                     ["recoB_l_xy","recoB_l_xy_unc"], 
+                     ["recoE1_vz","recoE2_vz"],
                      ["recoK_vz","recoE1_vz","recoE2_vz"], 
                      ["recoE1_eta","recoE1_phi","recoE2_eta","recoE2_phi"], 
                      ["recoK_eta","recoK_phi","recoE1_eta","recoE1_phi","recoE2_eta","recoE2_phi"] ],
-      operation=["{0}/{1}","abs({0}-{1})",
+      operation=["{0}/{1}",
+                 "{0}/{1}",
+                 "abs({0}-{1})",
                  "min(abs({0}-{1}),abs({0}-{2}))",
                  "deltaR({0},{1},{2},{3})",
                  "min(deltaR({0},{1},{2},{3}),deltaR({0},{1},{4},{5}))"],
-      createdBranches=["recoB_l_xy_sig","recoB_l1l2Dz","recoB_lKDz","recoB_l1l2Dr","recoB_lKDr"],
+      createdBranches=["recoB_k_svip3d_sig","recoB_l_xy_sig","recoB_l1l2Dz","recoB_lKDz","recoB_l1l2Dr","recoB_lKDr"],
       checkForBCandBranch="recoB_l_xy" #if provided branch puts -99 when branch value is -99. eg Useful for evt where recoK is found but
     )
    process.append(CreateVars)
@@ -779,6 +873,48 @@ def KEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):
    process.append(PAssymVar)
 
    return process  
+ 
+def TriggerWeightsMC(process):
+ from PhysicsTools.NanoAODTools.postprocessing.modules.bpark.functionWrapper import functionWrapper
+ 
+ triggers = [
+         "L1_DoubleEG11_er1p2_dR_Max0p6",
+         "L1_DoubleEG10p5_er1p2_dR_Max0p6",
+         "L1_DoubleEG10_er1p2_dR_Max0p6",
+         "L1_DoubleEG9p5_er1p2_dR_Max0p6",
+         "L1_DoubleEG9_er1p2_dR_Max0p7",
+         "L1_DoubleEG8p5_er1p2_dR_Max0p7",
+         "L1_DoubleEG8_er1p2_dR_Max0p7",
+         "L1_DoubleEG7p5_er1p2_dR_Max0p7",
+         "L1_DoubleEG7_er1p2_dR_Max0p8",
+         "L1_DoubleEG6p5_er1p2_dR_Max0p8",
+         "L1_DoubleEG6_er1p2_dR_Max0p8",
+         "L1_DoubleEG5p5_er1p2_dR_Max0p8",
+         "L1_DoubleEG5_er1p2_dR_Max0p9",
+         "L1_DoubleEG4p5_er1p2_dR_Max0p9",
+         "L1_DoubleEG4_er1p2_dR_Max0p9",
+         "HLT_DoubleEle10_eta1p22_mMax6",
+         "HLT_DoubleEle9p5_eta1p22_mMax6",
+         "HLT_DoubleEle9_eta1p22_mMax6",
+         "HLT_DoubleEle8p5_eta1p22_mMax6",
+         "HLT_DoubleEle8_eta1p22_mMax6",
+         "HLT_DoubleEle7p5_eta1p22_mMax6",
+         "HLT_DoubleEle7_eta1p22_mMax6",
+         "HLT_DoubleEle6p5_eta1p22_mMax6",
+         "HLT_DoubleEle6_eta1p22_mMax6",
+         "HLT_DoubleEle5p5_eta1p22_mMax6",
+         "HLT_DoubleEle5_eta1p22_mMax6",
+         "HLT_DoubleEle4p5_eta1p22_mMax6",
+         "HLT_DoubleEle4_eta1p22_mMax6",
+ ]
+ TriggerWeightVars = functionWrapper(
+     functionName="TriggerWeight",
+     collections=triggers,
+     createdBranches=["trig_wgt"],
+ )
+ process.append(TriggerWeightVars)
+ return process
+
 
 
 def KstarPiEEMC (process,Jpsi=[],use_PF=False,use_1lowPt_1PF=False):

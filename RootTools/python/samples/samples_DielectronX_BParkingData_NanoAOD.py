@@ -1,6 +1,7 @@
 # COMPONENT CREATOR
 from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 kreator = ComponentCreator()
+smallsample = kreator.makeDataComponentFromEOS("smallsample","/store/group/phys_bphys/DiElectronX/jodedra/newtestsingularfileBDT/", ".*root")
 
 # Run 2022C
 Run2022C_part0_0000 = kreator.makeDataComponentFromEOS('Run2022C_part0_0000', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar10/ParkingDoubleElectronLowMass0/crab_Run2022C_part0/230310_163938/0000/', '.*root')
@@ -73,7 +74,7 @@ Run2022G_part2_0000 = kreator.makeDataComponentFromEOS('Run2022G_part2_0000', '/
 Run2022G_part3_0000 = kreator.makeDataComponentFromEOS('Run2022G_part3_0000', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar10/ParkingDoubleElectronLowMass3/crab_Run2022G_part3/230310_211617/0000/', '.*root')
 Run2022G_part5_0000 = kreator.makeDataComponentFromEOS('Run2022G_part5_0000', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar10/ParkingDoubleElectronLowMass5/crab_Run2022G_part5/230310_211630/0000/', '.*root')
 
-samples = [Run2022C_part0_0000, Run2022C_part0_0001, Run2022C_part1_0000, Run2022C_part1_0001, Run2022C_part2_0000, Run2022C_part2_0001, Run2022C_part3_0000, Run2022C_part3_0001, Run2022C_part4_0000, Run2022C_part4_0001, Run2022C_part5_0000, Run2022C_part5_0001, 
+samples = [smallsample,Run2022C_part0_0000, Run2022C_part0_0001, Run2022C_part1_0000, Run2022C_part1_0001, Run2022C_part2_0000, Run2022C_part2_0001, Run2022C_part3_0000, Run2022C_part3_0001, Run2022C_part4_0000, Run2022C_part4_0001, Run2022C_part5_0000, Run2022C_part5_0001, 
 		   Run2022Dv1_part0_0000, Run2022Dv1_part1_0000, Run2022Dv1_part2_0000, Run2022Dv1_part3_0000, Run2022Dv1_part4_0000, Run2022Dv1_part5_0000, Run2022Dv2_part0_0000, Run2022Dv2_part1_0000, Run2022Dv2_part2_0000, Run2022Dv2_part3_0000, 
 		   Run2022Dv2_part4_0000, Run2022Dv2_part5_0000, Run2022E_part0_0000, Run2022E_part0_0001, Run2022E_part1_0000, Run2022E_part1_0001, Run2022E_part2_0000, Run2022E_part2_0001, Run2022E_part3_0000, Run2022E_part3_0001, Run2022E_part4_0000, 
 		   Run2022E_part4_0001, Run2022E_part5_0000, Run2022E_part5_0001, Run2022F_part0_0000, Run2022F_part0_0001, Run2022F_part0_0002, Run2022F_part1_0000, Run2022F_part1_0001, Run2022F_part1_0002, Run2022F_part2_0000, Run2022F_part2_0001, 

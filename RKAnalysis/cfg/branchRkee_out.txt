@@ -1,7 +1,10 @@
 drop *_*
+keep run*
+keep luminosityBlock*
+keep event*
+drop fixed*
 keep L1_*
 keep HLT_*
 keep nSV
-keep PV_npvs
+keep PV*
 keep n*
-keep Electron*
