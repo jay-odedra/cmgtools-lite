@@ -648,14 +648,3 @@ def TriggerWeight(collections):
         weight += wgt
 
     return [weight]
-  
-def BDTevaluator(collections,othervars):
-    
-    ModelLocation = othervars[0]
-    FeatureNames = othervars[1]
-    booster = xgb.Booster()
-    booster.load_model('/afs/cern.ch/user/j/jodedra/PRESELECTIONCMGTOOLS/CMSSW_10_4_0/src/bdtmodels/XGB_89.json')
-    data = xgb.DMatrix(data=collections, feature_names=FeatureNames)
-    Score = booster.predict(data)
-        
-    return [Score]

@@ -234,13 +234,6 @@ def KEEData ( process, Bcuts,use_PF=False,use_1LowPt_1PF=False):
       nCol="nSkimBToKEE"
     )
     process.append(PAssymVar)
-    BDTevaluator = functionWrapper(
-      functionName="BDTevaluator",
-      collections=["SkimBToKEE_fit_pt","SkimBToKEE_fit_l2_pt","SkimBToKEE_l2_PFMvaID_retrained","SkimBToKEE_l1_PFMvaID_retrained"],
-      createdBranches=["BDTSCORE"],
-      othervars=['/afs/cern.ch/user/j/jodedra/PRESELECTIONCMGTOOLS/CMSSW_10_4_0/src/bdtmodels/XGB_89.json',['SkimBToKEE_fit_pt', 'SkimBToKEE_fit_l2_pt', 'SkimBToKEE_l2_PFMvaID_retrained', 'SkimBToKEE_l1_PFMvaID_retrained']]
-    )
-    process.append(BDTevaluator)
 
     return process
 

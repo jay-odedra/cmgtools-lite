@@ -22,13 +22,13 @@ BuToKstarJPsi_preEE    = kreator.makeDataComponentFromEOS('BuToKstarJPsi_preEE',
 BuToKstarPsi2s_postEE  = kreator.makeDataComponentFromEOS('BuToKstarPsi2s_postEE', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar14/BuToKstarPsi2s_KstarToK0Pi_Psi2sToEE_K0ToPiPi_SoftQCD_TuneCP5_13p6TeV_pythia8-evtgen/crab_BuToKstarPsi2S_Toee_v1_postEE/230314_170442/0000/', '.*root')
 BuToKstarPsi2s_preEE   = kreator.makeDataComponentFromEOS('BuToKstarPsi2s_preEE', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar14/BuToKstarPsi2s_KstarToK0Pi_Psi2sToEE_K0ToPiPi_SoftQCD_TuneCP5_13p6TeV_pythia8-evtgen/crab_BuToKstarPsi2S_Toee_v1_preEE/230314_170417/0000/', '.*root')
 
-samples = [smallsampletest,
+samples = [#smallsampletest,
 #        BuToKEE_postEE, 
 #        BuToKEE_preEE, 
 #        BuToKJPsi_postEE, 
 #        BuToKJPsi_preEE, 
-#        BuToKPsi2s_postEE, 
-#        BuToKPsi2s_preEE, 
+        BuToKPsi2s_postEE, 
+        BuToKPsi2s_preEE, 
 #        BdToK0starEE_postEE, 
 #        BdToK0starEE_preEE, 
 #        BdToK0starJPsi_postEE, 
