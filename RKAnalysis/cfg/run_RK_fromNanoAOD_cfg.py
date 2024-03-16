@@ -170,16 +170,20 @@ if kstaree_piee and mc:
   elif not jpsi and psi2s:
      modules = KstarPiEEMC(modules,["100443->11,-11","313->321,-211"],onlyPFe,onlyLowPtAndPFe)
   BparkSkim=""
+  modules = TriggerWeightsMC(modules)
+
 
 if kstaree_kee and mc:
   br_in = "branchRkee_in.txt"
   if not jpsi and not psi2s:
      modules = KstarKEEMC(modules,["313->321,-211"],onlyPFe,onlyLowPtAndPFe)
   elif jpsi and not psi2s:
-     modules = KstarKEEMC(modules,["443->11,-11","313->321,-211"],onlyPFe,onlyLowPtAndPFe)
+     modules = KstarKEEMC(modules,["443->11,-11","323->310,211"],onlyPFe,onlyLowPtAndPFe)
   elif not jpsi and psi2s:
      modules = KstarKEEMC(modules,["100443->11,-11","313->321,-211"],onlyPFe,onlyLowPtAndPFe)
   BparkSkim=""
+  modules = TriggerWeightsMC(modules)
+
 
 
 # only read the branches in this file - for speed deactivate unescairy stuff

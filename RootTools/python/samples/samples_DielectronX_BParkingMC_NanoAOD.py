@@ -1,7 +1,7 @@
 # COMPONENT CREATOR
 from CMGTools.RootTools.samples.ComponentCreator import ComponentCreator
 kreator = ComponentCreator()
-smallsampletest = kreator.makeDataComponentFromEOS("smallsampletest","/store/group/phys_bphys/DiElectronX/jodedra/singulartestmc/", ".*root")
+smallsampletest = kreator.makeDataComponentFromEOS("smallsampletest","/store/group/phys_bphys/DiElectronX/jodedra/olderfolder/singulartestmc/", ".*root")
 
 BuToKEE_postEE         = kreator.makeDataComponentFromEOS('BuToKEE_postEE', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar10/BuToKEE_SoftQCD_TuneCP5_13p6TeV_pythia8-evtgen/crab_BuToKee_v1_postEE/230310_173557/0000/', '.*root')
 BuToKEE_preEE          = kreator.makeDataComponentFromEOS('BuToKEE_preEE', '/store/group/phys_bphys/DiElectronX/production/samples/BParkingNANO_2023Mar10/BuToKEE_SoftQCD_TuneCP5_13p6TeV_pythia8-evtgen/crab_BuToKee_v1_preEE/230310_173544/0000/', '.*root')
@@ -27,8 +27,8 @@ samples = [#smallsampletest,
 #        BuToKEE_preEE, 
 #        BuToKJPsi_postEE, 
 #        BuToKJPsi_preEE, 
-        BuToKPsi2s_postEE, 
-        BuToKPsi2s_preEE, 
+#        BuToKPsi2s_postEE, 
+#        BuToKPsi2s_preEE, 
 #        BdToK0starEE_postEE, 
 #        BdToK0starEE_preEE, 
 #        BdToK0starJPsi_postEE, 
@@ -37,8 +37,8 @@ samples = [#smallsampletest,
 #        BdToK0starPsi2s_preEE, 
 #        BuToKstarEE_postEE, 
 #        BuToKstarEE_preEE, 
-#        BuToKstarJPsi_postEE, 
-#        BuToKstarJPsi_preEE, 
+        BuToKstarJPsi_postEE, 
+        BuToKstarJPsi_preEE, 
 #        BuToKstarPsi2s_postEE, 
 #        BuToKstarPsi2s_preEE
 ]
